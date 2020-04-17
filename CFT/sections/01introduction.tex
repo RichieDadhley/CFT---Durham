@@ -1,0 +1,50 @@
+\chapter{Introduction \& Motivations}
+
+We start this course with a introduction and motivation of the work that is to follow. It is beneficial to do this as a some of the work that follows can be rather abstract and it is always useful to have some kind of grounding to remind us why we care about what we're doing. However it is worth saying that the things said in the introduction aren't meant to be fully understood on a first read, but will slowly `fall into place' as the course goes on.\footnote{I simply say this because I have felt overwhelmed at introductions before.} So without further ado, let's get introducing and motivating. 
+
+\section{What is CFT ?}
+
+Of course the most immediate question to ask is "what is conformal field theory (CFT)?" This is something that will become more precise as we progress, but as a guiding principle, a CFT is a \textit{scale-invariant} quantum field theory (QFT).\footnote{We should clarify and say that there are indeed ways to get CFTs without making reference to a Lagrangian, something you usually have in a QFT.} By scale-invariant we mean that you can expand/shrink the underlying spacetime without changing the theory. In other (even more rough) words you can't tell how `zoomed in' you are to the theory, and you don't really care. Not only is a CFT invariant under \textit{global} scalings (i.e. scale the whole spacetime by the same amount, so relative lengths are preserved), but it is also invariant under \textit{local} scalings. Essentially what this means is that a CFT is invariant under any transformation that preserves the \textit{angles}\footnote{In the Euclidean sense.} between things, but it need not preserve lengths. On top of this scaling symmetry, a CFT also possesses Poincar\'{e} symmetry. This follows simply from the fact that a CFT is a QFT (which we construct with Poincar\'{e} invariance in mind!)
+
+\begin{center}
+    \btik 
+        \draw[thick, ->, rotate around={70:(0,0)}] (0,0) -- (2,0) node [right] {$v_1$};
+        \draw[thick, ->] (0,0) -- (3,0)  node [right] {$v_2$};
+        \draw[->] (1,0) arc (0:70:1cm);
+        \node at (0.5,0.4) {$\theta$};
+        %%
+        \draw[->] (4.5,1) -- (7.5,1) node [midway, above] {Conformal Transformation};
+        %%
+        \draw[thick, ->, rotate around={150:(12,0)}] (12,0) -- (15,0) node [left] {$v_1^{\prime}$};
+        \draw[thick, ->, rotate around={80:(12,0)}] (12,0) -- (13.5,0)  node [right] {$v_2^{\prime}$};
+        \draw[->, rotate around={80:(12,0)}] (13,0) arc (0:70:1cm);
+        \node at (11.75,0.5) {$\theta$};
+    \etik  
+\end{center}
+
+Combining these symmetries can lead to further symmetries. It turns out that in $2$-dimensions we have infinitely many symmetries, while in higher dimensions there is a finite number. We can collect all these symmetries into a group, known as the \textit{conformal group}, and thus we can define a CFT to be a QFT that is invariant under the conformal group.
+
+\br 
+    It is important to note that the real world is \textit{not} scale invariant! For example QCD is not scale invariant as 
+    \ben[label=(\roman*)]
+        \item The gluon masses: this just comes from the idea that mass and length are related (i.e. the higher the energy the smaller the scale). 
+        \item Even in massless QCD, we introduce a scale via the renormalisation process, i.e. the cut-off, and so we still break scale invariance. 
+    \een 
+    In general for a theory to be CFT, the classical Lagrangian has to be scale-invariant. When you quantize it, it either retains scale-invariance or it does not, and as we have just explained QCD does not. 
+\er 
+
+\section{Why CFT?}
+
+Ok so armed with our introductory understanding of what CFT is, we can ask the next important question "Why do we care about CFTs?" Well there's always the standard answer of "things are interesting to study," but really we would like a more motivating answer. 
+
+It turns out that there exist many theories similar to QCD which \textit{are} scale invariant, e.g. $\cN=4$ super-Yang-Mills theory.\footnote{This is the most symmetry QFT you can have in 4-dimensions. On top the conformal symmetry, we have 4 supersymmetries. Obviously more details on supersymmetry in my SUSY notes. Also "Yang-Mills" is just the fancy name for non-Abelian gauge theory --- see my QFT II notes for more details.} This is worth studying as it plays a role in the study of the AdS/CFT correspondance.
+
+Furthermore RG flow fixed points of \textit{any} QFT are conformally invariant (and thus CFTs).
+
+More recently, \textit{numerical conformal bootstrap} procedures are ongoing research. We will discuss these in a bit more detail later, but essentially this is a way to constrain a system by imposing self-consistency checks. This allows us to find stuff out about the theory without having to do any explicit calculations (e.g. Feynman diagrams).
+
+The above motivational examples are, almost certainly, completely new names and so might not provide a huge motivation. The next example will perhaps provide more motivation: string theory is a $2$-dimensional CFT! Indeed almost any string theory course you will read will most likely contain a reasonable amount of information presented in this course. It is really important to remember, though, that this is only a specific application of CFT and so it is worth studying outside that. Note also that string theory happens to fall into our `special' class of CFTs, namely 2-dimensional ones. For this reason we should be careful about using string theory has our only grounding when it comes to studying CFTs.
+
+\section{Parts}
+
+Part I of this course will focus on studying $D>2$ CFTs (with some $D=2$ comments made along the way) then Part II will focus on $D=2$ CFTs.

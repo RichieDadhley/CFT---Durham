@@ -1,0 +1,191 @@
+\chapter{Quantum Stress Tensor \& Virassoro Reps}
+
+Everything we did in the last chapter was for our specific example of a free Bosonic field. Let's go back now to a general CFT in $2D$. Not much is too different. For example the Witt algebra is simply modified to
+\bse 
+    [L_m,L_n] = (m-n)L_{m+n} + \frac{c}{12} m(m^2-1)\del_{m+n,0}.
+\ese 
+which is known as the \textit{Virasoro algebra}. Again technically this is not really an algebra but is a central extension of one, where $c$ is the central extension. $c$ is known as the \textit{central charge}. As we just saw, for the single free Boson we have $c=1$. It's not too hard to see that if we extend our theory to $D$ free Bosons, we get $c=D$. From this we can lean on intuition and arrive at the result that $c$ essentially measures the number of degrees of freedom on the system. As we will see shortly, the central charge plays a massive role in string theory and basically gives us the dimension of the spacetime. 
+
+Ok, now recall that for primaries\footnote{In $2D$ one often only writes the singular terms and leaves the "$+$ non-singular" implicit. This is why we don't write it in this formula here.} 
+\bse 
+    T(z) \Phi(w) = h\frac{\Phi(w) }{(z-w)^2} + \frac{\p_w \Phi(w)}{(z-w)} \qquad \iff \qquad [L_m,\varphi_n] = \big((h-1)m-n)\big)\varphi_{m+n}.
+\ese 
+The Virasoro algebra tells us that $L_m$ no longer corresponds to a primary of weight $2$. That is if we  put $\varphi_n=L_n$ we get the central charge term which breaks our primary operator relation. Recalling that $L_m$ are the mode expansion of the stress-energy tensor, what we're saying is that $T$ is \textit{not} primary. By the $\iff$ above, this is equivalent to saying that the $T(z)T(w)$ OPE contains a higher pole singularity. It turns out that the result is in fact 
+\mybox{
+    \be 
+    \label{eqn:TTOPE}
+        T(z)T(w) = \frac{c/2}{(z-w)^4} + 2\frac{T(w)}{(z-w)^2} + \frac{\p T(w)}{z-w}.
+    \ee
+}
+A derivation of this, for the case of a free Boson, can be found on page 82 of Prof. Tong's notes. However let's note why it makes sense. $T$ is still a dimension $(2,0)$ operator, it is just not primary. We see from this that it has $\Delta=2$, from which it follows that every term in the OPE must have $\Delta=2+2=4$. Now $(z-w)^{-1}$ has $\Delta=1$, and so it's possible for us to have everything up to $(z-w)^{-4}$ poles.\footnote{You might ask about higher poles and having some operator in the numerator with $\Delta_{\cO}<0$. These turn out to be excluded from unitary theories, so we drop these cases.} It's then a simple game of asking "what operators can I put in the numerator to get the weights right?", and we arrive at something of the form \Cref{eqn:TTOPE}. 
+
+\badr 
+    It's a fair question to ask "why don't we have a $(z-w)^{-3}$ term in \Cref{eqn:TTOPE}?" The answer to this involves a bit of work but essentially it comes down to the fact that we require the symmetry $T(z)T(w)=T(w)T(z)$. The cubic term would violate this. The $(z-w)^{-1}$ term \textit{appears} to also violate this, but it can be justified by a Taylor expansion argument: $T(z) = T(w) + (z-w)\p T(w) + ...$. Again for more details see Prof. Tong's notes.
+\eadr 
+
+\br 
+    The fact that $T$ is not a primary is not actually a problem for our CFT, just means we're using this extension of the algebra. Note, however, that $T$ is indeed quasi-primary. 
+\er 
+
+Right, let's see how $T$ transforms under the conformal group, then. That is it doesn't transform as a primary, so how \textit{does} it transform? We do this by considering the contour arguments we made before and then use the OPE \Cref{eqn:TTOPE}. That is we compute\footnote{Again the minus sign on the right-hand side comes from the difference between the $[Q_{\xi},\cO] = -\del_{\xi}\cO$.}
+\bse 
+    \del_{\xi} T(w) = - \frac{1}{2\pi i} \oint dz \xi(z) T(z) T(w),
+\ese
+by plugging in the OPE:
+\bse 
+    \del_{\xi}T(w) = -\frac{c}{12} \p_{w}^3 \xi(w) - 2T(w) \p_w \xi(w) - \xi(w) \p_w T(w)
+\ese 
+The important thing to note is that for the global M\"{o}bius subgroup we had that $\xi(w)$ was quadratic in $w$, and so the first term in the above vanishes. So we see that for higher dimensional CFTs the stress-energy tensor is like a primary operator if weight $\Delta=D$.\footnote{The easiest way to see that we have $\Delta = D$ is to recall that we get the energy by integrating the stress-energy tensor over space. Each spatial integral measure carries weight $[dx]=-1$, and then using $[E]=1$, we conclude $[T]=(D-1)+1=D$. Then simply use that the dilatation weight and mass dimension agree.} 
+
+\section{Virasoro Representations}
+
+We now want to organise our Hilbert space into the irreps of the Virasoro algebra. We label our states by the weight $\ket{h}$ such that $L_0\ket{h} = h\ket{h}$. We saw before that $\widetilde{P}/\widetilde{K}$ were creating/annihilation operators, we now want to see what these translate to. Let's consider the Virasoro descendant $L_n\ket{h}$ and check its weight: 
+\bse 
+    L_0 L_n \ket{h} = [L_0,L_n] \ket{h} + h L_n\ket{h} = (h-n)L_n\ket{h},
+\ese 
+where we have used $L_0\ket{h} = h\ket{h}$ and $[L_0,L_n] = -nL_n$. So we see that $L_n$ lowers the weight by $n$ when $n>0$ and raises the weight when $n<0$. Note that the difference to before is now we can lower a state by $n$ in \textit{one go}, whereas before we had to do $n$ steps. This is important because it tells us that there is more than one way to produce a descendent of a given weight. For example we can product a descendant of weight $h+2$ via 
+\bse 
+    L_{-2}\ket{h} \qquad \text{or} \qquad L_{-1}^2 \ket{h}.
+\ese    
+
+Let's have a look at the identity operator. This had no descendants in the higher dimensional case because it was annihilated by the raising operator $\widetilde{P}_{\mu}$. However in $2D$ it \textit{does} have descendants when $c\neq0$. Of course consistency with the higher dimensional cases tell us that the state dual to the identity, the absolute vacuum, is annihilated by the M\"{o}bius subgroup. So we have\footnote{Interestingly, it can be shown that the \textit{only} state that is annihilated by both $L_{-1}$ and $\bar{L}_{-1}$ is the state dual to the identity. This is not actually hard to see: simply recall that $L_{-1}=\p$ and $\bar{L}_{-1}=\bar{\p}$, and so essentially they shift the local operator away from the origin. Therefore if $L_{-1}$ and $\bar{L}_{-1}$ is to annihilate the state, it must be position independent. The only position independent local operator is the identity. This footnote is included to make the point that the only state that is annihilated by the full M\"{o}bius subgroup is the absolute vacuum.} 
+\bse 
+    L_n \ket{0} \qquad \forall n \geq -1.
+\ese 
+However now consider the action of $L_{-2}$. In particular consider acting with $L_{+2}$ on $L_{-2}\ket{0}$:
+\bse 
+    L_{+2}L_{-2}\ket{0} = [L_2,L_{-2}]\ket{0} = \bigg(4L_0 + \frac{c}{2}\bigg)\ket{0} = \frac{c}{2}\ket{0},
+\ese
+so we clearly need $L_{-2}\ket{0}\neq0$ when $c\neq 0$. Now let's see what unitarity can tell us. Using $L_n^{\dagger} = L_{-n}$, we have 
+\bse 
+    \bra{0} L_2 L_{-2}\ket{0} = \big|L_{-2}\ket{0}\big|^2 = \frac{c}{2}\braket{0}{0},
+\ese 
+so if we have a unitary theory (i.e. inner products are non-negative definite) we have 
+\mybox{
+    \be 
+    \label{eqn:cPositive}
+        c > 0. 
+    \ee 
+}
+
+\badr 
+    It is a fair point to say "actually all we can conclude $c$ is non-negative so \Cref{eqn:cPositive} should be $c \geq 0$". Well it turns out that when $c=0$ the only state in the whole theory is the absolute vacuum, which is boring. So \Cref{eqn:cPositive} is meant to be understood for any non-trivial theory. 
+\eadr 
+
+We can now look at building up our irreps. We start by defining the lowest weight state $\ket{h}$ such that 
+\bse 
+    L_n \ket{h} = 0 \qquad \forall n >0.
+\ese 
+We then obtain all other states in the representation by acting on this with raising operators $L_{-n}$. We list the first few descedents below 
+
+\bse 
+    \textcolor{blue}{\ket{h}}
+\ese 
+\bse 
+    \textcolor{blue}{L_{-1}\ket{h}}
+\ese 
+\bse 
+    \textcolor{blue}{L_{-1}^2\ket{h}} \quad \textcolor{red}{L_{-2}\ket{h}}
+\ese 
+\bse 
+    \textcolor{blue}{L_{-1}^3\ket{h}} \quad \textcolor{red}{L_{-1}L_{-2}\ket{h}} \quad \textcolor{green}{L_{-3}\ket{h}}.
+\ese 
+\bse 
+    \textcolor{blue}{L_{-1}^4\ket{h}} \quad \textcolor{red}{L_{-1}^2L_{-2}\ket{h}} \quad \textcolor{green}{L_{-1}L_{-3}\ket{h}} \quad \textcolor{purple}{L_{-2}^2\ket{h}} \quad L_{-4}\ket{h}
+\ese 
+The complete set of such states is known as the \textit{Verma module}. They form an irreducible representation of the Virasoro algebra. 
+
+What is the colour coordination meant to mean? Well on a closer look we see that within each colour, the only thing that changes as we move down the rows is the action of a $L_{-1}$. These are therefore representations of the global M\"{o}bius subgroup. In other words the first state that appears in a given colour is a primary state through the lenses of the M\"{o}bius group, and then the states of the same colour are descendants. Note that $L_{-2}^2\ket{h}$ is \textit{not} a descendant of $L_{-2}\ket{h}$ from the M\"{o}bius subgroups lenses.
+
+\br 
+    Note that we don't need to include the state $L_{-2}L_{-1}\ket{h}$ on the third row (and similarly for lower rows). Why? Well because we can use the Virasoro algebra to relate this to $L_{-1}L_{-2}\ket{h}$ and $L_{-3}\ket{h}$, and so it is \textit{not} a new state. 
+\er 
+
+\badr 
+    As an extension of the above remark, there is actually a subtly between the states of the Verma module, and it turns out that they are not all necessarily independent. We do not give an example here but the interested reader is directed to the bottom of page 97 of Prof. Tong's notes. 
+\eadr 
+
+\section{Another example of a CFT: bc Ghost Theory}
+
+We end the course with a very quick overview of another example of a $2D$ CFT. This system plays a crucial role in one approach to string theory and it is known as the \textit{$bc$ ghost theory.} We do not present any proofs of the statements made here, but details will be flushed out in the string theory course.\footnote{Of course more details can also be found in either Prof. Tong's notes or my notes on Prof. Minwalla's course.}
+
+We introduced the central charge $c$ above with absolutely no problems, and indeed it doesn't pose any problem for \textit{flat} $2D$ CFTs. However, as the emphasis indicates, this is not true for CFTs on \textit{curved} backgrounds. The reason is related to the comment we made about Weyl anomolies all the way back in \Cref{rem:WeylAnom}: the trace of the stress-energy tensor in $2D$ turns out to be given by
+\be 
+\label{eqn:WeylAnom}
+    {T^a}_{a} = -\frac{c}{12} R,
+\ee 
+where $R$ is the Ricci scalar. As we said in the remark, this is known as a Weyl anomaly. 
+
+
+\badr 
+    It turns out that we can trace the presence of the central charge, $c$, back to the Weyl transformations in our 2D CFT. Essentially the idea is that the $(z-w)^{-4}$ term appearing in the $T(z)T(w)$ OPE comes purely from the Weyl part of a conformal transformation, and therefore $c$ comes from the Weyl transformations. Putting this together with the fact that \textit{classically} conformal invariance gave us the traceless condition, we see why \Cref{eqn:WeylAnom} is called a Weyl anomaly; we loose the exact classical Weyl invariance in the quantum theory. For more details flushing out this idea, see Lecture 7 of my notes on Prof. Shiraz Minwalla's string theory course.
+\eadr 
+
+Why is this a problem? Well recall that in our discussion of string theory we needed Weyl invariance in order to make the Polyakov and Nambu-Goto actions equivalent. That is if we don't impose Weyl invariance on the Polyakov action then our set of solutions is (infinitely) bigger. This Weyl symmetry also allowed us to restrict the theory to a flat metric and gave us our conformal symmetry. \Cref{eqn:WeylAnom} breaks our Weyl invariance and so ruins everything. There is a way we can save this, though: make $c=0$. 
+
+However we already said that if $c=0$ then the only state in our theory is the absolute vacuum, so it appears we are doomed. However we now note that important word used above: in a \textit{unitary} theory we require $c>0$. That is a non-unitary theory can have negative central charge. From previous courses, we know of a field which we can add to our theory which is non-unitary: ghosts! The idea is to consider a theory which consists of both free Bosons, $X^{\mu}$, and ghosts, which we standardly denote $b$ and $c$, such that their \textit{collective} central charge vanishes. That is we want 
+\bse 
+    c_{\text{tot}} = c_{\text{Bosons}} + c_{\text{ghosts}} = 0.
+\ese
+
+\subsection{Ghost Theory}
+The action for our ghost theory on our 2D space turns out to be
+\bse 
+    S_g = \frac{1}{2\pi} \int d^2 x \big( b\bar{\p} c + \bar{b}\p \bar{c}\big)
+\ese 
+where $b,c$ are our ghosts. A quick calculation shows that the equations of motion are
+\bse 
+    \bar{\p} b = \bar{\p} c = \p \bar{c} = \p \bar{b} = 0
+\ese
+which tells us that $b,c$ are holororphic and $\bar{b}, \bar{c}$ are antiholomorphic. We can show that 
+\bse 
+    b(z) = \sum_m \frac{b_m}{z^{m+2}} \qand c(z) = \sum_m \frac{c_m}{z^{m-1}} 
+\ese 
+so $b$ has weights $(2,0)$ and $c$ has weights $(-1,0)$. The anticommutators between the two ghost types turn out to be
+\bse 
+    \{ b_m, c_n\} = \del_{m+n,0} 
+\ese
+and we can show\footnote{We stress again here that, as the $bc$ system is non-unitary, the state dual to the identity need \textit{not} be the vacuum. Indeed it turns out that $\ket{\b1} = b_{-1}\ket{\downarrow}$, where $\ket{\downarrow}$ is one of the two ground states of the $bc$ system. A proof of all this can be found in lecture 11 of my notes on Prof. Shiraz Minwalla's string theory course.} 
+\bse 
+    \begin{split}
+        b_m \ket{\b1} = 0 \qquad m \geq -1 \\
+        c_n \ket{\b1} = 0 \qquad m \geq 2.
+    \end{split}
+\ese
+
+As the ghost system has its own action, it also has it's own stress-energy tensor, which is easily verified to be 
+\bse 
+    T = 2(\p c) b + c \p b.
+\ese 
+This in turn tells us that 
+\bse 
+    L_n = \sum_m (2n-m)b_m c_{n-m}.
+\ese 
+
+Ok that was a \textit{lot} of plucked-out-of-the-air stuff, so why do we want it? Well we can now compute the inner product $\bra{0}L_2L_{-2}\ket{0}$ again. If we plug through all the algebra we obtain
+\bse 
+    \bra{\b1}L_2L_{-2} \ket{\b1} = -13\braket{\b1}{\b1},
+\ese
+which comparing to 
+\bse 
+    \bra{\b1}L_2L_{-2}\ket{\b1} = \frac{c}{2}\braket{\b1}{\b1}
+\ese 
+tells us
+\bse 
+    c_{\text{ghost}} = -26.
+\ese 
+We then need to compensate for this with $26$ Bosonic fields $X^{\mu}$, as each Bosonic field contributes $c_{\text{Boson}}=+1$. But the number of Bosonic fields is given by the dimension of the spacetime, and so we conlclude that 
+\mybox{
+    \bse 
+        D=26.
+    \ese 
+}   
+\noindent This is the famous result that string theory is a 26 dimensional theory. 
+
+\br 
+    There is actually another way to obtain the result $D=26$ without having to introduce ghosts. This involves breaking manifest Lorentz invariant and going to light-cone gauge. You then quantise the system there and look at the resulting irreducible representations and \textit{insist} that these form a valid decomposition of the Lorentz group. Details of this can be found in Prof Tong's notes (again or my notes on Prof Minwalla's notes).
+\er 
+
+\badr 
+    For completeness, we just make one comment about the $D=10$ result that people also say. This corresponds to \textit{super}string theory. This corresponds to considering free Fermions, and so is sometimes also called \textit{Fermionic} string theory. In this case we end up getting $c_{\text{ghost}}=-15$ and each Fermion contributes $c_{\text{Fermion}} = 3/2$, so in total we need $10$ spacetime dimensions. Much more details on this can be found in my notes on Prof Minwalla's course.\footnote{Unfortunately, Prof. Tong's notes don't discuss the Fermionic string in analytic detail, so unless you wish to give Polchinski Volume II a bash, I'm afraid all I can reference are my notes.}
+\eadr 

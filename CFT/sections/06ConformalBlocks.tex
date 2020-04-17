@@ -1,0 +1,334 @@
+\chapter{Conformal Blocks \& Bootstrap Programme}
+
+\section{CFT Data (Summary)}
+
+As we have tried to emphasise, any CFT data is characterised by the set local primary operators $\{\cO_{\Delta,I}\}$, where $I$ denotes the general Lorentz indices as before, and their correlation functions. We refer to the set $\{\cO_{\Delta,I}\}$ as the \textit{spectrum} of local primary operators.
+
+Let's review what we know so far about the correlation functions.
+\ben[label=(\roman*)] 
+    \item Two-point functions: 
+        \ben 
+            \item Are fixed up to a normalisation, e.g. for scalars we had $\la \cO^{(1)}_{\Delta}(x)\cO^{(2)}_{\Delta}(y)\ra = \frac{C_{12}}{|x-y|^{2\Delta}}$. 
+            \item We can normalise the operators, i.e. $\cO^{(i)}_{\Delta}(x) \to \cO^{(i)}_{\Delta}(x)/\sqrt{A}$, such that the 2-point functions are completely fixed.
+            \item We can diagonalise our representations by the dilatation weight, i.e. pick a basis such that two different operators of the same weight are orthogonal. 
+        \een 
+    \item Three-point functions:
+        \ben 
+            \item Are fixed up to a constant $C_{123}$, e.g. for scalars we have 
+            \bse
+                \la \cO_{\Delta_1}(x_1) \cO_{\Delta_2}(x_2)\cO_{\Delta_3}(x_3)\ra = \frac{C_{123}}{|x_{12}|^{\Delta_1+\Delta_2-\Delta_3} |x_{23}|^{\Delta_2+\Delta_3-\Delta_1} |x_{13}|^{\Delta_1+\Delta_3-\Delta_1}}.
+            \ese
+            \item The constant $C_{123}$ is set by how we choose to normalise our states, in other words it is fixed once we renormalise our operators as (i)(b) above.
+        \een 
+    \item Higher point functions: 
+        \ben 
+            \item Can be reduced to three point functions using the OPE.
+            \item The terms appearing in the OPE are completely fixed in terms of the three-point functions. 
+        \een 
+\een 
+
+So we have seen that we can essentially completely categorise a CFT via the above steps. We therefore make the following definition. 
+
+\bd[CFT Data]
+    We call the set of the of the spectrum and the OPE coefficients the \textit{CFT data}. That is 
+    \be 
+    \label{eqn:CFTData}
+        (\text{CFT Data}) := \{ \cO_{\Delta,I} , C_{\cO_1\cO_2\cO_3} \}.
+    \ee 
+\ed 
+
+This name is fitting as given this data we can compute \textit{any} correlation function, and therefore we have solved the CFT. 
+
+\section{Consistency Conditions On CFT Data}
+
+The next question is what kind of CFT data gives a well defined CFT? That is can we just give \textit{any} random set and be OK? The answer is, of course, "no" and we have some consistency conditions.
+
+The first thing we note is that we have completely glazed over unitarity so far. It turns out that unitarity imposes bounds on the allowed values of $\Delta$ for a given Lorentz rep, for example for a scalar field we have
+\be 
+\label{eqn:UnitarityBoundOnDelta}
+    \Delta \geq \frac{D}{2}-1,
+\ee 
+apart from identity operator which has $\Delta=0$. The bounds for other operator types can be found in Section 7.3 of Simmons-Duffin.
+
+\br 
+    Note that a scalar field saturates this bound. This is easily seen from computing its mass dimension from the Lagrangian. 
+\er 
+
+Secondly (and more interestingly), let's consider the 4-point functions
+\bse 
+    \la \Phi_1(x_1)\Phi_2(x_2) \Phi_3(x_3)\Phi_4(x_4)\ra. 
+\ese 
+We can take an OPE between $\Phi_1(x_1)\Phi_2(x_2)$ and another OPE between $\Phi_3(x_3)\Phi_4(x_4)$ to obtain 
+\bse 
+    \begin{split}
+        \la \Phi_1(x_1)\Phi_2(x_2) \Phi_3(x_3)\Phi_4(x_4)\ra & = \sum_{\cO,\cO^{\prime}} C_{12\cO}C_{34\cO^{\prime}} \big[ C_{\cO}(x_{12},\p_y)  C_{\cO^{\prime}}(x_{34},\p_z) \la \cO(y) \cO^{\prime}(z)\ra \big] \\
+        & = \sum_{\cO} C_{12\cO} C_{34\cO} \big[ C_{\cO}(x_{12},\p_y)  C_{\cO}(x_{34},\p_z) \la \cO(y) \cO(z)\ra \big]
+    \end{split}
+\ese 
+where the second line follow from our diagonalisation procedure, i.e. the two point function is only non-vanishing when $\cO=\cO^{\prime}$. Now we recall that the bit in square brackets is completely theory independent, as the $C_{\cO}(x,\p_y)$ are purely dynamical and only depend on the representations (i.e. weights) and similarly the two-point function only depends on $|y-z|$ and weights. We call this square bracketed terms a \textit{conformal partial wave} or \textit{conformal block}, and we shall denote it as 
+\bse 
+    G_{\cO}(x_1,x_2,x_3,x_4) :=  C_{\cO}(x_{12},\p_y)  C_{\cO}(x_{34},\p_z) \la \cO(y) \cO(z)\ra 
+\ese
+so that  
+\bse 
+    \la \Phi_1 ... \Phi_4 \ra = \sum_{\cO} C_{12\cO}C_{34\cO} G_{\cO}(x_1,..., x_4).
+\ese 
+
+This is good, however (as we will indeed shortly do) we could have done the OPE contractions as $\Phi_2\Phi_3$ and $\Phi_1\Phi_4$. This would change our definition of our conformal block to be\footnote{Bonus exercise, verify that this is true.} 
+\bse 
+    G_{\cO}(x_1,x_2,x_3,x_4) :=  C_{\cO}(x_{23},\p_y)  C_{\cO}(x_{14},\p_z) \la \cO(y) \cO(z)\ra. 
+\ese 
+We can therefore tweak the definition of our conformal blocks to be 
+\mybox{
+    \be 
+    \label{eqn:ConformalBlock}
+        G_{\cO}(x_1,x_2,x_3,x_4) := |x_{ij}|^{\Delta_i+\Delta_j} |x_{k\ell}|^{\Delta_k+\Delta_{\ell}} C_{\cO}(x_{ij},\p_y) C_{\cO}(x_{k\ell}, \p_z) \la \cO(y)\cO(z)\ra 
+    \ee 
+}
+\noindent with our 4-point function then given by 
+\be 
+\label{eqn:FourPointFunctionConformalBlocks}
+    \la \Phi_1... \Phi_4 \ra = P_{ijk\ell} \sum_{\cO} C_{ij\cO} C_{k\ell\cO} G_{\cO}(x_1,x_2,x_3x_4),
+\ee 
+with 
+\be 
+\label{eqn:Pijkl}
+    P_{ijk\ell} := |x_{ij}|^{-(\Delta_i+\Delta_j)} |x_{k\ell}|^{-(\Delta_k+\Delta_{\ell})}
+\ee 
+This might seem like overkill, however this will come in handy shortly. 
+
+We can depict the conformal block pictorially so that our 4-point function is given by
+\begin{center}
+    \btik 
+        \node at (-3,0) {\Large{$\sum C_{12\cO}C_{34\cO} $}};
+        \node at (-4.1,-0.5) {\small{$\cO$}};
+        \draw[thick, rotate around={-45:(0,0)}] (0,0) -- (-1,0) node [left] {$1$};
+        \draw[thick, rotate around={45:(0,0)}] (0,0) -- (-1,0) node [left] {$2$};
+        \draw[thick, rotate around={45:(1,0)}] (1,0) -- (2,0) node [right] {$4$};
+        \draw[thick, rotate around={-45:(1,0)}] (1,0) -- (2,0) node [right] {$3$};
+        \draw[thick] (0,0) -- (1,0) node [midway, above] {$\cO$};
+    \etik 
+\end{center}
+
+Now we did the above OPEs in $\Phi_1\Phi_2$ and $\Phi_3\Phi_4$, but we could just have easily done them for $\Phi_2\Phi_3$ and $\Phi_1\Phi_4$. If we do that we of course get a different conformal block corresponding to the following diagram
+\begin{center}
+    \btik 
+        \node at (-3,0) {\Large{$\sum C_{23\cO}C_{14\cO} $}};
+        \node at (-4.1,-0.5) {\small{$\cO$}};
+        \draw[thick, rotate around={-30:(0,0.5)}] (0,0.5) -- (-1,0.5) node [left] {$1$};
+        \draw[thick,rotate around={30:(0,-0.5)}] (0,-0.5) -- (-1,-0.5) node[left] {$2$};
+        \draw[thick, rotate around={-30:(0,-0.5)}] (0,-0.5) -- (1,-0.5) node [right] {$3$};
+        \draw[thick, rotate around={30:(0,0.5)}] (0,0.5) -- (1,0.5) node [right] {$4$};
+        \draw[thick] (0,0.5) -- (0,-0.5) node [midway, right] {$\cO$};
+    \etik 
+\end{center}
+
+Of course these two things have to agree (as they are both the 4-point function) and so we get a constraint between the allowed OPE coefficients $\{C_{ij\cO}\}$ where $i,j=1,2,3,4$. This relation is known as a \textit{crossing symmetry}, and it is a very powerful constraint on the allowed data by placing a constraint on the OPE associativity. 
+
+\section{Conformal Bootstrap}
+
+\bcl 
+    Once we impose the $4$-point crossing symmetry, there are \textit{no new constraints} at higher point functions.
+\ecl 
+
+This is a non-trivial result and \textit{massively} simplifies the study of CFTs. Let's prove that it works for the case of a 5-point function. In order to lighten notation, we shall absorb the OPE coefficients into the diagrams.\footnote{They can be read off by looking at the vertices.} We shall use a $\bullet$ to indicate a point in the diagram that still needs to OPEd.
+
+\subsubsection{Step 1: Do $\Phi_1\Phi_2$ OPE}
+\begin{center}
+    \btik 
+        \begin{scope}
+            \draw[thick, rotate around={-45:(0,0)}] (0,0) -- (-1,0) node [left] {$1$};
+            \draw[thick, rotate around={45:(0,0)}] (0,0) -- (-1,0) node [left] {$2$};
+            \draw[thick, rotate around={-60:(0,0)}] (0,0) -- (1,0) node [right] {$3$};
+            \draw[thick] (0,0) -- (1,0) node [right] {$4$};
+            \draw[thick, rotate around={60:(0,0)}] (0,0) -- (1,0) node [right] {$5$};
+            \draw[fill=black] (0,0) circle [radius=0.1cm];
+            \node[right] at (1.75,0) {\Large{$=$}};
+        \end{scope}
+        \begin{scope}[xshift=4.75cm]
+            \node at (-1.75,0) {\Large{$\sum$}};
+            \node at (-1.75,-0.5) {\small{$\cO$}};
+            \draw[thick, rotate around={-45:(0,0)}] (0,0) -- (-1,0) node [left] {$1$};
+            \draw[thick, rotate around={45:(0,0)}] (0,0) -- (-1,0) node [left] {$2$};
+            \draw[thick] (0,0) -- (1,0) node [midway, above] {$\cO$};
+            \draw[thick, rotate around={-60:(1,0)}] (1,0) -- (2,0) node [right] {$3$};
+            \draw[thick] (1,0) -- (2,0) node [right] {$4$};
+            \draw[thick, rotate around={60:(1,0)}] (1,0) -- (2,0) node [right] {$5$};
+            \draw[fill=black] (1,0) circle [radius=0.1cm];
+        \end{scope}
+    \etik 
+\end{center}
+
+\subsubsection{Step 2: Do $\Phi_3\Phi_4$ OPE}
+
+\begin{center}
+    \btik 
+        \begin{scope}
+            \node at (-1.75,0) {\Large{$\sum$}};
+            \node at (-1.75,-0.5) {\small{$\cO$}};
+            \draw[thick, rotate around={-45:(0,0)}] (0,0) -- (-1,0) node [left] {$1$};
+            \draw[thick, rotate around={45:(0,0)}] (0,0) -- (-1,0) node [left] {$2$};
+            \draw[thick] (0,0) -- (1,0) node [midway, above] {$\cO$};
+            \draw[thick, rotate around={-60:(1,0)}] (1,0) -- (2,0) node [right] {$3$};
+            \draw[thick] (1,0) -- (2,0) node [right] {$4$};
+            \draw[thick, rotate around={60:(1,0)}] (1,0) -- (2,0) node [right] {$5$};
+            \draw[fill=black] (1,0) circle [radius=0.1cm];
+            \node[right] at (2.75,0) {\Large{$=$}};
+        \end{scope}
+        \begin{scope}[xshift=5.75cm]
+            \node at (-1.75,0) {\Large{$\sum$}};
+            \node at (-1.75,-0.5) {\small{$\cO, \cO^{\prime}$}};
+            \draw[thick, rotate around={-45:(0,0)}] (0,0) -- (-1,0) node [left] {$1$};
+            \draw[thick, rotate around={45:(0,0)}] (0,0) -- (-1,0) node [left] {$2$};
+            \draw[thick] (0,0) -- (1,0) node [midway, above] {$\cO$};
+            \draw[thick, rotate around={60:(1,0)}] (1,0) -- (2,0) node [right] {$5$};
+            \draw[thick] (1,0) -- (1.7,-0.7);
+            \node at (1.6,-0.2) {$\cO^{\prime}$};
+            \draw[thick, rotate around={25:(1.7,-0.7)}] (1.7,-0.7) -- (2.7,-0.7) node [right] {$4$};
+            \draw[thick, rotate around={-65:(1.7,-0.7)}] (1.7,-0.7) -- (2.7,-0.7) node [right] {$3$};
+        \end{scope}
+    \etik 
+\end{center}
+
+\subsubsection{Step 3: Use $4$-point crossing symmetry on $\Phi_1\Phi_2\cO\Phi_5\cO^{\prime}$}
+
+\begin{center}
+    \btik 
+        \begin{scope}
+            \node at (-1.75,0) {\Large{$\sum$}};
+            \node at (-1.75,-0.5) {\small{$\cO, \cO^{\prime}$}};
+            \draw[thick, rotate around={-45:(0,0)}] (0,0) -- (-1,0) node [left] {$1$};
+            \draw[thick, rotate around={45:(0,0)}] (0,0) -- (-1,0) node [left] {$2$};
+            \draw[thick] (0,0) -- (1,0) node [midway, above] {$\cO$};
+            \draw[thick, rotate around={60:(1,0)}] (1,0) -- (2,0) node [right] {$5$};
+            \draw[thick] (1,0) -- (1.7,-0.7);
+            \node at (1.6,-0.2) {$\cO^{\prime}$};
+            \draw[thick, rotate around={25:(1.7,-0.7)}] (1.7,-0.7) -- (2.7,-0.7) node [right] {$4$};
+            \draw[thick, rotate around={-65:(1.7,-0.7)}] (1.7,-0.7) -- (2.7,-0.7) node [right] {$3$};
+            \node[right] at (3.5,0) {\Large{$=$}};
+        \end{scope}
+        \begin{scope}[xshift=6.75cm]
+            \node at (-1.75,0) {\Large{$\sum$}};
+            \node at (-1.75,-0.5) {\small{$\cO^{\prime}, \cO^{\prime\prime}$}};
+            \draw[thick, rotate around={-30:(0,0.5)}] (0,0.5) -- (-1,0.5) node [left] {$1$};
+            \draw[thick,rotate around={30:(0,-0.5)}] (0,-0.5) -- (-1,-0.5) node[left] {$2$};
+            \draw[thick, rotate around={30:(0,0.5)}] (0,0.5) -- (1,0.5) node [right] {$5$};
+            \draw[thick] (0,-0.5) -- (0.8,-1);
+            \node at (0.6,-0.5) {$\cO^{\prime}$};
+            \draw[thick, rotate around={25:(0.8,-1)}] (0.8,-1) -- (1.8,-1) node [right] {$4$};
+            \draw[thick, rotate around={-65:(0.8,-1)}] (0.8,-1) -- (1.8,-1) node [right] {$3$};
+            \draw[thick] (0,0.5) -- (0,-0.5) node [midway, left] {$\cO^{\prime\prime}$};
+        \end{scope}
+    \etik 
+\end{center}
+
+\subsubsection{Step 4: Use OPE on $\Phi_2\cO^{\prime}\Phi_3\Phi_4$ in reverse}
+
+\begin{center}
+    \btik 
+        \begin{scope}
+            \node at (-1.75,0) {\Large{$\sum$}};
+            \node at (-1.75,-0.5) {\small{$\cO^{\prime}, \cO^{\prime\prime}$}};
+            \draw[thick, rotate around={-30:(0,0.5)}] (0,0.5) -- (-1,0.5) node [left] {$1$};
+            \draw[thick,rotate around={30:(0,-0.5)}] (0,-0.5) -- (-1,-0.5) node[left] {$2$};
+            \draw[thick, rotate around={30:(0,0.5)}] (0,0.5) -- (1,0.5) node [right] {$5$};
+            \draw[thick] (0,-0.5) -- (0.8,-1);
+            \node at (0.6,-0.5) {$\cO^{\prime}$};
+            \draw[thick, rotate around={25:(0.8,-1)}] (0.8,-1) -- (1.8,-1) node [right] {$4$};
+            \draw[thick, rotate around={-65:(0.8,-1)}] (0.8,-1) -- (1.8,-1) node [right] {$3$};
+            \draw[thick] (0,0.5) -- (0,-0.5) node [midway, left] {$\cO^{\prime\prime}$};
+            \node[right] at (2.5,0) {\Large{$=$}};
+        \end{scope}
+        \begin{scope}[xshift=5.75cm]
+            \node at (-1.75,0) {\Large{$\sum$}};
+            \node at (-1.75,-0.5) {\small{$\cO^{\prime\prime}$}};
+            \draw[thick, rotate around={-30:(0,0.5)}] (0,0.5) -- (-1,0.5) node [left] {$1$};
+            \draw[thick, rotate around={30:(0,0.5)}] (0,0.5) -- (1,0.5) node [right] {$5$};
+            \draw[thick,rotate around={30:(0,-0.5)}] (0,-0.5) -- (-1,-0.5) node[left] {$2$};
+            \draw[thick, rotate around={10:(0,-0.5)}] (0,-0.5) -- (1,-0.5) node [right] {$4$};
+            \draw[thick, rotate around={-60:(0,-0.5)}] (0,-0.5) -- (1,-0.5) node [right] {$3$};
+            \draw[fill=black] (0,-0.5) circle [radius=0.1cm];
+            \draw[thick] (0,0.5) -- (0,-0.5) node [midway, left] {$\cO^{\prime\prime}$};
+        \end{scope}
+    \etik 
+\end{center}
+
+If we then relabel $\cO^{\prime\prime}\to \cO$ and compare the right-hand side of step 1, we see that crossing at 5-points follows automatically from crossing at 4-points. 
+
+\br 
+    We did this whole thing under our assumptions that everything was a scalar. Of course it is possible to extend the idea to operators with spin. We focused on the scalar case because it is easier in practice.
+\er 
+
+This above calculation allows us to introduce the following definition for a CFT.\footnote{Multiple people have come to this conclusion, including: Ferrara, Grillo, Gatto, '73; Polyakov '74; Mack '77.}
+
+\bd[CFT] 
+   We \textit{define} a CFT as the set of data satisfying this OPE associativity. 
+\ed 
+
+This leads to what is known as the conformal \textit{bootstrap programme}, which was used to completely solve some 2d theories analytically in the 1980s (e.g. so-called \textit{minimum models}, i.e. CFTs with a finite number of primaries). In 2008 there was a programme started by Rychkov known as \textit{numerical bootstrap programme} in higher dimensions. Here the idea is to put numerical constraints on the space of theories by examining this crossing equation. 
+
+Let's sketch the idea now.\footnote{For more details see Section 10 (in particular Section 10.4) of Simmons-Duffin.} First consider the crossing equation for 4 identical scalars of weight $\Delta$. 
+
+\begin{center}
+    \btik 
+        \begin{scope}[xshift=-4cm]
+            \node at (-3,0) {\Large{$\sum C_{\Phi\Phi\cO}^2 $}};
+            \node at (-3.65,-0.5) {\small{$\cO$}};
+            \draw[thick, rotate around={-45:(0,0)}] (0,0) -- (-1,0) node [left] {$\Phi$};
+            \draw[thick, rotate around={45:(0,0)}] (0,0) -- (-1,0) node [left] {$\Phi$};
+            \draw[thick, rotate around={45:(1,0)}] (1,0) -- (2,0) node [right] {$\Phi$};
+            \draw[thick, rotate around={-45:(1,0)}] (1,0) -- (2,0) node [right] {$\Phi$};
+            \draw[thick] (0,0) -- (1,0) node [midway, above] {$\cO$};
+            \node[right] at (2.75,0) {\Large{$=$}};
+        \end{scope}
+        \begin{scope}[xshift=4cm]
+            \node at (-3,0) {\Large{$\sum C_{\Phi\Phi\cO}^2$}};
+            \node at (-3.65,-0.5) {\small{$\cO$}};
+            \draw[thick, rotate around={-30:(0,0.5)}] (0,0.5) -- (-1,0.5) node [left] {$\Phi$};
+            \draw[thick,rotate around={30:(0,-0.5)}] (0,-0.5) -- (-1,-0.5) node[left] {$\Phi$};
+            \draw[thick, rotate around={-30:(0,-0.5)}] (0,-0.5) -- (1,-0.5) node [right] {$\Phi$};
+            \draw[thick, rotate around={30:(0,0.5)}] (0,0.5) -- (1,0.5) node [right] {$\Phi$};
+            \draw[thick] (0,0.5) -- (0,-0.5) node [midway, right] {$\cO$};
+        \end{scope}
+    \etik 
+\end{center}
+
+It is now that our redefinition \Crefrange{eqn:ConformalBlock}{eqn:Pijkl} comes in handy. As we are considering 4 identical fields our $P_{ijk\ell}$ factor simply becomes 
+\bse
+    P_{ijk\ell} = |x_{ij}|^{\Delta} |x_{k\ell}|^{\Delta}.
+\ese
+The reason this is useful is because we note that the two diagrams above correspond to 
+\bse 
+    P_{1234} = |x_{12}|^{\Delta}|x_{34}|^{\Delta} \qand P_{1423} = |x_{14}|^{\Delta}|x_{23}|^{\Delta},
+\ese 
+which we can relate to the 4-point cross-ratios, \Cref{eqn:CrossRatios}, as
+\bse 
+    P_{1234} = |x_{13}|^{\Delta} |x_{24}|^{\Delta} u^{\Delta} \qand P_{1423} = |x_{13}|^{\Delta} |x_{24}|^{\Delta} v^{\Delta}.
+\ese 
+
+Next note that crossing symmetry is basically the statement that the result is invariant under $1\leftrightarrow 3$ (or $2\leftrightarrow 4$), which corresponds exactly to $u\leftrightarrow v$, which is how our two $P$s are related. If we then plug all this into \Cref{eqn:FourPointFunctionConformalBlocks}, we see the above equality of diagrams is equivalent to saying 
+\bse 
+    \sum_{\cO} C^2_{\Phi\Phi\cO} \big[ u^{2\Delta} G_{\cO}(x_1,x_2,x_3,x_4) - v^{2\Delta} G_{\cO}(x_3,x_2,x_1,x_4)\big] = 0
+\ese 
+for any $u,v$. 
+
+This is the sort of equation people play around with numerically in order to solve $D\geq 3$ CFTs. The obvious question is how does this help in that goal? Well first we notice that $C^2_{\Phi\Phi\cO} >0$. This obviously places a constraint on the allowed set of primaries, i.e. the allowed values of $C_{\Phi\Phi\cO}$. The idea is to then consider the function in square brackets as a vector, so we're asking for a sum of vectors with non-negative coefficients to vanish:
+\bse 
+    \sum c \underline{v} = 0
+\ese 
+with $c\geq 0$. The case $c=0$ just means every correlator vanishes and so is boring, so we focus on $c > 0$. Clearly this has no solutions if all the vectors live on one side of a plane as we need to cancel stuff. That is, if we want to cancel a sum of the blue and green arrows in the diagram below we need something like the red arrow. 
+
+\begin{center}
+    \btik[scale=0.8]
+        \draw[ultra thick, ->, red] (4,0.5) -- (4,-1.5);
+        \draw[thick, rotate around={-25:(0,0)}, xscale=1.5, fill = gray!40, opacity = 0.8] (0,0) .. controls (0.8,0.5) and (1.2,0.5) .. (3.5,1) .. controls (4,1.5) and (4,3) .. (4.5,4.5) .. controls (3.2,4) and (3.7,4) .. (1,3.5) .. controls (0.5,3) and (0.5,1.5) .. (0,0);
+        \draw[thick, rotate around={-25:(0,0)}, xscale=1.5] (0,0) .. controls (0.8,0.5) and (1.2,0.5) .. (3.5,1) .. controls (4,1.5) and (4,3) .. (4.5,4.5) .. controls (3.2,4) and (3.7,4) .. (1,3.5) .. controls (0.5,3) and (0.5,1.5) .. (0,0);
+        \draw[ultra thick, ->, blue, rotate around={10:(4,0.5)}] (4,0.5) -- (4,2.5);
+        \draw[ultra thick, ->, green, rotate around={-40:(4,0.5)}] (4,0.5) -- (4,2.5);
+        \draw[fill=black] (4,0.5) circle [radius=0.05cm];
+    \etik
+\end{center}
+
+\noindent These vectors themselves are the data you are given in order to try solve the CFT. 
+
+% For Paul: you made some comment about AdS/CFT here about how bootstrap is used to do strong coupled CFT calculations. I didn't catch everything you said in when I typed it in the lecture and I'm not confident enough with AdS/CFT to expand on this remark myself. 

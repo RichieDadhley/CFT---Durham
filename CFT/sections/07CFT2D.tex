@@ -1,0 +1,750 @@
+\chapter{CFT in 2D}
+
+We now move on to the discussion of CFTs in 2D. As we have said multiple times throughout these notes, CFTs in 2-dimensions are conceptually very different from higher dimensional CFTs. One of the biggest differences, which we will continue to emphasise in this part of the course, is that in 2D we have an \textit{infinite} number symmetries. The fact that this is true can be seen going all the way back to the first exercise, which asked for a derivation of $\xi^{\mu}$: during one step of the calculation you should have got something of the form 
+\be 
+\label{eqn:D-2Kappa}
+    (D-2) \p_{\mu} \p_{\nu} \kappa = 0,
+\ee 
+which was used to say that $\kappa$ was linear in $x$. However if we set $D=2$ then we can have \textit{any} function of $x$. This clearly gives us conceptually different results, which this part of the course will explain. 
+
+Before moving on, it is worth clarifying a fact that might seem backwards at first.\footnote{At least it took me a while to get my head around this.} The fact that we have more symmetries puts \textit{more} constraints on the CFT (i.e. more symmetries need to be obeyed) and so actually gives us a \textit{better} grasp on the problem. 
+
+\section{Introduction To String Theory}
+
+We start this part of the notes with a brief introduction to string theory. We will not go into much depth of the physics of string theory\footnote{This will be done on the string theory course, of course.} but just use it as a base to study the mathematics of 2D CFTs. 
+
+\subsection{The Relativistic Particle}
+
+The standard way to introduce string theory is to begin by considering the relativistic particle. In this case we think of the coordinates $X^{\mu}$ as being maps 
+\bse 
+    \begin{split}
+        X^{\mu} : \R & \to \mathbb{M}^{1,D-1} \\
+        \tau & \mapsto X^{\mu}(\tau),
+    \end{split}
+\ese 
+where $\mathbb{M}^{1,D-1}$ is $D$-dimensional Minkowski spacetime. This is just the statement that for a given proper time, $\tau$, we have a given event in Minkowski spacetime. This just gives us the familiar \textit{worldline} of the particle. 
+\begin{center}
+    \btik
+        \draw[thick, ->] (-8,2.5) -- (-4,2.5);
+        \draw[thick] (-7.5,2.7) -- (-7.5,2.3);
+        \draw[thick] (-7,2.7) -- (-7,2.3);
+        \draw[thick] (-6.5,2.7) -- (-6.5,2.3);
+        \draw[thick] (-6,2.7) -- (-6,2.3);
+        \draw[thick] (-5.5,2.7) -- (-5.5,2.3);
+        \draw[thick] (-5,2.7) -- (-5,2.3);
+        \draw[thick] (-4.5,2.7) -- (-4.5,2.3);
+        \node at (-3.8, 2.3) {$\R$};
+        \draw[->] (-5,3) .. controls (-3,4) and (-1,4) .. (1,3) node [midway, above] {$X^{\mu}$};
+        \draw[ultra thick, ->] (-0.5,0) -- (3,0);
+        \node at (2.8,-0.3) {$\Vec{x}$};
+        \draw[ultra thick, ->] (0,-0.5) -- (0,5);
+        \node at (-0.3,4.8) {$x^0$};
+        \draw[thick] (0.5,0.5) .. controls (3,3) and (1,3) .. (2,4.5);
+        \draw[rotate around={35:(0.6,0.6)}] (0.6,0.4) -- (0.6,0.8);
+        \draw[rotate around={38:(1,1)}] (1,0.8) -- (1,1.2);
+        \draw[rotate around={40:(1.4,1.5)}] (1.4,1.3) -- (1.4,1.7);
+        \draw[rotate around={45:(1.65,2)}] (1.65,1.8) -- (1.65,2.2);
+        \draw[rotate around={70:(1.8,2.6)}] (1.8,2.4) -- (1.8,2.8);
+        \draw[rotate around={100:(1.75,3.3)}] (1.75,3.1) -- (1.75,3.5);
+        \draw[rotate around={70:(1.75,4)}] (1.75,3.8) -- (1.75,4.2);
+    \etik
+\end{center}
+
+The action for the relativistic particle in terms of the proper time $\tau$ is
+\be 
+\label{eqn:ParticleAction}
+    S = -m \int d\tau \, \sqrt{\dot{X}_{\mu} \dot{X}^{\mu}}, \qquad \text{with} \qquad \dot{X}^{\mu} := \frac{\p X^{\mu}}{\p \tau}.
+\ee    
+
+We now stress an important, at first confusing, point. The $\mu = 0, ... , D-1$ index comes from the fact our Minkowski spacetime is $D$ dimensional and so we need to specify how the worldline "lies" in there.\footnote{More technically, we need to specify how our embedding is defined.} However our action is just a 1-dimensional QFT and so the $\mu$ there is just viewed as labelling $D$ different scalar fields on our 1D space. That is $X^1(\tau)$ is just a scalar field as far as \Cref{eqn:ParticleAction} is concerned. 
+
+\badr 
+\label{rem:ProperTimeGauge}
+    There is actually a subtle point relating to going from integrating over coordinate time $t$ to integrating over proper time $\tau$. When we go to proper time, we "promote" the coordinate time $t$ to a degree of freedom, $\tau$, in order to give a manifestly Lorentz invariant theory. However $t$ is \textit{not} a real degree of freedom (you cannot travel in time as you like), and so really $\tau$ is a \textit{gauge} degree of freedom. This discrimination between a real degree of freedom and an gauge degree of freedom is tied up in the fact that our action is reparameterisation invariant $\tau \to \widetilde{\tau}(\tau)$. This basically tells us that $\tau$ has no physical meaning. This point is made here because the same idea applies to the coordinates on the string, where it is easy to get confused about what's what. For a bit more detailed discussion of this point, see the start of Prof. Tong's string theory notes.\footnote{Or, shameless plug, the start of my string theory notes on Shiraz Minwalla's course.}
+\eadr 
+
+\subsection{String Actions}
+
+We now want to extend this logic for a free relativistic particle to a free propagating string. The idea is that instead of having a particle tracing out a worldline, we have a string tracing out a world\textit{sheet}. This string can either be closed (which traces out a cylinder shape) or open (which just gives a sheet, like a piece of paper). In our discussion of string theory we shall focus on the closed string. 
+
+Our worldsheet is now parameterised using two coordinates; the proper time, $\tau$, and another which tells us about moving \textit{around} the sheet. It is standard to label the latter as $\sig$. Our $X^{\mu}$ map then becomes 
+\bse 
+    \begin{split}
+        X^{\mu} : \R^{1,1} & \to \mathbb{M}^{1,D-1} \\
+        (\tau,\sig) & \mapsto X^{\mu}(\tau,\sig).
+    \end{split}
+\ese 
+We call the domain and target of this map the "\textit{worldsheet}" and "\textit{target space}", respectively. That is 
+\bse 
+    \text{Worldsheet} = \R^{1,1}, \qand \text{Target Space} = \mathbb{M}^{1,D-1}.
+\ese
+
+Pictorially, this map acts as follows. 
+\begin{center}
+    \btik
+        \draw[thick, ->] (-8.5,0.5) -- (-4,0.5);
+        \node at (-3.8,0.2) {$\sig$};
+        \draw[thick, ->] (-8,0) -- (-8,4.5);
+        \node at (-8.3,4.2) {$\tau$};
+        %
+        \draw[->] (-5.5,3) .. controls (-3.5,4) and (-1.5,4) .. (0.5,3) node [midway, above] {$X^{\mu}$};
+        %
+        \draw[ultra thick] (-0.5,0) -- (4,0);
+        \node at (3.8,-0.3) {$\Vec{x}$};
+        \draw[ultra thick] (0,-0.5) -- (0,5);
+        \node at (-0.3,4.8) {$x^0$};
+        \draw[thick] (0.8,0.5) .. controls (2.3,3) and (0.3,3) .. (0.8,4.5);
+        \draw[thick] (2.3,0.5) .. controls (4.8,2.5) and (0.8,3) .. (2.3,4.5);
+        \draw[thick] (1.55,4.5) ellipse (0.74 and 0.18);
+        \draw[thick] (0.8,0.5) arc (180:360:0.74 and 0.18);
+        \draw[thick, dashed] (0.8,0.5) arc (180:360:0.74 and -0.18);
+        \draw[thick, dashed] (2.22,2) ellipse (0.87 and 0.2);
+        \draw[->, thick] (3.3,2) .. controls (3.1,2.5) .. (2.6,3);
+        \node at (3.3,2.5) {$\tau$};
+        \draw[->, thick] (1.5,1.7) .. controls (2.25,1.5) .. (2.9,1.7);
+        \node at (2.25, 1.4) {$\sig$};
+    \etik
+\end{center}
+
+\badr 
+    It is at this point that \Cref{rem:ProperTimeGauge} becomes important. As we have done in the diagram above, we often talk about about $\tau$ and $\sig$ in our Minkowski spacetime as "going up the string" and "going around the string". However these are the analogue of the proper time for the worldline and have \textit{no} physical meaning. What $\tau$ and $\sig$ label are the coordinates on the worldsheet (i.e. the left-hand side of the diagram above). However it is often more intuitive to think of how $(\tau,\sig)$ live in target space as it gives us an idea of the worldsheet being the thing on the right-hand side of our figure, but we just \textit{defined} the worldsheet to be our $\R^{1,1}$. A bit more technically the thing on the right-hand diagram is an \textit{embedding} of the worldsheet into $\mathbb{M}^{1,D-1}$. This is completely analogous to differentiating between the abstract $2$-sphere $S^2$ and the embedding into $\R^3$, which is our intuitive notion of a ball. 
+\eadr 
+
+We now want to define a QFT around this, and in order to do that we need an action. We again want to use the particle action, \Cref{eqn:ParticleAction}, as a guiding light. It should be familiar from a GR course that this action just gives the length of the curve. This is an absolute property of the worldline, i.e. it doesn't depend on how we choose to do the embedding. We therefore try to extend this idea to say that our string action should give us the \textit{area} of the worldsheet. 
+
+\subsection{Nambu-Goto Action}
+
+The question is "how do we do this?" Well recall from GR that we measure lengths and angles using the metric. We therefore need some kind of metric on the worldsheet. We do this by introducing what is known as the \textit{induced metric}. This is given by
+\be 
+\label{eqn:InducedMetric}
+    h_{ab} = \p_a X^{\mu} \p_b X_{\mu}, \qquad a, b \in \{1,2\},
+\ee 
+where we have used the fact that our target space is Minkowski and so has the flat metric $\eta_{\mu\nu}$. You obtain this result by considering the pullback of the target space metric onto the embedding of the worldsheet. We do not go through the details here but refer intrested readers to Section 1.2 of Prof. Tong's notes.\footnote{Again or 1.3.1 of my notes on Prof. Minwalla's course.} 
+
+We can use this result to get the following action, known as the \textit{Nambu-Goto} action.
+\mybox{
+    \be 
+    \label{eqn:NambuGotoAction}
+        S_{NG} = -\frac{1}{2\a'} \int d^2 x \sqrt{-\det(h_{ab})},
+    \ee 
+}
+\noindent where the brackets around $(h_{ab})$ tell us to consider the matrix whose entries are given by $h_{ab}$. The fact that this gives the area can be seen by considering the area of `infintesimal tiles' in a Euclidean space.\footnote{Again for more detials see either Prof. Tong's notes or my notes.} The $\a^{\prime}$ appearing in \Cref{eqn:NambuGotoAction} is known as the \textit{Regge slope}, and simple dimensional analysis tells us $[\a^{\prime}] = [L^2]$. We can  relate it to the, more physical, tension of the string via
+\bse 
+    \frac{1}{2\pi\a'} = T.
+\ese
+
+\br 
+    In order to understand how this tension fits in to our pictorial intuition, we should really think of the strings as a rubber band trying to shrink down to zero radius. The tension then corresponds to its resistance to being stretched out again.
+\er 
+
+\bbox 
+    Vary the Nambu-Goto action w.r.t. $X^{\mu}$ to arrive at the equations of motion 
+    \be 
+    \label{eqn:NambuGotoEOM}
+        \p_a \big( \sqrt{-h} h^{ab}\p_b X^{\mu}\big) = 0,
+    \ee 
+    where $h:=\det(h_{ab})$.
+\ebox 
+
+Let's see what symmetries our Nambu-Goto action has.
+\ben[label=(\roman*)]
+    \item The spacetime Poincar\'{e} generators, ${\Lambda^{\mu}}_{\nu}$ and $a^{\mu}$, are independent of the worldsheet coordinates,\footnote{This is what we mean about $\mu$ just labelling the different fields from the worldsheet's perspective.} so we have spacetime Poincar\'{e} symmetry from the fact that the indices are contracted. This is genuine \textit{global} symmetry from the worldsheet's perspective. 
+    \item Just as we had the gauge reparameterisation symmetry $\tau\to\widetilde{\tau}(\tau)$ for the worldline, we have the gauge reparameterisation symmetries $\tau\to\widetilde{\tau}(\tau)$ and $\sig\to\widetilde{\sig}(\sig)$ for the worldsheet. Again it is important to note that these are conceptually different from the Poincar\'{e} symmetries; they are \textit{local} gauge symmetries.
+\een 
+
+\badr 
+    An important repercussion of the above statements is that the Poincar\'{e} symmetries, being global symmetries, will give rise to Noether currents. However the gauge symmetries will not. 
+\eadr 
+
+\subsection{Polyakov Action}
+
+This is great, but this is meant to be a CFT course and our action is clearly not a CFT; it doesn't have the needed Weyl invariance! Why are we talking about it, then? Well we note the following "theorem"
+\bt 
+    Square roots nasty things to have in actions, and make quantisation very hard.\footnote{This is bascially because in the path integral formulation we get the propagators by rewritting the action in the form $\int \phi A \phi$, and then take the inverse of this operator to find the propagator (see, e.g., my notes on Dr. Nabil Iqbal's QFT II course for more details). This is hard to do for multiple reasons if we have a pesky square root.}
+\et 
+
+We would, therefore, like to remove this square root. In order to do that, we invoke a neat trick that finds use when studying the relativistic particle.\footnote{This presentation is taken, almost directly, from Prof. Tong's string theory notes.} The idea is that we can rewrite \Cref{eqn:ParticleAction} in the following form 
+\bse 
+    S = \frac{1}{2}\int d\tau \big( e^{-1} \dot{X}^{\mu}\dot{X}_{\mu} - em^2\big),
+\ese
+where $e=e(\tau)$ is some new field we introduce. We can make this look more familiar by switching to notation 
+\bse 
+    e = \sqrt{-\g_{\tau\tau}},
+\ese 
+so that our action becomes 
+\bse 
+    S = \frac{1}{2}\int d\tau \, \sqrt{-g_{\tau\tau}} \big( g^{\tau\tau} \dot{X}^{\mu}\dot{X}_{\mu} + m^2\big) \qquad g^{\tau\tau} := (g_{\tau\tau})^{-1}.
+\ese 
+This now looks like we have coupled our scalar fields $X^{\mu}(\tau)$ to a 1D gravity, which is where the name "einbein" comes from.\footnote{In GR we have something called a \textit{vierbein}.} 
+
+\br 
+    It would be fair to raise concern about $e(\tau)$ having a drastic impact on the theory. However, as a quick calculation will show, it is completely fixed by the equations of motion and so we don't need to panic. 
+\er 
+
+Ok so we want to take this argument and try remove the square root from our Nambu-Goto action. This gives us what is known as the \textit{Polyakov} or \textit{Brink-DiVecchia-Howe-Deser-Zumino} action.\footnote{It was the latter that discovered the action. It was Polyakov was responsible with understanding how to manipulate it in a path integral, and so it is normally given by his name.} 
+\mybox{
+    \be 
+    \label{eqn:PolyakovAction}
+        S_P = -\frac{1}{4\pi\a'} \int d^2 x \sqrt{-\g} \g^{ab} \p_a X^{\mu} \p_b X_{\mu}. 
+    \ee 
+}
+\noindent Our new field here is $\g_{ab}$, with inverse $\g^{ab}$. We have also used the standard notation $\g := \det(\g_{ab})$. First let's check this is actually (classically) equivalent to the Nambu-Goto action. Computing the Euler Lagrangian equations for $\g$, we find 
+\bse
+    0 = \p_a X^{\mu} \p_b X_{\mu} - \frac{1}{2}\g_{ab}\g^{cd} \p_c X^{\mu} \p_d X_{\mu} = h_{ab} - \frac{1}{2}\g_{ab}\g^{cd}h_{cd}
+\ese 
+which can be manipulated into the form
+\bse 
+    \sqrt{-\g} \g^{ab} \p_a X^{\mu} \p_b X_{\mu} = \sqrt{- h}.
+\ese 
+
+\bbox 
+    Fill in the missing lines in the above calculation. \textit{Hint: Recall that $\det(aM) = a^2\det M$ for any scalar $a$ and matrix $M$.}
+\ebox 
+
+Ok that's good, but what is this new field $\g_{ab}$? Well if we compute the equations of motion w.r.t $X^{\mu}$ we simply get 
+\bse 
+    \p_a \big( \sqrt{-\g} \g^{ab}\p_a X^{\mu}\big) = 0,
+\ese 
+which is exactly the same as the Nambu-Goto equations of motion, \Cref{eqn:NambuGotoEOM}, but with $h\to \g$. This tells us that we can \textit{think} of $\g_{ab}$ as the induced metric in the Polyakov case.
+
+\badr 
+    The emphasis on "think" above is for the following reason. The induced metric $h_{ab}$ is a genuine metric, given by the pullback metric from the spacetime metric $\eta_{\mu\nu}$. However $\g_{ab}$ is a \textit{field}, and is therefore dynamical. As with the einbein $e$, its dynamics are completely fixed by the equations of motion, however we should not be so quick to say it is a legitimate metric. We therefore refer to $\g_{ab}$ as the \textit{dynamical metric} on the worldsheet. We will, however, just think of it as a `normal' metric from now on.
+\eadr 
+
+The Polyakov action is the action of free scalar fields $X^{\mu}(\sig,\tau)$ (from the 2-dimensional point of view) coupled to a background metric. It is a free field as the $X^{\mu}$ equations of motion are 
+\bse 
+    \nabla^2 X^{\mu} = 0 
+\ese 
+where $\nabla$ is the covariant derivative in 2D w.r.t. $\g_{ab}$. 
+
+\subsection{Symmetries Of Polyakov Action}
+
+The important thing about the Polyakov action for us are it's symmetries. It still has the spacetime Poincar\'{e} and worldsheet reparameterisation symmetries (which we will call worldsheet diffeos from now on) present in the Nambu-Goto action. However it also possess a Weyl symmetry given by 
+\bse 
+    \g_{ab} \to \Omega^2(x) \g_{ab}.
+\ese 
+This is easily seen by the fact that
+\bse 
+    \det\g \to \Omega^4(x)\det\g , \qand \g^{ab} \to \Omega^{-2}(x)\g^{ab},
+\ese 
+so that 
+\bse 
+    \sqrt{-\g} \g^{ab} \to \sqrt{-\g} \g^{ab}.
+\ese 
+These are \textit{local} symmetries, and so we can gauge fix them. 
+
+Now $\g_{ab}$ is a $2\times 2$ symmetric matrix and so has $3$ independent components. However we have just said that we have 2 worldsheet reparameterisation gauge symmetries, and so we can use a gauge transformation to fix $\g_{ab}$ so that it is of diagonal form. We can then use a Weyl transformation to give us a flat worldsheet metric:
+\bse 
+    \g_{ab} \, \overset{\text{Diffeos.}}{\longrightarrow} \, \Omega^2(x)\eta_{ab} \, \overset{\text{Weyl}}{\longrightarrow} \, \eta_{ab}.
+\ese 
+
+\br 
+    We can also see this result by considering the Riemann tensor $R_{\mu\nu\rho\sig}$. In 2D it reduces down to $\frac{R}{2}(g_{\mu\rho} g_{\nu\sig} - g_{\mu\sig}g_{\nu\rho})$. This tells us that essentially the Riemann tensor goes like $R$, which is just a single scalar degree of freedom, which we can make flat using the Weyl transformations. 
+\er 
+
+Now comes the important result for us: there is still a left over residual gauge symmetry after we fix $\g_{ab}=\eta_{ab}$. That is, even after picking this gauge, there is still some left over gauge invariance. It is not too hard to see that this gauge invariance is given \textit{precisely} by conformal transformations. That is any worldsheet diffomorphism that only changes $\g_{ab}$ by a Weyl factor is a left over residual gauge. This allows us to make the all important conclusion
+
+\mybox{
+    \begin{center}
+        String theory is a 2D CFT!
+    \end{center}
+}
+
+\badr 
+    The fact that the Polyakov action possess the additional Weyl invariance tells us that if we want to continue studying the Nambu-Goto action through the Polyakov one, we actually have to take an equivalence class on our solutions, i.e. we mod out by Weyl transformations. In other words, two solutions that differ purely by a Weyl transformation are considered the same solution. The Weyl invariance is obviously true at the classical level, and it places some significant restraints on the allowed terms in the action. For example we couldn't include a cosmological constant term as then there wouldn't be a $\g^{ab}$ factor to cancel the transformation from the determinant. Things become a bit more subtle when it comes to the quantum theory, and more details about this can be found in my notes on Prof. Shiraz Minwalla's string theory course. 
+\eadr 
+
+\br 
+    Note that in higher dimensions we were making the \textit{choice} to consider a flat space for our CFT. However for string theory we can actually always do this. 
+\er 
+
+This concludes our discussion of string theory itself, and we will now study abstract 2D CFTs. A lot of the work that follows will be very similar to the work we did before for higher dimensional CFTs, but there are some important differences, that we shall point out along the way. Of course the stuff we talk about for the rest of the course will be applicable to string theory (as it is a 2D CFT), but it is important to note that it is not string theory specific. 
+
+\bnn 
+    As we are now moving on from string theory our $\mu$ indices that follow take two values. That is they label the worldsheet coordinates $(\tau,\sig)$ not some higher dimensional spacetime. 
+\enn 
+
+\section{Conformal Transformations In 2D}
+
+As we said at the start of this part of the notes, the space of conformal transformations is \textit{much} bigger, which came from the fact that the $D-2$ on the left-hand side of \Cref{eqn:D-2Kappa} identically vanishes. This tells us that $\kappa$ can be an arbitrary polynomical in $x$, rather than quadratic as for the $D>2$ case.
+
+We can see this result in another useful way by considering so-called \textit{light-cone coordinates}
+\be 
+\label{eqn:LightconeCorrdinates}
+    x^{\pm} := \frac{1}{\sqrt{2}} (\sig \pm \tau). 
+\ee 
+The line element in these coordinates becomes
+\bse 
+    ds^2 = d\sig^2 - d\tau^2 = 2dx^+ dx^- = \begin{pmatrix}
+        dx^+ & dx^-
+    \end{pmatrix} \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix} \begin{pmatrix}
+        dx^+ \\
+        dx^-
+    \end{pmatrix}
+\ese 
+from which we can read off the worldsheet metric (which we denote by $g$ from now on) as 
+\bse 
+    (g_{ab}) = \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix}.
+\ese 
+Now consider the general transformation
+\bse 
+    x^- \mapsto f(x^-) \qand x^+ \mapsto g(x^+) 
+\ese
+where $f$ and $g$ can \textit{any} functions of only their respective arguments, i.e. $f$ doesn't depend on $x^+$ at all and similarly $g$ doesn't depend on $x^-$. Then our metric transforms as
+\bse 
+    2dx^+ dx^- \to  2\frac{df(x^-)}{dx^-}\frac{dg(x^+)}{dx^+} dx^-dx^+,
+\ese 
+but this is just a Weyl transformation, as the metric is just scaling under this transformation. This is therefore a conformal transformation for \textit{any} functions $f,g$. This gives us an infinte class of symmetries for the $D=2$ case. In higher dimensions things are a bit more complicated,\footnote{Note in higher dimensions going to light-cone coordinates would break Lorentz invariance as we would have to single out two of our directions in order to define $x^{\pm}$. However for $2D$ we're alright because there are only two coordinates.} and, as we have seen already, we get at most quadratic terms.
+
+We now abandon light-cone coordinates and look at the much more useful complex coordinates, i.e. we define
+\bse 
+    z := x^+ \qand \Bar{z} := x^-. 
+\ese 
+There are three cases:
+\ben[label=(\roman*)] 
+    \item Real Minkowski space: $\sig,\tau\in\R$ and therefore $z,\Bar{z}\in\R$ and independent. 
+    \item Complexify to get Complex Minkowski: $\sig,\tau\in\C$ and $z,\Bar{z}\in\C$ and independent. 
+    \item Real Euclidean, $\tau\to i\tau$: $\sig,\tau\in\R$ but $z,\Bar{z}\in \C$ with $\Bar{z} = z^*$.
+\een 
+
+Case (iii)  is often most useful as it gives us a direct relation between $z$ and $\bar{z}$, namely complex conjugation.\footnote{Note it's for this reason that we call the second variable $\bar{z}$. That is for cases (i) and (ii) the bar does not indicate complex conjugation, but here it does.} This essentially allows us to derive all the results by just considering the $z$ case and then obtain the $\bar{z}$ results by complex conjugation. For this reason, this is the case we will use in this course.
+
+Our conformal transformations are then just simply meromorphic\footnote{It is likely I will use mermorphic and holomorphic interchangeabley. These are obviously technically different, but close enough that hopefully the ideas are understood.} transformations
+\bse 
+    z^{\prime} = f(z) \qand \bar{z}^{\prime} = g(\bar{z}).
+\ese 
+
+\badr 
+    Note although we still have an infinite space of conformal transformations, it is still \textit{drastically} smaller than the original diffeomorphisms. This is because our $f$ and $g$ are only functions of a single variable. The easiest way to see this is to consider taking a Taylor expansion of functions that depends on both variables $F(\tau,\sig)$ and $G(\tau,\sig)$. If we expand $F(\tau,\sig)$ about $\sig$, only \textit{the first term} in this expansion is $\sig$ independent, and similarly only the first term in the expansion of $G(\tau,\sig)$ about $\tau$ will be $\tau$ independent. Therefore essentially we have truncated our space of diffeomorphisms down to a first order.
+\eadr 
+
+\section{Generators: Witt Algebra}
+
+We can write our conformal transformations infinitesimally as 
+\bse 
+    z^{\prime} = z + \xi(z)  
+\ese 
+where $\xi(z)$ is any meromorphic function of $z$, which we can expand as
+\bse 
+    \xi(z) = \sum_n a_n z^{n+1}.
+\ese 
+Our conformal transformation is then generated by 
+\bse 
+    \xi(z) \p_z = \sum_n a_n z^{n+1}\p_z = -\sum_a a_n L_n
+\ese 
+where 
+\mybox{
+    \be 
+    \label{eqn:Ln}
+        L_n := -z^{n+1}\p_z
+    \ee
+}
+\noindent are the generators. If these are to be generators, they are meant to be elements of the Lie algebra, and so we better check that they close under the Lie bracket, which is just the commutator. By direct calculation we have
+\bse 
+    [L_n,L_m] = [z^{n+1}\p_z, z^{m+1}\p_z] = ... = (m-n) z^{n+m+1}\p_z,
+\ese 
+which we can rewrite as
+\bse 
+    [L_n, L_m] = (n-m) L_{n+m},
+\ese
+where we have used the minus sign to flip $(m-n)$. As we mentioned above, we can easily obtain the barred version by taking the complex conjugate (i.e. put bars everywhere). That is repeating the above for the $\bar{z}$s will give us
+\bse 
+    [\bar{L}_n, \bar{L}_m] = (n-m) \bar{L}_{n+m}.
+\ese 
+
+This is an important result, so we write it again in a nice box. 
+\mybox{
+    \be 
+    \label{eqn:WittAlgebra}
+        [L_n,L_m] = (n-m) L_{n+m} \qand [\bar{L}_n,\bar{L}_m] = (n-m) \bar{L}_{n+m}.
+    \ee 
+}
+\noindent This is known as the \textit{Witt algebra}. 
+
+\subsection{M\"{o}bius Subgroup}
+
+The Witt algebra at first seems completely new, however after staring at it for a moment or two, we see that it has a subalgebra spanned by
+\bse 
+    L_0, L_1, L_{-1} \qquad \text{or} \qquad \bar{L}_0, \bar{L}_1, \bar{L}_{-1}
+\ese 
+depending on which part of the algebra we're looking at. Explicitly the commutators are 
+\bse 
+    [L_{-1}, L_1] = -2L_0 \qquad [L_0,L_1] = -L_1 \qand [L_0,L_{-1}] = L_{-1},
+\ese
+and similarly for the barred expressions. We can then construct a Lie algebra isomorphism between this subalgebra and the $\mathfrak{sl}(2)$ algebra.\footnote{For an explicit statement see Section 6.1.1 of my notes on Prof. Shiraz Minwalla's course.}
+
+We can translate this Lie algebra isomorphism to a Lie group isomorphism. That is there is a subgroup of our $2D$ conformal group that is isomorphic to $SL(2,\C)$. These are the subset of transformations which are globally well defined on the whole Riemann sphere. In other words, when we have $n<-1$ our generators $L_n/\bar{L}_n$ go with negative powers of $z$, and so are ill-defined at $z=0$. Similarly for $n>1$ they are ill-defined at $z=\infty$. The latter condition might seem a bit strange, but we can see it by considering an inversion, then 
+\bse 
+    z^n \mapsto \frac{1}{z^n}, \qand \infty \mapsto 0,
+\ese 
+so they are ill-defined.
+
+So what are the subgroup generators?
+\ben[label=(\roman*)]
+    \item $L_{-1}, \bar{L}_{-1}$ are translations, as they are just $\p_z, \p_{\bar{z}}$. In other words they correspond to $P_{\mu}$. 
+    \item $L_0, \bar{L}_0$ are dilatations. This just just because $D = z\p_z + \bar{z}\p_{\bar{z}}$, and so can be generated by $L_0 = z\p_z$ and $\bar{L}_0 = \bar{z}\p_{\bar{z}}$. We can also get the Lorentz transformations\footnote{Note that the indices only take values $\{0,1\}$ as we are in 2D.} $L_{01} = -L_{10} = z\p_{\bar{z}} - \bar{z}\p_z$.
+    \item $L_1, \bar{L}_1$ give us the special conformal transformations $K_{\mu}$. We can see this by a similar argument to (ii) above. 
+\een 
+
+This global subgroup is called the \textit{M\"{o}bius group}. For a finite transformation it is given by\footnote{Hopefully it's reasonably clear why this is isomorphic to $SL(2,\C)$ from here.}
+\bse 
+    z \mapsto \frac{az+b}{cz+d} \qquad \text{with} \qquad ad-bc = 1.
+\ese 
+We can get the infinitesimal version by setting
+\bse 
+    a = 1 + \a, \qquad b = 1+\beta, \qquad d = 1 + \del, \qand c = 1+\g, 
+\ese 
+where the $ad-bc=1$ condition gives us $\a = - \del$. This will reproduce the 3 generators $\{L_0,L_1,L_{-1}\}$, as it must as the Lie algebra is given by working infinitesimally around the identity. 
+
+\section{Transformations Of Fields}
+
+We now want to introduce fields into our CFT. A general field will depend on both variables, $\varphi(z,\bar{z})$, however there are also fields which only depend on one. We call a field that only depends on $z$, $\varphi(z)$, \textit{Chiral} and similarly a field $\varphi(\bar{z})$ \textit{antichiral}.
+
+The first thing we note is that we can consider the scaling of $z$ and $\bar{z}$ separately, i.e. $z\to \l z$ and $\bar{z}\to \bar{\l}\bar{z}$. Our fields will obviously scale by both these, and so we write the weights of the fields as a doublet $(h,\bar{h})$. That is a general field of weight $(h,\bar{h})$ transforms as
+\bse 
+    \varphi \to \varphi^{\prime}, \qquad \varphi^{\prime}(\l z, \bar{\l}\bar{z}) = \l^{-h}\bar{\l}^{-\bar{h}} \varphi(z,\bar{z}). 
+\ese 
+
+Now we note that this combines both dilatations and rotations. We can see this by letting $\l = re^{i\theta}$ and $\bar{\l} = r e^{-i\theta}$, then we have
+\bse 
+    \varphi^{\prime}(\l z, \bar{\l} \bar{z} ) = r^{-(h+\bar{h})} e^{-i\theta(h-\bar{h})} \varphi(z,\bar{z}).
+\ese
+The $r$ factor is just our dilatation scaling, while the $\theta$ term is a rotation in the $\C$ plane. We therefore make the following definitions/conclusions. 
+\mybox{
+    \be 
+        \Delta = h + \bar{h} \qand S = h-\bar{h},
+    \ee 
+}
+\noindent where $\Delta$ is the dilatation weight and $S$ is the \textit{spin} of the field. 
+
+Ok so how does a field transform under a \textit{general} conformal transformation? Again we answer this by \textit{defining} what we mean by a primary field and then move on to descendants. 
+\bd[Primary Field (2D)] 
+    A \textit{primary field} of weight $(h,\bar{h})$ transforms as $\varphi\to\varphi^{\prime}$ where 
+    \be 
+    \label{eqn:PrimaryField2D}
+        \varphi^{\prime}\big(f(z),\bar{f}(\bar{z})\big) = \big(\p_z f\big)^{-h} \big(\p_{\bar{z}}\bar{f}\big)^{-\bar{h}} \varphi(z,\bar{z}).
+    \ee 
+\ed 
+\noindent If we then restrict to the M\"{o}bius subgroup we can find how a field transforms in the same way as $D>2$ case before. 
+
+An infinitesimal transformation
+\bse 
+    z \mapsto z + \xi(z), \qand \bar{z} \mapsto \bar{z} + \bar{\xi}(\bar{z}),
+\ese 
+of primary of weight $(h,\bar{h})$ is then 
+\be 
+\label{eqn:InfintesimalPrimaryTransformation2D}
+    \del \varphi = -h \frac{\p \xi}{\p z} \varphi - \xi \frac{\p\varphi}{\p z} -\bar{h} \frac{\p \bar{\xi}}{\p \bar{z}} \varphi - \bar{\xi} \frac{\p\varphi}{\p \bar{z}}
+\ee 
+
+\br 
+    Note, as we tried to emphasise at the start of this chapter, this is a much \textit{stronger} requirement than in higher-dimensions. That is, we have more constraints and so it gives us a smaller set of primary fields. 
+\er 
+
+With the above remark in mind, we can define
+
+\bd[Quasi-primary Field]
+    A \textit{quasi-primary field} of weight $(h,\bar{h})$ transforms under an infinitesimal transformation as \Cref{eqn:InfintesimalPrimaryTransformation2D} \textit{but} it need only hold for the global M\"{o}bius subgroup, i.e. for transformations were $\xi(z)$ is quadratic in $z$.
+\ed 
+
+To clarify, a quasi-primary field \textit{must} transform as \Cref{eqn:InfintesimalPrimaryTransformation2D} when $\xi(z)$ is quadratic in $z$, but it can transform arbitrarily for higher polynomials. It follows from this that all primary operators are quasi-primary, but the reverse is not true. This is exactly what we mean in the remark above; there are \textit{less} primary operators then there are quasi-primary ones.
+
+\br 
+    Note in $D>2$ CFTs quasi-primaries and primaries become indistinguishable. This is purely because we only have quadratic transformations for $D>2$. 
+\er 
+
+\section{Stress-Energy Tensor}
+
+As we are still considering a CFT the stress energy tensor still obeys
+\bse 
+    \p_{\mu}T^{\mu\nu} = 0 \qand {T^{\mu}}_{\mu} = 0.
+\ese
+The stress-tensor is symmetric, and so we have 3 independent components,
+\bse 
+    T^{zz} \qquad T^{\bar{z}\bar{z}} \qand T^{z\bar{z}} = T^{\bar{z}z}
+\ese 
+to start with. The question now is "what do our constraints above tell us about these components?" First consider the traceless condition. Recall that our metric is off-diagonal form, and so it essentially trades $z\leftrightarrow \bar{z}$ when we raise/lower indices. We therefore have 
+\bse 
+    T^{\mu\nu}g_{\mu\nu} = 2 T^{z\bar{z}} = 0. 
+\ese 
+This removes one of our components, leaving us with just 2. Now let's look at current conservation
+\bse 
+    \p_{\mu}T^{\mu\nu} = 0.
+\ese 
+This is actually two equations, given by $\nu=z,\bar{z}$. Let's consider these separately 
+\ben[label=(\roman*)]
+    \item $\nu=z$: 
+    \bse 
+        \p_z T^{zz} +\p_{\bar{z}} T^{\bar{z}z} = 0 \qquad \implies \qquad \p_z T^{zz} = 0,
+    \ese 
+    where we have used the traceless condition. 
+    \item $\nu=\bar{z}$: Similarly we get
+    \bse 
+        \p_{\bar{z}} T^{\bar{z}\bar{z}} = 0.
+    \ese 
+\een 
+We therefore see that the $T^{zz} = T^{zz}(\bar{z})$ and $T^{\bar{z}\bar{z}} = T^{\bar{z}\bar{z}}(z)$. This seems a little unappealing; it would be nicer if $T$ with $z$ indices was only $z$ dependent, and similarly $T$ with $\bar{z}$ indices. Well if we again use the fact that the metric is off-diagonal we can lower the indices while swapping $z\leftrightarrow \bar{z}$, to define
+\be 
+\label{eqn:StressTensor2D}
+    \begin{split}
+        T(z) & := T_{zz} = T^{\bar{z}\bar{z}} \\
+        \bar{T}(\bar{z}) & := T_{\bar{z}\bar{z}} = T^{zz}.
+    \end{split}
+\ee 
+With this notation in mind we shall also introduce the notation 
+\be 
+\label{eqn:PartialsNotation}
+    \p := \p_z \qand \bar{\p} := \p_{\bar{z}}.
+\ee 
+In this notation we have 
+\mybox{
+    \be 
+    \label{eqn:PartialsStressTensor2D}
+        \bar{\p} T(z) = 0 = \p \bar{T}(\bar{z}).
+    \ee 
+}
+
+\section{Radial Quantisation}
+
+Next on the list: radial quantisation. Again this is just the same as before, but our map is really from a cylinder, $\R\times S^1$, to a plane, $\C$. Our radius is now just given by $r=|z|$, and we parameterise the other coordinate using the angle $\arg(z) = \theta$. In other words we replace our $(r,\underline{n}^{\mu})$ from the $D>2$ case with $(r,\theta)$. Of course this is just a standard coordinatisation of the complex plane with $z=re^{i\theta}$ and so we use $(z,\bar{z})$ as coordinates, as we have been up to now. 
+
+\subsection{Hermitian Conjugation In 2D Radial Quantisation}
+
+We now get to something new coming from the fact that we are considering a 2D CFT. Recall that the Hermitian conjugation was given by
+\bse 
+    \cO_{\text{flat}}(r,\underline{n})^{\dagger} = \frac{1}{r^{2\Delta}} \cO_{\text{flat}}\bigg(\frac{1}{r},\underline{n}\bigg),
+\ese
+If we therefore consider a scalar field --- i.e. no spin, so $h=\bar{h}$ --- we have $\Delta=2h$, and so our complex conjugation becomes 
+\bse 
+    \cO(z,\bar{z})^{\dagger} = \frac{1}{(z\bar{z})^{2h}} \cO\bigg(\frac{1}{\bar{z}}, \frac{1}{z}\bigg)
+\ese 
+where we have used $r^2=|z|^2 = z\bar{z}$ along with
+\bse 
+    \frac{1}{\bar{z}} = \frac{1}{re^{-i\theta}} = \frac{1}{r}e^{i\theta}.
+\ese 
+The natural generlisation for fields with spin is just
+\be 
+\label{eqn:HermitianConjugatePhi2D}
+    \Phi(z,\bar{z})^{\dagger} = \frac{1}{z^{2\bar{h}}} \frac{1}{\bar{z}^{2h}} \Phi\bigg(\frac{1}{\bar{z}}, \frac{1}{z}\bigg).
+\ee 
+
+Ok so why is this different to the higher dimensional case? Well in our $\C$ plane we can take a Laurent expansions for our fields as
+\bse 
+    \Phi(z,\bar{z}) = \sum_{m,n\in \Z} \frac{\varphi_{nm}}{z^n \bar{z}^m}.
+\ese
+As will become clear soon, it is actually convenient to shift\footnote{This is a shift in the sense of we are just shifting where $m\to m^{\prime} = m+h$ and $n\to n^{\prime} = n+\bar{h}$. As the sum is over all integers, we can take the sum over $m,n$ again instead of $m^{\prime}, n^{\prime}$ without ruining anything.} this Laurent expansion as 
+\bse 
+    \Phi(z,\bar{z}) = \sum_{m,n\in \Z} \frac{\varphi_{nm}}{z^{n+h} \bar{z}^{m+\bar{h}}}.
+\ese
+
+Now the right-hand side of \Cref{eqn:HermitianConjugatePhi2D} is then
+\bse 
+    \Phi^{\dagger}(z,\bar{z}) = \frac{1}{z^{2\bar{h}}} \frac{1}{\bar{z}^{2h}} \sum_{n,m} \varphi_{n,m} \bar{z}^{n+h} z^{m+\bar{h}} = \sum_{m,n} \varphi_{nm} z^{m-\bar{h}}\bar{z}^{n-h},
+\ese 
+but the left-hand side is just 
+\bse 
+    \sum_{n,m} \frac{\varphi_{nm}^{\dagger}}{\bar{z}^{n+h} z^{m+\bar{h}} } = \sum_{m,n} \varphi^{\dagger}_{-n,-m} \bar{z}^{n-h} z^{m-\bar{h}}, 
+\ese 
+where the equality follows from the relabelling $m\to -m$ and $n\to -n$. So comparing these two see see 
+\mybox{
+    \be 
+    \label{eqn:VarphiNMDagger}
+        \varphi^{\dagger}_{n,m} = \varphi_{-n,-m}.
+    \ee 
+}
+\noindent The reason we did the shift of the sum above was so that this result turned out nicely. In other words, if we hadn't do the shift we would have factors of $h/\bar{h}$ appearing in \Cref{eqn:VarphiNMDagger}.
+
+\section{Operator State Correspondance}
+
+We now move on to discuss the state-operator correspondance. Recall that the state-operator map allowed us to define the state $\ket{\Phi}$ as
+\bse 
+    \ket{\Phi} := \Phi(0,0)\ket{0}.
+\ese 
+If we then use the mode expansion above,
+\bse 
+    \ket{\Phi} = \sum \frac{\varphi_{nm}}{z^{n+h}\bar{z}^{m+\bar{h}}}\bigg|_{z,\bar{z}=0} \ket{0},
+\ese
+we see that we need 
+\bse 
+    \varphi_{nm}\ket{0} = 0 \qquad \forall (n+h) > 0 \qand (m+\bar{h}) >0,
+\ese
+and 
+\bse 
+    \ket{\Phi} = \varphi_{-h,-\bar{h}}\ket{0}.
+\ese 
+We then define the $\bar{\Phi}$ state by Hermitian conjugation
+\bse 
+    \bra{\Phi} := \bra{0}\Phi^{\dagger}(0,0) = \bra{0} \big(\varphi_{-h,-\bar{h}}\big)^{\dagger} = \bra{0}\varphi_{h,\bar{h}}.
+\ese 
+
+\section{OPE \& Stress-Tensor}
+
+Finally we move on to the OPE. Of course this works in exactly the same way as before, and we have
+\bse 
+    \Phi_1(z) \Phi_2(0) = \sum_{\text{primaries}} C_{123} C(z,\p_y) \Phi_3(y)\big|_{y=0}.
+\ese 
+As above, we now consider putting in the mode expansions. In order to simplify things, we shall just consider a Chiral field (i.e one that just depends on $z$), and obtain the general field relation by simply adding the barred bit. Our mode expansion is then just
+\bse 
+    \Phi(z) = \sum \frac{\varphi_n}{z^{n+h}}.
+\ese 
+
+Now, for a reason that will become clear in a moment, let's consider what happens when we take a contour integral around our local insertion $\Phi(z)$. We will weight this contour integral by $z^{n+h-1}$, giving us
+\bse
+    \frac{1}{2\pi i}\oint \Phi(z) z^{n+h-1} dz = \frac{1}{2\pi i} \oint \sum_{n^{\prime}} \frac{\varphi_{n^{\prime}}}{z^{n^{\prime}+h}} z^{n+h-1} dz = \frac{1}{2\pi i} \oint \sum_{n^{\prime}} \frac{\varphi_{n^{\prime}}}{z^{n^{\prime}-n}} \frac{1}{z} dz = \varphi_n
+\ese 
+where the integral is taken over a contour enclosing $z$, and where  the last line follows from the residue theorem (i.e. we get $\del_{n,n^{\prime}}$ and then use the sum). We therefore see that we can extract the modes via a contour integral. We shall return to this shortly.
+
+We now want to go back to talking about Noether currents and their associated charge. Recall in higher dimensions we had a conformal Killing vector with a corresponding Noether current, which in turn has a corresponding conserved charge\footnote{Written here in time quantisation. This is why we have a $0$ index and are integrating over space.}
+\bse 
+    \xi^{\nu}\p_{\nu} \longrightarrow J^{\mu} = T^{\mu\nu}\xi_{\nu} \longrightarrow Q_{\xi} = \int T^{0\nu} \xi_{\nu} d^3 x.
+\ese 
+How does this translate to our 2D picture? Well of course it is all the same, but the idea is to try use our complex coordinates to simplify stuff. 
+
+In the complex picture we have two conserved currents given by the transformations $z\to z + \xi(z) $ and $\Bar{z} \to \Bar{z}+\Bar{\xi}(\bar{z})$. The currents are simply 
+\bse 
+    J(z) = \xi(z)T(z) \qand \bar{J}(z) = \bar{\xi}(\bar{z})\bar{T}(\bar{z}).
+\ese
+Our charges are then simply given by
+\bse 
+    Q_{\xi} := \frac{1}{2\pi i} \oint \xi(z) T(z) dz, \qand Q_{\bar{\xi}} := \frac{1}{2\pi i} \oint \bar{\xi}(\bar{z}) \bar{T}(\bar{z}) d\bar{z}
+\ese
+where again our contours are done over the region containing $z/\bar{z}$. The reason for this form is because here we are working in radial quantisation and so our equal time slices (i.e. integrating over $d^3x$) become equal radial slices (i.e. closed contour integrals).
+
+Next also recall that in QFT charges become the generators of the symmetry via commutators. That is, for a Chiral primary of weight $h$,\footnote{Note we don't need to say $(h,0)$ as Chiral already tells us $\bar{h}=0$ as there is no $\bar{z}$ dependence.}
+\be 
+\label{eqn:QPhiCommutator}
+    [Q_{\xi},\Phi(z)] = - \del_{\xi} \Phi = h (\p \xi) \Phi + \xi \p \Phi,
+\ee 
+where the last line comes from \Cref{eqn:InfintesimalPrimaryTransformation2D} (where we have ignored the barred terms). 
+
+This is our CFT result, but we also know that the commutator is just given by
+\bse 
+    [Q_{\xi}, \Phi(w)] = Q_{\xi}\Phi(w) - \Phi(w) Q_{\xi} 
+\ese 
+The right-hand side is an operator, and so it is meant to be understood inside a correlator. In `normal' QFT this corresponds to time ordering, however here we are working in radial quantisation, and so time ordering is replaced by radial ordering. The first term in the above result then corresponds to the $Q_{\xi}$ contour enclosing $\Phi(w)$ (i.e. $r_{\xi} > r_w$) and the second term corresponds to the contour not enclosing $\Phi(w)$ (i.e. $r_{\xi} < r_w$). Pictorially,
+\begin{center}
+    \btik 
+        \begin{scope}[xshift=-3cm]
+            \draw[thick] (-2,-2) -- (2,-2) -- (2,2) -- (-2,2) -- (-2,-2);
+            \draw (-2,0) -- (2,0);
+            \draw (0,-2) -- (0,2);
+            \node at (1,1) {$\cross$};
+            \node[below] at (1,1) {$\Phi$};
+            \draw[thick, blue, decoration={markings, mark=at position 0.15 with {\arrow{>}}}, postaction={decorate}] (0,0) circle [radius=1.75cm];
+        \end{scope}
+        \node at (0,0) {\Huge{$-$}};
+        \begin{scope}[xshift=3cm]
+            \draw[thick] (-2,-2) -- (2,-2) -- (2,2) -- (-2,2) -- (-2,-2);
+            \draw (-2,0) -- (2,0);
+            \draw (0,-2) -- (0,2);
+            \node at (1,1) {$\cross$};
+            \node[below] at (1,1) {$\Phi$};
+            \draw[thick, blue, decoration={markings, mark=at position 0.15 with {\arrow{>}}}, postaction={decorate}] (0,0) circle [radius=0.75cm];
+        \end{scope}
+        \node at (6,0) {\Huge{$=$}};
+        \begin{scope}[xshift=9cm]
+            \draw[thick] (-2,-2) -- (2,-2) -- (2,2) -- (-2,2) -- (-2,-2);
+            \draw (-2,0) -- (2,0);
+            \draw (0,-2) -- (0,2);
+            \node at (1,1) {$\cross$};
+            \node[below] at (1,1) {$\Phi$};
+            \draw[thick, blue, decoration={markings, mark=at position 0.15 with {\arrow{<}}}, postaction={decorate}] (0,0) circle [radius=0.75cm];
+            \draw[thick, blue, decoration={markings, mark=at position 0.15 with {\arrow{>}}}, postaction={decorate}] (0,0) circle [radius=1.75cm];
+        \end{scope}
+    \etik 
+\end{center}
+where we note that the arrow of the inner circle switches in the last diagram. This is just the absorption of the minus sign to switch the contour direction. 
+
+We now use some complex analysis: we use the fact that our charges are holomorphic to deform our contours. Assume that there are no poles apart from $z$ and $w$ (this is equivalent to saying there are no other fields near by), we then just get 
+\begin{center}
+    \btik 
+        \begin{scope}[xshift=-3cm]
+            \draw[thick] (-2,-2) -- (2,-2) -- (2,2) -- (-2,2) -- (-2,-2);
+            \draw (-2,0) -- (2,0);
+            \draw (0,-2) -- (0,2);
+            \node at (1,1) {$\cross$};
+            \draw[thick, blue, decoration={markings, mark=at position 0.15 with {\arrow{<}}}, postaction={decorate}] (0,0) circle [radius=0.75cm];
+            \draw[thick, blue, decoration={markings, mark=at position 0.15 with {\arrow{>}}}, postaction={decorate}] (0,0) circle [radius=1.75cm];
+        \end{scope}
+        \node at (0,0) {\Huge{$=$}};
+        \begin{scope}[xshift=3cm]
+            \draw[thick] (-2,-2) -- (2,-2) -- (2,2) -- (-2,2) -- (-2,-2);
+            \draw (-2,0) -- (2,0);
+            \draw (0,-2) -- (0,2);
+            \node at (1,1) {$\cross$};
+            \draw[thick, blue, decoration={markings, mark=at position 0.2 with {\arrow{>}}}, postaction={decorate}] (1,1) circle [radius=0.25cm];
+        \end{scope}
+    \etik  
+\end{center}
+This can be seen by either "pinching" the two contours together and seeing that they cancel apart from around the insertion, or by considering first contracting the inner circle to nothing and then contracting the outer circle around the insertion. 
+
+The conclusion is that the commutator 
+\bse 
+    [Q_{\xi},\Phi] = \frac{1}{2\pi i} \oint \xi(z) T(z) \Phi(w) dz,
+\ese 
+where the contour is taken around $w$. Now this is supposed to be equal to \Cref{eqn:QPhiCommutator}. This tells us something about the $T(z)\Phi(w)$ OPE. This might not be immediately clear so let's air out any confusion. If we are going to get the terms on the right-hand side of \Cref{eqn:QPhiCommutator} we need our contour integral to pick up two poles. The easier one to see is the $\xi(w)\p_w \Phi(w)$:\footnote{Note it is $w$ not $z$, as $z$ is the integration variable.} if the OPE contained the term 
+\bse 
+    T(z)\Phi(w) = ... + \frac{1}{z-w} \p_w \Phi(w) + ...
+\ese 
+then we would just pick up this pole and set $z=w$ giving us exactly what we want. The other term takes a bit more work. We see that there is a derivative acting on the $\xi$, this suggests we want to some kind of integration by parts within our integral. Then noting 
+\bse 
+    \p_z\bigg(\frac{1}{z-w}\bigg) = -\frac{1}{(z-w)^2},
+\ese 
+we see that the term we need is 
+\bse 
+    T(z)\Phi(w) = ... + \frac{h}{(z-w)^2} \Phi(w) + ...
+\ese 
+In other words we have
+\bse 
+    \begin{split}
+        \frac{1}{2\pi i}\oint \xi(z) \p_z\bigg(-\frac{1}{z-w}\bigg) h\Phi(w) dz & = \frac{1}{2\pi i}\oint \big(\p_z\xi(z)\big) \frac{1}{z-w} h\Phi(w) dz \\
+        & = \big(\p_z\xi(z)\big)h\Phi(w)\big|_{z=w} \\
+        & = h\big(\p_w\xi(w)\big)\Phi(w),
+    \end{split}
+\ese
+where the minus sign from the derivative is cancelled by the minus sign from the integration by parts. Finally, by extension of this idea, it's hopefully clear that we don't want any higher poles. That is we don't want any $\frac{1}{(z-w)^3}$ poles etc. We therefore conclude that the OPE between a Chiral primary of weight $h$ and the stress-energy tensor is
+\bse 
+    T(z)\Phi(w) = h\frac{\Phi(w)}{(z-w)^2} + \frac{\p_w \Phi(w)}{z-w} + \text{non-singular}
+\ese
+We can then extend this argument to the OPE of a general primary operator (i.e. depending on both $z$ and $\bar{z}$) with $T/\bar{T}$ as follows.\footnote{We drop the subscripts on the derivatives and assume that the variable is understood by its action.}
+\mybox{
+    \be 
+    \label{eqn:TPhiOPE}
+        \begin{split}
+            T(z)\Phi(w) & = h\frac{\Phi(w,\bar{w})}{(z-w)^2} + \frac{\p \Phi(w,\bar{w})}{z-w} + \text{non-singular} \\
+            \bar{T}(\bar{z})\Phi(w) & = h\frac{\Phi(w,\bar{w})}{(\bar{z}-\bar{w})^2} + \frac{\bar{\p} \Phi(w,\bar{w})}{\bar{z}-\bar{w}} + \text{non-singular}
+        \end{split}
+    \ee 
+}
+
+What we have essentially shown is that the OPE of a primary operator and the stress-energy tensor is equivalent to the transformation of such an operator. In fact some people\footnote{For example: Polchinski, Prof. Tong and Prof Minwalla all do this.} give \Cref{eqn:TPhiOPE} as the \textit{definition} of a primary operator. You can then work back from this definition and obtain our definition of a primary operator in terms of its transformation property. In fact we could have done something similar in higher dimensions but we were more focused on getting toward conformal bootstrap and so just wanted the Ward identities there. 
+
+So far everything is written with $\xi(z)$, but what about the generators, $L_n$? Well recall that we got them by expanding $\xi(z)\p_z$ as a Laurent series, giving us \Cref{eqn:Ln}. For the quantum theory we do a similar thing and expand $\xi(z)$ in $Q_{\xi}$ to give us 
+\mybox{
+    \be 
+    \label{eqn:LnOint}
+        L_n = \frac{1}{2\pi i} \oint dz \, z^{n+1} T(z).
+    \ee
+}
+We now do something that we \textit{can't} do in the higher dimensional case by recalling the idea that we can obtain the modes by doing a contour integral weighted by $z^{n+h-1}$ to see that we can reconstruct the stress-energy tensor from the modes
+\mybox{
+    \be 
+    \label{eqn:TLaurent}
+        T(z) = \sum_n \frac{L_n}{z^{n+2}}.
+    \ee
+}
+\noindent The $L_n$ are so-called \textit{Virasoro modes}. We obtain a version of the $T(z)\Phi(w)$ OPE on the modes,
+\be 
+\label{eqn:LmVarphinCommutator}
+    [L_m, \varphi_n] = \big((h-1)m-n\big)\varphi_{m+n}
+\ee 
+
+\bbox 
+    Use a contour integral argument to show \Cref{eqn:LmVarphinCommutator}.
+\ebox 

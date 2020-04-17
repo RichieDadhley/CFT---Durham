@@ -1,0 +1,493 @@
+\chapter{Radial Quantisation \& The State-Operator Correspondence}
+
+\section{Radial Quantisation}
+
+Recall from a canonical QFT course that we tend to quantise the fields on equal time slices, i.e. we take our (anti)commutators to be equal time (anti)commutators. However this is not the only slicing we can take. This might sound strange at first but recall that how we choose to slice the spacetime is essentially arbitrary so there is no reason to assume that equal time is the only way.\footnote{In fact if it was then this would be non-Lorentz invariant, as we are giving time `more priority' to space.} It turns out for CFTs it is useful to use "equal radial slices" in order to do our quantisation, and this process is known, unsurprisingly, as \textit{radial quantisation}. 
+
+We can motivate this by first considering the theory on a cylinder. That is we consider a Euclidean\footnote{The $\R$ here is the Euclidean time.} CFT on $\R\times S^{D-1}$ (the $D$-dimensional cylinder) instead of on the more common $\R^{1,D-1}$.  We coordinatise our cylinder by using $\tau$ for the Euclidean time, $\R$, and $\underline{n}$ for the sphere, $S^{D-1}$. We also choose the coordinates such that we have a unit sphere, i.e. $\underline{n}\cdot \underline{n} =1$. We illustrate this below for $D=2$.\footnote{As it's hard to draw $4D$ and higher objects...}
+
+\begin{center}
+    \btik 
+        \draw[thick] (0,3) ellipse (0.75 and 0.2);
+        \draw[thick] (-0.75,0) arc (180:360:0.75 and 0.2);
+        \draw[thick, dashed] (-0.75,0) arc (180:360:0.75 and -0.2);
+        \draw[thick] (-0.75,0) -- (-0.75,3);
+        \draw[thick] (0.75,0) -- (0.75,3);
+        \draw[thick, dashed] (0,1.5) ellipse (0.75 and 0.2);
+        \draw[thick, ->] (-1,1) -- (-1,2) node [midway, left] {$\tau$};
+        \draw[thick, ->] (-0.5,1.1) arc (200:340: 0.5 and 0.133) node [midway, below] {$\underline{n}$};
+    \etik 
+\end{center}
+
+\noindent The metric\footnote{Technically speaking this is a line element, however we can extract the metric components from it. We wont be so picky to distinguish between the two in this course (apart from this footnote...)} on our cylinder is just
+\bse 
+    ds^2 = d\tau^2 + d\underline{n}^2
+\ese 
+where we have a plus sign for both as we are considering the Euclidean cylinder. For example, if we had $D=3$ then we would have the 2-sphere $S^2$, and our metric would be
+\bse 
+    ds^2 = d\tau^2 + d\theta^2 + \sin^2\theta d\varphi^2.
+\ese 
+
+Now let's consider a coordinate transformation
+\bse 
+    \tau \to r = e^{\tau} \qquad \implies \qquad \frac{dr}{d\tau} = e^{\tau} = r,
+\ese 
+so our metric becomes 
+\bse 
+    ds^2 = \frac{dr^2}{r^2} + d\underline{n}^2 = \frac{1}{r^2}\big( dr^2 + r^2d\underline{n}^2)
+\ese
+where we notice that the term in brackets is flat space, or  Euclidean,\footnote{Not to be confused with Euclidean as in Wick rotate.} metric. 
+
+So all our coordinate transformation has done is scale the metric by an overall factor. This is just a Weyl transformation, and so we have shown that there exists a conformal transformation from
+\bse 
+    \R\times S^{D-1} \to \R^D
+\ese 
+with 
+\be 
+\label{eqn:ConformalFactorRadial}
+    \Omega = r = |x|.
+\ee 
+Let's look at the properties of this map.
+\ben[label=(\roman*)] 
+    \item The infinite past, $\tau=-\infty$, is mapped to the origin $r=0$. 
+    \item Increasing time corresponds to increasing radius. More specifically, 
+    \bse 
+        \frac{\p}{\p\tau} \to \frac{\p}{\p \ln r} = r\frac{\p}{\p r}.
+    \ese 
+    This tells us that equal time quantisation corresponds to equal radius quantisation. We also see that time ordering corresponds to radial ordering. 
+    \item From the above point we see that the energy on the cylinder corresponds to the dilatation weight on the plane. This is because the energy on the cylinder is given by the Hamiltonian which is given by $\p_{\tau}$, whereas a dilatation corresponds to scaling the system. We have just seen, though, that propagating in time on the cylinder corresponds to scaling on the plane. This further supports our idea that $\Delta$ weight is given by the mass dimension (as $[E]=[m]$). 
+\een 
+We summarise the idea in the following diagram.
+\begin{center}
+    \btik
+        \draw[thick] (0,0) -- (0,5);
+        \draw[thick] (2,0) -- (2,5);
+        \draw[thick] (1,5) ellipse (1 and 0.18);
+        \draw[thick] (0,0) arc (180:360: 1 and 0.18);
+        \draw[thick, dashed] (0,0) arc (180:360: 1 and -0.18); 
+        \draw[thick, dashed, blue] (1,1.5) ellipse (1 and 0.18);
+        \draw[thick, dashed, red] (1,3) ellipse (1 and 0.18);
+        \node at (-0.5, 1.5) {$\tau_1$};
+        \node at (-0.5, 3) {$\tau_2$};
+        %
+        \draw[ultra thick, ->] (2.5,2.5) -- (5.5,2.5) node [midway, above] {$\tau \to r=e^{\tau}$};
+        %
+        \draw[thick] (6,0) -- (11,0) -- (11,5) -- (6,5) -- (6,0);
+        \draw (8.5,0) -- (8.5,5);
+        \draw (6,2.5) -- (11,2.5);
+        \draw[thick, dashed, blue] (8.5,2.5) circle (1cm);
+        \draw[thick, dashed, red] (8.5,2.5) circle (2cm);
+        \node at (9.35,3.35) {$r_1$};
+        \node at (10.1,4.1) {$r_2$};
+    \etik 
+\end{center}
+
+\badr 
+    Note that, just as spacelike separated operators commute in a causal Lorentz invariant QFT, we know that operators at the same \textit{radius} on our flat space will commute. These two statements are indeed exactly the same, as per the explanations above.
+\eadr 
+
+\badr 
+    There is another way to understand the mapping from the cylinder to the plane pictorially, using what is known as \textit{stereographic projection}. Imagine putting the cylinder on top of the plane, and then drawing a line from the top of the cylinder\footnote{Which is infinitely far away, but you get the idea.} to the plane. The point on the cylinder that the line passes through corresponds to point of intersection on the plane. We can see from this that the infinite past (i.e. bottom of the cylinder) corresponds to the origin of the plane and increasing time corresponds to increasing radius on the plane.\footnote{To save myself messing with Tikz to get the angles correct, I request you google stereographic projection for a illustration.}
+\eadr 
+
+\subsection{Mapping Of Operators}
+
+Ok great, so we have seen how to map into the radial picture, the next thing we need to ask is "how are the local operators mapped?" Well we have already said that our mapping is just a conformal transformation with the conformal factor given by $\Omega = r$, \Cref{eqn:ConformalFactorRadial}. So we just plug this into the transformation behaviour of our fields (and therefore operators), \Cref{eqn:PrimaryFieldTransformation}. For a scalar primary operator we therefore just have 
+\bse 
+    \cO_{\text{cyl}}(\tau,\underline{n}) \to \cO_{\text{flat}}(r,\underline{n}) = \frac{1}{r^{\Delta}} \cO_{\text{cyl}}(\tau,\underline{n}).
+\ese 
+
+Now we also know from QM that the Hermitian conjugate plays an important role, so let's see how that acts. On the cylinder we have 
+\bse 
+    \cO_{\text{cyl}}(\tau,\underline{n})^{\dagger} = \cO_{\text{cyl}}(-\tau,\underline{n})
+\ese
+where the minus sign comes from our Wick rotation, $\tau=-it$. This concept is called \textit{reflection positivity}, it is the Euclidean equivalent to unitarity in the Lorentzian picture.\footnote{In general reflection positivity tells us whether our Euclidean picture is just a Wick-rotated version of a unitary Lorentzian theory or not. That is, given a arbitrary Euclidean theory, there is no reason a priori to assume the Lorentzian theory you get by `counter' Wick rotating will be unitary. If the Euclidean picture is reflection positive, then we know the Lorentzian theory is unitary. This is apparently the content of the \textit{Osterwalder-Schrader reconstruction theorem}. Note that of course this worked out for us because we got our Euclidean picture by Wick rotating a unitary Lorentzian theory.} We can then use our radial mapping to see what happens to the local operators on our flat space:
+\bse 
+    \cO_{\text{flat}} (r,\underline{n})^{\dagger} = \bigg( \frac{1}{r^{\Delta}} \cO_{\text{cyl}}(\tau,\underline{n})\bigg)^{\dagger} = \frac{1}{r^{\Delta}} \cO_{\text{cyl}}(-\tau,\underline{n}) = \frac{1}{r^{\Delta}} \bigg(\frac{1}{r}\bigg)^{\Delta} \cO_{\text{flat}}\bigg(\frac{1}{r}, \underline{n}\bigg)
+\ese
+Therefore Hermitian conjugation we have
+\be 
+\label{eqn:HermitianConjugateOperatorFlat}
+    \cO_{\text{flat}}(r,\underline{n})^{\dagger} = \frac{1}{r^{2\Delta}} \cO_{\text{flat}}\bigg(\frac{1}{r}, \underline{n}\bigg).
+\ee
+
+We now note that this is just the action of an inversion on the operator, i.e. if we act with 
+\bse 
+    I : x^{\mu} \mapsto \frac{x^{\mu}}{x^2}
+\ese 
+on the operator we will get \Cref{eqn:HermitianConjugateOperatorFlat}. 
+
+\bcl 
+    We can use this inversion result to show that 
+    \be
+    \label{eqn:HermitianConjugateCharge}
+        Q_{\xi_i}^{\dagger} = - Q_{I \xi_i I}.
+    \ee 
+\ecl 
+
+\bq 
+    \textcolor{red}{I am not actually sure how to do this. Simmons-Duffin says to consider acting on the stress-tensor. I tried doing that but couldn't quite get the correct result. This is a note to self to remember to try do this later and come back and include it here.} % Note to Paul: If you know how to do this could I come to your office and see how to do it?
+\eq 
+
+For example, recalling \Cref{eqn:KEqualIPI}, we can use \Cref{eqn:HermitianConjugateCharge} to deduce that 
+\be
+\label{eqn:KDaggerP}
+    (\widetilde{K}^{\mu})^{\dagger} = \widetilde{P}^{\mu},
+\ee 
+in radial quantisation. 
+
+\badr 
+    Note that this seems very strange at first. We are used to the momentum charge being Hermitian in a QFT, however we have essentially just shown that its Hermitian conjugation is the special conformal charge. The reason for this mismatch is that the Hilbert space in our radial quantisation picture is different from the Hilbert space of our Lorentzian system. This is actually not a surprising result as we have quantised differently and so we expect the resulting Hilbert space to change. Therefore we should really distinguish between $\dagger_{\text{Cyl}}$ and $\dagger_{\text{flat}}$. We won't make such distinguishes here, but this remark is just included to clear up potential confusion. 
+\eadr 
+
+\section{The State-Operator Correspondence}
+
+We are now ready to present the highly non-trivial \textit{state-operator correspondence}, which is also called the state-operator map. 
+
+\mybox{
+    \bt[State-Operator Correspondence]
+        In a conformal field theory, there is a one-to-one correspondance, i.e. an isomorphism, between states and \textbf{local} operators.
+    \et 
+}
+
+Note that we have been very careful to say \textit{local} everywhere in these notes. This is because the state-operator map tells us that this correspondence only holds for \textit{local} operators. In particular this tells us that the total number of general operators and states do not agree (indeed this is \textit{never} the case), but simply that the number of local operators and states agree. Even with this reduction the state-operator map is still highly-non trivial.
+
+\badr
+    Before we go on to present a proof of this correspondence, let's first see how non-trivial this result really is. The states of our system live in some Hilbert space and so we can represent them as $n$-column matrices. On the other hand, operators act on the Hilbert space and map us from one element to another. We can therefore represent them as $(n\times n)$ matrices. The state-operator map is telling us that there is an isomorphism between these two structures. It's somewhat reasonable to believe we can get a state from a given local operator, however it is really non-trivial that we can recover a local operator from a state.
+\eadr
+
+\subsection{Motivating A Proof}
+
+As the name of this section suggests, we do not present a strict proof of the state-operator here but simply motivate why it's actually a reasonable result. A more detailed derivation can be found in Section 4.6 of David Tong's notes or in Polchinski.
+
+\subsubsection{State $\Rightarrow$ Local Operator}
+
+We shall first discuss the more non-trivial step of obtaining a local operator from the state.
+
+First consider states in QM, i.e. 1-particle in 1 spatial dimension. Here states are equivalent to the Schr\"{o}dinger wavefunction $\psi(x,t_0)$ at a particular time. Note that these are defined across an entire spatial slice, we shall use this idea soon. Now in particular let's focus on an initial state, i.e. $t_0 \to -\infty$, this is given by
+\bse 
+    \psi_I(x) := \lim_{t_0\to-\infty} \psi(x,t_0).
+\ese 
+
+In QFTs we don't normally consider wavefunctions, but there is no reason that we can't. Here we don't have wavefunctions but wavefunction\textit{al}s, however this is a minor detail and won't effect much of the intuition. For simplicity, consider just a single scalar particle (the generalisation should be clear), then the $x$ in QM becomes $\varphi(x,t_0)$ in QFT. That is the configuration space becomes the space of fields at a particular time. An initial state $\psi_I(x)$ becomes a limit of a functional
+\bse 
+    \lim_{t_0\to-\infty} \Psi[\varphi(x,t_0), t_0].
+\ese 
+What does this mean? Well, let's go to radial quantisation where $t_0\to-\infty$ becomes $r\to 0$, giving us
+\bse 
+    \lim_{r\to 0} \Psi[\varphi(r,\underline{n}),r],
+\ese 
+so it is essentially a function of $\varphi(\underline{x})$ at $\underline{x}=0$. That is $\Psi$ is a function of $\varphi(0)$, $\p_{\mu} \varphi(0)$, $\p_{\mu}\p_{\nu}\varphi(0)$ etc, but a function of $\varphi(0)$ etc, is precisely a local operator at $\underline{x}=0$. That is, given some general state we can obtain a local operator by taking an infinite dilatation `backwards', i.e. shrink it down to the origin. 
+
+This is perhaps still confusing, so let's think of it more pictorially.\footnote{This explanation is based off the one given in Shiraz Minwalla's string theory course. See section 4.5 of my notes for more details.} As we said above, a state in a QFT corresponds to specifying it's values on an entire spatial slice. In the cylinder picture this corresponds to `cutting' the cylinder horizontally. When we take our radial map, this tells us that states on the flat space are given by equal radial slices. A general state, then, is just a circle around the origin, with the radius telling us the `time'. This is clearly not local; it's a whole circle! If we have any hope of producing a local operator we need to reduce the radius of this circle to a single point. We know how to do this, though: simply take an infinite dilatation to the origin. This is \textit{exactly} equivalent to considering the initial state that propagated to our general state. 
+
+\begin{center}
+    \btik 
+        \begin{scope}[xshift=-5cm]
+            \draw[thick] (-1.5,-1.5) -- (1.5,-1.5) -- (1.5,1.5) -- (-1.5,1.5) -- (-1.5,-1.5);
+            \draw (0,-1.5) -- (0,1.5);
+            \draw (-1.5,0) -- (1.5,0);
+            \draw[dashed, thick] (0,0) circle [radius=1cm];
+            \node at (0,-2) {`Time' $r$};
+        \end{scope}
+        \begin{scope}
+            \draw[thick] (-1.5,-1.5) -- (1.5,-1.5) -- (1.5,1.5) -- (-1.5,1.5) -- (-1.5,-1.5);
+            \draw (0,-1.5) -- (0,1.5);
+            \draw (-1.5,0) -- (1.5,0);
+            \draw[dashed, thick] (0,0) circle [radius=0.5cm];
+            \node at (0,-2) {`Time' $r^{\prime}<r$};
+        \end{scope}
+        \begin{scope}[xshift=5cm]
+            \draw[thick] (-1.5,-1.5) -- (1.5,-1.5) -- (1.5,1.5) -- (-1.5,1.5) -- (-1.5,-1.5);
+            \draw (0,-1.5) -- (0,1.5);
+            \draw (-1.5,0) -- (1.5,0);
+            \draw[fill=black] (0,0) circle [radius=0.05cm];
+            \node at (0,-2) {`Time' $r=0$};
+        \end{scope}
+    \etik 
+\end{center}
+
+\badr 
+    Note that we have assumed that there are no operators inserted between the origin and our chosen general state. This is why would could just take an infinite dilatation to obtain the result at the origin. Of course if there was an operator `in the way' we would have to consider how the operator effects our state. This is not a problem though, as we can always just choose our initial state to lie inside all operator insertions. The only problem being if the operator was inserted at the origin itself. This still isn't a problem as we have translation invariance, so we can just shift the origin to a point where there are no operator insertions and go from there. In fact, as we will see shortly, the idea of having operators inserted within our circle gives us a very powerful result, known as the operator product expansion.
+\eadr 
+
+We can therefore obtain a local operator at the origin for a given state. We can therefore label our states by their corresponding operator at the origin,
+\bse 
+    \ket{\cO} := \cO(0) \ket{0}.
+\ese 
+We say that the state $\ket{\cO}$ is \textit{dual} to the operator $\cO$.
+
+\bd[Vacuum]
+    We can \textit{define} the vacuum to be the state dual to the identity,\footnote{This is actually only true in unitary theories. This is a subtle point but does actually appear, perhaps most notable in string theory: in order to obtain quantum Weyl invariance in string theory we have to include $b,c$ ghost system. These form a non-unitary theory and here the state $\ket{\b1}$ is not the vacuum but is actually an excited state. See Section 11.5.4 of my string theory notes for more details.} 
+    \be 
+    \label{eqn:VacuumDualToIdentity}
+        \ket{0} := \ket{\b1}.
+    \ee
+\ed 
+
+\br 
+    We can now see why our conformal charges annihilate the vacuum, as said in footnote 2 of the last section: the action on the vacuum is given by the commutator with the identity operator, but everything commutes with the identity operator, and so the result vanishes. 
+\er 
+
+\subsubsection{State $\Leftarrow$ Local Operator}
+
+So we have seen how to relate an operator at the origin to a state, however not all our operators will be inserted at the origin, so how do we get the states for these operators? That is\footnote{For clarity, $\cO(x)$ does not mean a \textit{function} of $x$, as this would be non-local. Instead it just means $\cO$ inserted at the fixed event $x$.}
+\bse 
+    \ket{\psi} = \cO(x) \ket{0} = ?
+\ese
+
+The answer is we Taylor expand our operator around the origin,
+\bse 
+    \cO(x) = \cO(0) + x^{\mu}\p_{\mu} \cO(0) + \frac{1}{2}x^{\mu}x^{\nu}\p_{\mu}\p_{\nu}\cO(0) + ...,
+\ese 
+so that we conclude 
+\bse 
+    \ket{\psi} = \sum_n \frac{1}{n!} x^{\mu_1} ... x^{\mu_n} \ket{\p_{\mu_1} ... \p_{\mu_n} \cO}.
+\ese
+
+The question then obviously becomes "what is $\ket{\p_{\mu}\cO}$?" This is actually quite straight forward: use our state-operator correspondence at the origin to obtain 
+\bse 
+    \ket{\p_{\mu}\cO} := \p_{\mu}\cO(0)\ket{0} = [\widetilde{P}_{\mu},\cO(0)]\ket{0} = \widetilde{P}_{\mu}\cO(0)\ket{0} = \widetilde{P}_{\mu}\ket{\cO},
+\ese 
+where we have used $\widetilde{P}_{\mu}\ket{0} = 0$. We can therefore obtain a state from the insertion of a local operator at any $x$.
+
+We can think of the local operator to state map pictorially as well.\footnote{Again see my notes on Shiraz Minwalla's string theory course for more details.} The idea is that the area inside our circles represent the evolution of our states. We start with our initial wavefunctional at the origin and allow it to evolve freely. At some point, $x$, it comes into contact with an operator, and this disturbs the free evolution, resulting in some new state, which then again evolves freely (until it meets another operator). We can then associate the new state with the operator itself, giving us our duality.
+
+\badr 
+    Note, as Prof. Tong points out,\footnote{See page 100-101 of his String Theory notes.} this state from local operator is \textit{not} the same idea as using creation/annihilation operators in QFT. They look deceptively similar algebraically, however creation/annihilation operators are given by taking Fourier transforms of local fields, and so are completely \textit{un}localised!
+\eadr 
+
+\subsection{Raising \& Lowering Operators}
+
+Recall that normally in a QFT we label the states by their quantum numbers, e.g. their momentum and spin. We now want to do a similar thing for our conformal states. As we said before, in the radial picture the energy corresponds to the dilatation weight, and so we label our states by their $\Delta$. We can check this is a good thing to do by computing the action of the dilatation charge explicitly. Consider a general state (i.e. primary \textit{or} descendant) $\ket{\cO_{\Delta}}$, where $\cO_{\Delta}$ is an operator with weight $\Delta$. Then
+\bse 
+    \begin{split}
+        \widetilde{D}\ket{\cO_{\Delta}} & = \widetilde{D}\cO_{\Delta}(0)\ket{0} \\
+        & = \big([\widetilde{D},\cO(0)] + \cO(0) \widetilde{D}\big)\ket{0} \\
+        & = \Delta \cO_{\Delta}(0)\ket{0} \\
+        \implies D\ket{\cO_{\Delta}} & = \Delta \ket{\cO_{\Delta}},
+    \end{split}
+\ese 
+where we used $\widetilde{D}\ket{0}=0$.\footnote{This makes sense as the vacuum is dual to the identity operator, and the identity doesn't have a dilatation weight.} We can therefore label states by their dilatation weight 
+\bse 
+    \ket{\cO_{\Delta}} \equiv \ket{\Delta}. 
+\ese 
+
+\bbox 
+    Show that 
+    \bse 
+        \widetilde{D}\big( \widetilde{P}_{\mu} \ket{\cO} \big) = (\Delta+1)\widetilde{P}_{\mu} \ket{\cO},
+    \ese 
+    as well as 
+    \bse 
+        \widetilde{D}\big( \widetilde{K}_{\mu} \ket{\cO} \big) = (\Delta-1)\widetilde{K}_{\mu} \ket{\cO}.
+    \ese
+    These results tell us that $\widetilde{P}_{\mu}/\widetilde{K}_{\mu}$ are like raising/lowering operators for dilatation weight. \textit{Hint: Rewrite in terms of commutators, and recall we are at the origin, $x=0$.}
+\ebox 
+
+\badr 
+     We have essentially already shown the result of the above exericse in \Cref{sec:DescendantFields}. The excerise is included for non-asterisk self contained-ness.
+\eadr 
+
+So we have seen that $\widetilde{P}_{\mu}$ and $\widetilde{K}_{\mu}$ act on the states of our Hilbert space as
+\bse 
+    \ket{\Delta} \overset{\widetilde{P}_{\mu}}{\longrightarrow} \ket{\Delta+1}  \overset{\widetilde{P}_{\mu}}{\longrightarrow} \ket{\Delta+2} ... 
+\ese 
+and
+\bse 
+    \ket{\Delta} \overset{\widetilde{K}_{\mu}}{\longrightarrow} \ket{\Delta-1}  \overset{\widetilde{K}_{\mu}}{\longrightarrow} \ket{\Delta-2} ...,
+\ese 
+which is exactly how raising/lowering operators act. Note this is also consistent with \Cref{eqn:KDaggerP}, i.e. the dagger of the lowering operator is the raising operator. Note from here we see that we can define primary \textit{states} as follows. 
+
+\bd[Primary State]
+    A state $\ket{\Delta} \equiv \ket{\cO_{\Delta}}$ is a \textit{primary state} if it is annihilated by $\widetilde{K}_{\mu}$.
+\ed 
+
+\noindent We then define descendent \textit{states} similarly.
+
+\section{2-Point Function Again}
+
+Recall that our two point functions of primary operators were given by 
+\bse
+    \bra{0}\cO_1(x) \cO_2(y) \ket{0} = \begin{cases}
+        \frac{C_{12}}{|x_1-x_2|^{2\Delta}} & \text{if } \Delta_1=\Delta_2=\Delta \\
+        0 & \text{otherwise},
+    \end{cases}
+\ese 
+where we have written the bra-kets explicitly for comparison of what follows. We can use this to show that $C_{12}$ is just given by the overlap of our operators inserted at the origin, i.e. the overlap of the dual initial wavefunctionals. The first thing we note is that the overlap vanishes unless $\Delta_1=\Delta_2$, as states with different dilatation weight are given by raising/lowering operators. Now it turns out we can diagonalise our Hilbert space such that the inner product of two operators (i.e. the 2-point function) is orthogonal. That is if $\cO_1\neq \cO_2$ are two operators of weight $\Delta$,\footnote{Note this is \textit{not} the same thing as saying we only have one operator of weight $\Delta$, but just that the 2-point function vanishes.}
+\bse 
+    \la \cO_1(x) \cO_2(y) \ra = 0.
+\ese 
+It follows from this that the "otherwise" condition is already met.
+
+The initial overlap is given by 
+\bse 
+    \braket{\cO_{\Delta_1}}{\cO_{\Delta_2}} = \lim_{r\to0}\lim_{u\to \infty} u^{2\Delta_1} \bra{0} \cO_{\Delta_1}(u,\underline{n}_1) \cO_{\Delta_2}(r,\underline{n}_2)\ket{0}
+\ese 
+where we have used the definition of the Hermitian and the substitution $u=1/r_1$ in the first term. We then plug in the two-point function result above to get  
+\bse 
+    \braket{\cO_{\Delta_1}}{\cO_{\Delta_2}} = \lim_{r\to0}\lim_{u\to \infty} u^{2\Delta_1} \begin{cases}
+        \frac{C_{12}}{|x_1-x_2|^{2\Delta}} & \text{if } \Delta_1=\Delta_2=\Delta \\
+        0 & \text{otherwise}.
+    \end{cases}
+\ese 
+Here we have 
+\bse 
+    (x_1-x_2)^{\mu} = u\underline{n}_1^{\mu} - r\underline{n}_2^{\mu} \overset{r\to0}{\longrightarrow} u \underline{n}_1^{\mu} 
+\ese 
+and therefore 
+\bse 
+    (x_1-x_2)^2 \overset{r\to 0}{\longrightarrow} u^2
+\ese
+so 
+\bse 
+    \braket{\cO_{\Delta}}{\cO_{\Delta}} = \lim_{u\to\infty} u^{2\Delta} \frac{C_{12}}{u^{2\Delta}} = C_{12}. 
+\ese 
+
+We can use this result to cross check our result with what we would have got for the overlap purely algebraically. This calculation is left as the following exercise.
+
+\bbox 
+    Given the standard evolution relation
+    \bse 
+        \cO(x) = e^{x\cdot\widetilde{P}} \cO(0) e^{-x\cdot \widetilde{P}}
+    \ese 
+    show that 
+    \bse 
+        \braket{\psi_1}{\psi_2} = u^{2\Delta} \bra{\cO} \exp\big( u^2 x_1 \cdot \widetilde{K}\big) \exp\big(x_2\cdot \widetilde{P}\big) \ket{\cO},
+    \ese 
+    where $\ket{\psi_i} := \cO(x_i)\ket{0}$, and $u := 1/x_1$.
+    \textit{Hint: Recall \Cref{eqn:KDaggerP} and the fact that the conformal charges annihilate the vacuum.}
+\ebox 
+
+We can use the result of this exercise to check the two agree. We do this by Taylor expanding the exponentials and using the fact that our states are primary, i.e. $\widetilde{K}^{\mu}\ket{\cO} = 0 = \bra{\cO}\widetilde{P}^{\mu}$ with the second following from taking a Hermitian conjugation. The first few terms in the expansion are then 
+\bse 
+    \begin{split}
+        \braket{\psi_1}{\psi_2} & \approx u^{2\Delta}\Big( \braket{\cO}{\cO} + u^2 x_1^{\mu} x_2^{\nu} \bra{\cO} \widetilde{K}_{\mu}\widetilde{P}_{\nu} \ket{\cO}\Big) \\
+        & = u^{2\Delta}\Big( C_{12} + u^2 x_1^{\mu} x_2^{\nu} \bra{\cO} [\widetilde{K}_{\mu},\widetilde{P}_{\nu}]\ket{\cO} \Big) \\
+        & = u^{2\Delta}\Big( C_{12} + u^2 x_1^{\mu} x_2^{\nu} \bra{\cO} \big( 2\eta_{\mu\nu} \widetilde{D} -2\widetilde{L}_{\mu\nu} \big)\ket{\cO} \Big) \\
+        & = u^{2\Delta}\big( C_{12} + 2\Delta u^2 x_1\cdot x_2  \bra{\cO}\ket{\cO} \big) \\
+        & = x_1^{-2\Delta} C_{12} \bigg( 1 + 2\Delta\frac{x_1\cdot x_2}{x_1^2} \bigg),
+    \end{split}
+\ese 
+where we have used the fact that we are considering a scalar primary to drop the $\widetilde{L}_{\mu\nu}$.\footnote{This is because $\widetilde{L}_{\mu\nu}\ket{\cO} = S_{\mu\nu}\ket{0}$.} This result agrees exactly with the first few terms in the expansion of 
+\bse 
+    \braket{\cO(x_1)}{\cO(x_2)} = \frac{C_{12}}{|x_1-x_2|^{2\Delta}} = x_1^{-2\Delta} \frac{C_{12}}{|1-\frac{x_2}{x_1}|^{2\Delta}}.
+\ese 
+
+\bbox 
+    Prove that the 3-point function coefficient $C_{123}$ of three scalar operators of dimensions $\Delta_1$, $\Delta_2$ and $\Delta_3$ is equal to sandwiching $\cO_{\Delta_2}(\hat{1})$ in between $\bra{\cO_{\Delta_1}}$ and $\ket{\cO_{\Delta_3}}$ where $\hat{1} = (1,0,0,...)$. That is show 
+    \bse 
+        \bra{\cO_{\Delta_1}} \cO_{\Delta_2}(\hat{1}) \ket{\cO_{\Delta_3}}.
+    \ese 
+    \textit{Hint: Start the same as above by taking the limits on the arguments of $\cO_{\Delta_1}$ and $\cO_{\Delta_2}$ and use the known 3-point function result.}
+\ebox 
+
+\section{Operator Product Expansion (OPE)}
+
+There is a very powerful consequence of the state-operator correspondance, it is known as the \textit{operator product expansion} (OPE). 
+
+\bl 
+    In a CFT, we can write the product of two local operators at different points as a sum of local operators (both primaries and descendants) at one point. In particular, labelling our given local operators with $\Phi$s,
+    \be 
+    \label{eqn:OPE}
+        \Phi_{\Delta_1}(x) \Phi_{\Delta_2}(0) = \sum_{\text{primary  ops.}} C_{\Phi_1\Phi_2\cO} C_{\cO}(x,\p_y) \cO(y) \big|_{y=0}
+    \ee 
+    where $C_{\cO}(x,\p_y)$ is a power series in $\p_y$ which generates our descendants, and $C_{\Phi_1\Phi_2\cO}$ is a theory dependent prefactor, known as \textit{OPE coefficients}.
+\el
+
+The important point to note is that the series in \Cref{eqn:OPE} is convergent (provided there is no other operators between $0$ and $x$).
+
+\br 
+    The power series, $C_{\cO}(x,\p_y)\cO(y)$, are a purely kinematical thing and only depends on the representation of the theory. The OPE coefficients, $C_{\Phi_1\Phi_2\cO}$, however are theory dependent and so allow us to distinguish the different CFTs. 
+\er 
+
+We can understand the idea of an OPE using our pictorial approach to the state-operator correspondence. Let's imagine the two local operators within one of our state circles. We can view this state as being produced by some initial state being altered by the two operators in turn. However we could `forget' about these operators and instead assume that our state was produced by a single operator at the origin, by the state $\Rightarrow$ operator map. Now of course its highly unlikely that a single primary operator at the origin will give us the state we want, however we know that we can always express a general state in our Hilbert space as a sum over a basis, which is what the right-hand side of \Cref{eqn:OPE} corresponds to. 
+
+\begin{center}
+    \btik 
+        \begin{scope}[xshift=-5.5cm]
+            \draw[thick] (-2,-2) -- (2,-2) -- (2,2) -- (-2,2) -- (-2,-2);
+            \draw (-2,0) -- (2,0);
+            \draw (0,-2) -- (0,2);
+            \node at (-0.5,0.6) {$\cross$};
+            \node[above] at (-0.5,0.6) {$\Phi_1$};
+            \node at (0.2,-1) {$\cross$};
+            \node[above] at (0.2,-1) {$\Phi_2$};
+            \draw[ultra thick, ->] (2.25,0) -- (3.25,0); 
+        \end{scope}
+        \begin{scope}
+            \draw[thick] (-2,-2) -- (2,-2) -- (2,2) -- (-2,2) -- (-2,-2);
+            \draw (-2,0) -- (2,0);
+            \draw (0,-2) -- (0,2);
+            \draw[thick, dashed] (0,0) circle [radius=1.5cm];
+            \node at (1.3,1.3) {$\ket{\psi}$};
+            \draw[ultra thick, ->] (2.25,0) -- (3.25,0);
+        \end{scope}
+        \begin{scope}[xshift=5.5cm]
+            \draw[thick] (-2,-2) -- (2,-2) -- (2,2) -- (-2,2) -- (-2,-2);
+            \draw (-2,0) -- (2,0);
+            \draw (0,-2) -- (0,2);
+            \node at (0,0) {$\cross$};
+            \node at (0.4,0.3) {$\cO_{\ket{\psi}}$};
+        \end{scope}
+    \etik 
+\end{center}
+
+Note that in the above picture we have taken the two $\Phi$s to be away from the origin whereas \Cref{eqn:OPE} has $\Phi_2$ at the origin. This is obviously not a problem as we can go between the two by a translation.
+
+\badr 
+    The idea of an OPE is actually useful in other, non-CFT, QFTs. However there it is only an approximate statement and requires the separation of the two operators to be smaller than the distance between these operators and other operators. That is, if $\Phi_1$ is at $x_1$ and $\Phi_2$ is at $x_2$, the other operator insertions in our correlator have to be more than $|x_1-x_2|$ away from $\Phi_1$/$\Phi_2$. For CFTs, though, our OPE is \textit{exact} and we just require that the other operator insertions are outside our state circle. 
+\eadr 
+
+Why is the OPE so useful? Well recall that we said that $n$-point correlators for $n\geq 4$ aren't fully constrained by our conformal symmetries, but the $2$-point and $3$-point functions were. The OPE allows us to reduce any $n$-point function to an $(n-1)$-point function as 
+\bse 
+    \la \cO_1 \cO_2 .... \cO_{n-1}\cO_n\ra = \sum_{\cO'} C_{\cO_{n-1}\cO_n\cO'} C_{\cO'}(x,\p_y) \la \cO_1\cO_2...\cO_{n-2}\cO'\ra. 
+\ese 
+The idea is to reduce all higher point functions down to 3-point functions weighted by the OPE coefficients. 
+
+So how can we compute $C_{\cO}(x,\p_y)$? Well firstly we simplify our lives by assuming that all the operators in our OPE are scalars. Of course this need not be the case as both the $\Phi$s and $\cO$s could be in non-trivial Lorentz representations, i.e. \Cref{eqn:OPE} could have indices everywhere. We will also work with one of the operators inserted at the origin, as with \Cref{eqn:OPE}. 
+
+Ok, now consider the 3-point function
+\bse 
+    \la \Phi_1(x) \Phi_2(0) \Phi_3(z) \ra.
+\ese 
+Plugging in the OPE for $\Phi_1(x)\Phi_2(0)$, we get
+\bse
+    \sum C_{\Phi_1\Phi_2\cO} C_{\cO}(x,\p_y) \la \cO(y)|_{y=0} \Phi_3(x)\ra
+\ese 
+but we know what both these expressions are (up to a constant). That is we know the general solution to a 2-point function and 3-point function. 
+
+Now recall that the two-point function is only non-zero when the two operators have the same dilatation weight. Also recall that we can pick a basis where any two operators with the same dilatation weight are orthogonal. We therefore conclude that the two-point function is only non-vanishing if the two operators are exactly the same. Finally, assume we normalised the operators so that 
+\bse 
+    \la \cO(y) \Phi_3(z) \ra = \begin{cases}
+        \frac{1}{|y-z|^{2\Delta_3}} & \Phi_3 = \cO \\
+        0 & \text{otherwise},
+    \end{cases}
+\ese 
+that is we have set $C_{12}=1$. We shall now assume that $\Phi_x=\cO$ and assume the "otherwise" case is understood implicitly.  
+
+Then recalling the 3-point function result, \Cref{eqn:ThreePointCorrelator}, we have
+\be 
+\label{eqn:Exercise}
+    \frac{C_{\Phi_1\Phi_2\Phi_3}}{|x|^{\Delta_1+\Delta_2-\Delta_3} |z|^{\Delta_2+\Delta_3-\Delta_1} |x-z|^{\Delta_1+\Delta_3-\Delta_2} } = C_{\Phi_1\Phi_3\Phi_3} C_{\Phi_3}(x,\p_y) \frac{1}{|y-z|^{2\Delta_3}}\bigg|_{y=0}. 
+\ee 
+Now identifying $C_{\Phi_1\Phi_2\Phi_3}$ with the 3-point coefficient,\footnote{That is, the $C_{\Phi_1\Phi_2\Phi_3}$ on the right-hand side is the OPE coefficient, $C_{\Phi_1\Phi_2\cO}$. We have used our $\cO=\Phi_3$ condition to get the right-hand side above.} this factors out. Expanding both sides in $x$ allows us to determine $C_{\Phi_3}(x,\p_y)$ term by term. The left-hand side is
+\bse 
+    \frac{1}{|x|^{\Delta_1+\Delta_2-\Delta_3} |z|^{\Delta_2+\Delta_3-\Delta_1} |z|^{\Delta_1+\Delta_3-\Delta_2}} = \frac{1}{|x|^{\Delta_1+\Delta_2-\Delta_3} |z|^{2\Delta_3}}
+\ese 
+which, upon comparing with right-hand side, we conclude that the leading term (as $x\to 0$) is 
+\bse 
+    C_{\Delta_3}(x,\p_y) = \frac{1}{|x|^{\Delta_1+\Delta_2-\Delta_3}}. 
+\ese 
+
+\bbox 
+    Use \Cref{eqn:Exercise} to show that, for $\Delta_1=\Delta_2=\Delta$,
+    \bse 
+        C_{\Phi}(x,\p_y) = \frac{1}{|x|^{2\Delta-\Delta_3}} \bigg[ 1 + \frac{1}{2}x^{\mu}\p_{\mu} + \a x^{\mu}x^{\nu}\p_{\mu}\p_{\nu} + \beta x^2 \p^2 + \cO(x^3)\bigg]
+    \ese 
+    where 
+    \bse 
+        \a = \frac{\Delta_3+2}{8(\Delta_3+1)} \qand \beta = - \frac{\Delta_3}{16(\Delta_3 - \frac{D}{2} + 1)(\Delta_3+1)},
+    \ese 
+    where $D$ is the spacetime dimension. 
+\ebox 

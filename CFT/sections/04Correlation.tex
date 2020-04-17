@@ -1,0 +1,377 @@
+\chapter{Ward Identity \& Correlation Functions}
+
+% Note to Paul: To be honest I find the Ward identity very confusing. I have seen multiple different statements of it which do not seem to be trivially compatible to me. I have written here what I think is true and have tried to work off Simmons-Duffin, but it's likely I've connected dots that shouldn't be connected. 
+
+So far we have been able to categorise all the fields (and their associated operators) in our $d>2$ CFT. However we know that in QFT it is important to also know about the \textit{correlation functions} for the fields. As we said earlier, if we know all the operators and all the corresponding correlators then we say was have `solved' the theory, in the sense that we can use that information to obtain anything we want to know about the CFT. Before looking at the correlators, let's just recap what we have seen as it will be useful going forward.
+
+\section{Ward Identities*}
+
+We have seen that in the quantum theory, where our local fields become local operators acting on some Hilbert space, and we can implement the conformal transformations via commutators of the charges and operators. We recall that when we do this we pick up an additional minus sign compared to the differential operator case. In other words, we have
+\bse 
+    [Q_{\xi_i},\cO(x)] = - \del_{\xi_i} \cO(x)
+\ese 
+where the $\del_{\xi_i}$s are given by \Cref{eqn:VariationGenerators}. For example we have 
+\bse 
+    [\widetilde{D},\cO(x)] = (\Delta + x^{\mu}\p_{\mu}) \cO(x) \qand [\widetilde{P}_{\mu}, \cO(x)] = \p_{\mu}\cO(x),
+\ese 
+etc. 
+
+Why are we repeating this? Well now let's consider a correlation function with our charges inserted. For concreteness we shall use $\widetilde{P}^{\mu}$
+\bse 
+    \la \widetilde{P}_{\mu}(\Sigma) \cO(x) \ra, 
+\ese 
+where we have explicitly reinserted the boundary $\Sigma$. Now correlation functions come time ordered, which we need to account for. Now our $\Sigma$ is the boundary of some surface in our spacetime, and so we really need to account for the fact that it `spans some time period'. Let's take $\Sigma_1, \Sigma_2$ to be spatial slices at times $t_1 < t < t_2$, where $t=x^0$ is the time of our local operator. Now with \Cref{eqn:Charges} in mind we take the orientation of these spatial surfaces to be opposite; that is our charges are the boundary of some surface and the $dS^{\mu}$ appearing in \Cref{eqn:Charges} always points out of this surface. Another way to think of this is to imagine picking $\Sigma$ so that it stretches really far in the spatial direction, then in the local picture it gives spatial slices with different orientations, as illustrated below. 
+
+\begin{center}
+    \btik 
+        \begin{scope}[xshift = -4cm]
+            \draw[dashed, thick] (0,0) ellipse (3cm and 1cm);
+            \draw[thick, ->] (0,-1) -- (0,-1.5);
+            \draw[thick, ->] (1,-0.9) -- (1,-1.4);
+            \draw[thick, ->] (-1,-0.9) -- (-1,-1.4);
+            \draw[thick, ->] (2,-0.75) -- (2,-1.25);
+            \draw[thick, ->] (-2,-0.75) -- (-2,-1.25);
+            % 
+            \draw[thick, ->] (0,1) -- (0,1.5);
+            \draw[thick, ->] (1,0.9) -- (1,1.4);
+            \draw[thick, ->] (-1,0.9) -- (-1,1.4);
+            \draw[thick, ->] (2,0.75) -- (2,1.25);
+            \draw[thick, ->] (-2,0.75) -- (-2,1.25);
+            % 
+            \node at (0,0) {$\cO(x)$};
+        \end{scope}
+        \draw[ultra thick, ->] (0,0) -- (2,0) node [above,midway] {Local};
+        \begin{scope}[xshift=4cm]
+            \draw[dashed, thick] (-1,1) -- (1,1);
+            \draw[dashed, thick] (-1,-1) -- (1,-1);
+            \draw[thick, ->] (-0.5,1) -- (-0.5,1.5);
+            \draw[thick, ->] (0.5,1) -- (0.5,1.5);
+            \draw[thick, ->] (-0.5,-1) -- (-0.5,-1.5);
+            \draw[thick, ->] (0.5,-1) -- (0.5,-1.5);
+            % 
+            \node at (0,0) {$\cO(x)$};
+        \end{scope}
+    \etik 
+\end{center}
+
+We therefore have two terms 
+\bse 
+    \la \cT\big\{ \big(\widetilde{P}_{\mu}(\Sigma_2) - \widetilde{P}_{\mu}(\Sigma_1)\big)\cO(x)\big\} \ra 
+\ese 
+which using the time ordering gives us a commutator
+\bse 
+    \la [\widetilde{P}_{\mu}, \cO(x)] \ra = \la \p_{\mu} \cO(x) \ra = \p_{\mu} \la \cO(x) \ra.
+\ese 
+It is important to notice that this result comes from the fact that $t_1<t<t_2$, or equivalently that $\cO(x)$ lies within our $\Sigma$. It is hopefully clear that we will get this result regardless of how we choose our spatial slices; that is $\cO(x)$ is always contained within the boundary and so we will always get a commutator. 
+
+We can now extend this argument to the case when we have more then one operator inserted within our $\Sigma$. Here we will get the sum of commutators. That is, let's assume that the first $i$ operators, $\{\cO_1(x_1) , ... , \cO_i(x_i)\}$, lie within $\Sigma$, then we get
+\bse 
+    \begin{split}
+        \la \cT\{ \widetilde{P}^{\mu}(\Sigma) \cO_1(x_1) ... \cO_i(x_i) ... \cO_n(x_n) \} \ra & = \la \big[\widetilde{P}^{\mu}(\Sigma), \cO_1(x_1) ... \cO_i(x_i)\big] \cO_{i+1} ... \cO_n(x_n) \} \ra \\
+        & = \la \Big( \big[\widetilde{P}^{\mu}(\Sigma), \cO_1(x_1)\big] \cO_2(x_2) ... \cO_i(x_i) \\
+        & \quad + \cO_1(x_1) \big[\widetilde{P}^{\mu}(\Sigma), \cO_2(x_2)\big] \cO_3(x_3) ... \cO_i(x_i) + ... \\
+        & \quad + \cO_1(x_1)... \cO_{i-1}(x_{i-1}) \big[\widetilde{P}^{\mu}(\Sigma), \cO_i(x_i)\big]\Big) \cO_{i+1} ... \cO_n(x_n) \} \ra \\ 
+        & = \big(\p_1^{\mu} + ... + \p^{\mu}_i \big) \la \cO_1(x_1) ... \cO_n(x_n) \ra,  
+    \end{split}
+\ese 
+where we have used the commutator result 
+\bse 
+    [A,BC] = [A,B]C + B[A,C]
+\ese 
+repeatedly to get the sums on the second line. The derivatives are meant to be understood with the mantra that they only act on the relevant fields, i.e. $\p^{\nu}_i$ only acts on $\cO_i(x_i)$ and none of the others. For even more clarity, we could imagine labelling the different $x_i$s as $\{x,y,z,...\}$ and then our derivatives would be $\frac{\p}{\p x}$, $\frac{\p}{\p y}$ etc.  
+
+Now if we recall that our charges are given by integrals over the stress-energy tensor we can reverse engineer\footnote{I say reverse engineer because Simmons-Duffin obtains the above result from the Ward identity. } this result to arrive at the Ward identity. 
+
+\be 
+\label{eqn:WardIdentity}
+    \p_{\mu}\la T^{\mu\nu}(x) \cO_1(x_1) ... \cO_n(x_n) \ra = - \sum_i \del^{(4)}(x-x_i) \p_i^{\nu} \la \cO_1(x_1) ... \cO_n(x_n) \ra.
+\ee 
+
+Let's just check this makes sense. Integrating both sides over the region $\Sigma$ is the boundary of: the derivative on the left-hand side can be removed using Stoke's theorem, leaving us with the integral over $\Sigma$ as needed for the charge; on the right-hand side the delta functions give us a sum of partial actions. The minus sign on the right-hand side is just included to account for the minus in \Cref{eqn:Charges}.
+
+The above was derived using the momentum charge, but we can extend it to the others by simply including the $\xi_{\nu}$ contractions, i.e. 
+\bse 
+    \p_{\mu}\la \xi_{\nu}(x)T^{\mu\nu}(x) \cO_1(x_1) ... \cO_n(x_n) \ra = - \sum_i \del^{(4)}(x-x_i) \p_i^{\nu} \la \xi_{\nu}(x) \cO_1(x_1) ... \cO_n(x_n) \ra,
+\ese 
+which we can rewrite as 
+\be 
+\label{eqn:WardIdentityCharge}
+    \p_{\mu}\la \xi_{\nu}(x) T^{\mu\nu}(x) \cO_1(x_1) ... \cO_n(x_n) \ra = \sum_i \del^{(4)}(x-x_i) \la \cO_1(x_1) ... \del_{\xi}\cO_i(x_i) ... \cO_n(x_n) \ra.
+\ee 
+
+We did all this so that we could draw the following conclusion: in terms of transformations of correlation functions, all that matters is whether the operator is contained within the $\Sigma$ region or not. This corresponds to the current (i.e. $T^{\mu\nu}$) having common support to the local operators, when it does the delta function in \Cref{eqn:WardIdentity} is hit and we pick up a term. Such terms are known as \textit{contact terms}, for intuitive reasons. 
+
+There's a nice result we can get from this. Let's consider the case when $\Sigma$ encloses \textit{all} the operators. Then our time ordering gives us the commutator as 
+\bse 
+    \begin{split}
+        \la \cT\{ Q_{\xi_i}(\Sigma) \cO_1(x_1) ... \cO_n(x_n) \} \ra & = \la [Q_{\xi_i}(\Sigma), \cO_1(x_1)...\cO_n(x_n)] \ra \\
+        & = \la Q_{\xi_i}(\Sigma_2)\cO_1(x_1)...\cO_n(x_n) \ra - \la \cO_1(x_1)...\cO_n(x_n)Q_{\xi_i}(\Sigma_1) \ra. 
+    \end{split}
+\ese 
+Now it turns out to be true\footnote{For a reason that will become clearer later.} that all the conformal charges annihilate the vacuum both as a left and right action, i.e. $\bra{0}Q_{\xi_i} = 0 = Q_{\xi_i}\ket{0}$, and so the above result just vanishes. However we could equally expand the commutator out as 
+\bse 
+    \begin{split}
+        [Q_{\xi_i}(\Sigma), \cO_1(x_1) ... \cO_n(x_n)] & = [Q_{\xi_i}(\Sigma),\cO_1(x_1)]\cO_2(x_2) ... \cO_n(x_n) \\
+        & \qquad + \cO_1[Q_{\xi_i}(\Sigma),\cO_2(x_2)]\cO_3(x_3) ... \cO_n(x_n) + ...\\
+        & \qquad \qquad  + \cO_1(x_1) ... \cO_{n-1}(x_{n-1})[Q_{\xi_i}(\Sigma),\cO_n(x_n)],
+    \end{split}
+\ese 
+and then using $[Q_{\xi_i}(\Sigma), \cO_j(x_j)] = -\del_{\xi_i} \cO(x_j)$, we get 
+\bse 
+    \la \del\cO_1(x_1) \cO_2(x_2) ... \cO_n(x_n)\ra + ... + \la \cO_1(x_1) \cO_2(x_2) ... \del\cO_n(x_n)\ra = 0.
+\ese 
+We can also write this result as the following.
+\mybox{
+
+    If $x\mapsto x'$ is a quantum symmetry with $\cO \mapsto \cO'$, then the correlators of the transformed operators is equal to the correlator of the untransformed ones. That is 
+    \be
+    \label{eqn:WardIdentityCourse}
+        \la \cO_1(x_1) ... \cO_n(x_n) \ra = \la \cO_1^{\prime}(x_1) ... \cO_n^{\prime}(x_n) \ra,
+    \ee 
+    where we note that the $x$s on the right-hand side are \textit{not} primed, as otherwise we have a trivial statement from $\cO(x)=\cO^{\prime}(x^{\prime})$.
+}
+\noindent where we get the above result by considering $\cO^{\prime} = \cO + \del\cO$. 
+
+\section{Correlation Functions}
+
+As we've said a few times, the key objects in a CFT are the local operators, and the key data defining the CFT are the correlation functions of these local operators. For example
+\bse 
+    \la \cO(x_1) \cO(x_2) ... \cO(x_n)\ra = f(x_1,...,x_n)
+\ese
+where $f(x_1,...,x_n)\in \C$ for a given $(x_1,...,x_n)$. The important thing to note is that the result is a function --- i.e. there is no information left about the operators themselves on the right-hand side. This is why we say that once we know the correlation functions we have solved the theory --- we have `removed' all the information about the operators themselves and are just left with theory specific results. 
+
+In principle, if you have a Lagrangian you can compute all the correlation functions essentially via Feynman diagrams. However, in practice this is exceedingly difficult!\footnote{Besides that, what about theories that don't have a Lagrangian?} We therefore want to try find some other way to get the correlation function results. Given that we just worked out how conformal transformations act on the correlation functions, \Cref{eqn:WardIdentityCourse}, the obvious question to ask is "does our conformal symmetry tells us anything about them?" The answer is "yes", and we shall now see what they tell us. 
+
+\subsection{Conformal Constraints}
+
+% Commenting out for now as doesn't use language of course, but don't want to loose the information.
+
+% Now it follows from our derivation of \Cref{eqn:WardIdentityCharge} that if the charge has no common support with any operator (i.e. all the charges are outside $\Sigma$) that the right-hand side vanishes. Now let's consider the case when the charge has common support with \textit{every} operator (i.e. they're all within $\Sigma$). Then every delta function is hit, and so we pick up every $\del_{\xi}\cO(x_i)$. However we know that in a conformal symmetry we have inversion symmetry, which essentially corresponds to turning the inside of the $\Sigma$ to the outside and visa versa. This has the effect of resulting in a situation where all the operators lie \textit{outside} $\Sigma$ and so the result must vanish. Equating these two ideas allows us to conclude 
+%\be
+%\label{eqn:CorrelationFunctionVariationOperatorsXi}
+%    \la \del_{\xi_i}\cO_1(x_1) \cO_2(x_2) ... \cO_n(x_n)\ra + \la \cO_1(x_1) \cO_2(x_2) ... \del_{\xi_i}\cO_n(x_n)\ra = 0.
+%\ee 
+
+Let's consider a infinitesimal conformal transformation. We then have 
+\bse 
+    \cO^{\prime}(x) = \cO(x) + \del\cO.
+\ese 
+Plugging this into \Cref{eqn:WardIdentityCourse} we see that the left-hand side will be cancelled by the $\cO(x)$ on the right-hand side of the above formula. We are then just left with 
+\be 
+\label{eqn:CorrelationFunctionVariationOperators}
+    \la \del\cO_1(x_1) \cO_2(x_2) ... \cO_n(x_n)\ra + ... + \la \cO_1(x_1) \cO_2(x_2) ... \del\cO_n(x_n)\ra = 0.
+\ee 
+We therefore have\footnote{Note the signs flip compared to \Cref{eqn:VariationGenerators}, due to the fact we are considering the charges. Of course we're setting it equal to 0 so an overall sign makes no difference.} 
+\ben[label=(\roman*)]
+    \item Translations, $\del=\del_{\widetilde{P}_{\mu}} = \p_{\mu}$:
+    \bse 
+        \bigg(\frac{\p}{\p x_1^{\mu}} + \frac{\p}{\p x_2^{\mu}} + ... + \frac{\p}{\p x_n^{\mu}}\bigg) \la \cO_1(x_1) ... \cO_n(x_n)\ra = 0.
+    \ese
+    \item Dilatations, $\del = \del_{\widetilde{D}} = (x^{\mu}\p_{\mu} + \Delta)$:
+    \bse 
+        \big(x_1^{\mu}\p_{1\mu} + x_2^{\mu}\p_{2\mu} + ... + x_3\p_{3\mu} + \Delta_1 + \Delta_2 + ... \Delta_n\big) \la \cO_1(x_1) ... \cO_n(x_n)\ra = 0.
+    \ese
+    \item Special conformal, for primary scalar operators, $\del = \del_{\widetilde{K}_{\mu}} = -2x_{\mu}\Delta +(x^2\p_{\mu} - 2x_{\mu} x^{\nu}\p_{\nu}) $:
+    \bse 
+        \bigg[\sum_{i=1}^n \big(2x_{i\mu} \Delta_i -(x_i^2 \p_{i\mu} - 2x_{i\mu} x_i^{\nu}\p_{i\nu})\big)\bigg] \la \cO_1(x_1) ... \cO_n(x_n)\ra = 0.
+    \ese
+    We can simplify this by defining\footnote{Note, no tilde here. This is the vector field $K_{\mu}$.} 
+    \bse 
+        K_{\mu} = x_i^2 \p_{i\mu} - 2x_{i\mu} x_i^{\nu}\p_{i\nu},
+    \ese 
+    which is the generator of special conformal transformations at $x_i$.
+    \item Lorentz, for primary scalar operators, $\del = \del_{\widetilde{L}_{\mu\nu}} = -x_{\nu}\p_{\mu} + x_{\mu}\p_{\nu}$:
+    \bse 
+        \bigg[\sum_{i=1}^n \big(x_{i\mu}\p_{i\nu} - x_{i\nu}\p_{i\mu}\big)\bigg]\la \cO_1(x_1) ... \cO_n(x_n) \ra = 0.
+    \ese 
+\een
+
+\br 
+    We can, of course, adapt the special conformal and Lorentz ones to non-scalars by including the $\rho$ terms, which results in including $S_{\mu\nu}$ factors. 
+\er 
+
+We can use these relations to constrain the correlators, which we now do. 
+
+\subsection{2-Point Functions}
+
+As always we start with the simplest case, the $2$-point function:
+\bse 
+    \la \cO_1(x_1)\cO_2(x_2)\ra = f(x_1,x_2).
+\ese 
+Here we will assume scalar operators, but not a great deal changes for other types; you just need to consider the Lorentz representation too.  
+
+\subsubsection{Translations}
+
+First we impose translation symmetry,
+\bse 
+    (\p_1+\p_2)f(x_1^{\mu},x_2^{\mu}) = 0 \qquad \implies \qquad f(x_1^{\mu},x_2^{\mu}) = f\big((x_1-x_2)^{\mu}\big),
+\ese 
+where the implication arrow can be seen by taking a change of variables as follows: let $y_1=x_1-x_2$ and $y_2=x_2$, then by chain rule we have (suppressing indices)
+\bse 
+    \p_1 f(y_1,y_2) = \frac{\p f}{\p y_1}\p_1 y_1 + \frac{\p f}{\p y_2}\p_1 y_2 = \frac{\p f}{\p y_1}
+\ese 
+and 
+\bse 
+    \p_2 f(y_1,y_2) = \frac{\p f}{\p y_1}\p_2 y_1 + \frac{\p f}{\p y_2}\p_2 y_2 = -\frac{\p f}{\p y_1} + \frac{\p f}{\p y_2},
+\ese 
+adding these together gives us
+\bse 
+    \frac{\p }{\p y_2} f(y_1,y_2) = 0 \qquad \implies \qquad f(y_1,y_2) = f(y_1) = f(x_1-x_2).
+\ese 
+
+\badr 
+    Note this result makes perfect sense if we think about the problem in terms of our $\Sigma$ picture. In general the operators will be inserted at $x_1 \neq 0 \neq x_2$, however we can use a translation to move everything such that $x_1=0$, say. It is clear from this that the answer could then only depend on $x_2$. We could equally have shifted everything so that $x_2=0$, and so the result then only depends on $x_1$. It's not a huge leap to go from here to seeing that the result only depends on the difference between the two points. 
+\eadr 
+
+\bnn 
+    From now one we shall use the notation $x_{12} := x_1-x_2$. So we write the above as $f(x_{12}^{\mu})$.
+\enn 
+
+\subsubsection{Lorentz}
+
+We could proceed similarly to above to see what the Lorentz transformations tells us. However we can save a bit of time by using the idea of "Lorentz symmetry corresponds to not having indices left over". We have seen that $f$ is a function of $x_{12}^{\mu}$ and so if we want to remove the indices we have to make it a function of $x_{12}^2 := x_{12}^{\mu}(x_{12})_{\mu}$. 
+
+\badr 
+    As with the remark above, we can make a diagrammatic argument here: Lorentz symmetries contains spatial rotations and boosts. The rotations tell us that our $f(x_{12}^{\mu})$ can't depend on how $\Vec{x}_{12}$ is orientated relative to the coordinate axes. It follows from this that it must only depend on the absolute value $x_{12}^2$.
+\eadr 
+
+So we have 
+\bse 
+    f(x_1,x_2) = f(x_{12}^2) \equiv f(|x_1-x_2|^2).
+\ese    
+
+\subsubsection{Dilatations}
+
+Let's now look at something that is CFT specific.\footnote{The Ward identity formula holds for a generic QFT and so the above results also hold there.} 
+\bse 
+    \big(x_1\cdot \p_1 + x_2\cdot \p_2 + \Delta_1 + \Delta_2\big) f(x_{12}^2) = 0.
+\ese 
+Using the chain rule 
+\bse 
+    \p_{1\mu} f(x_{12}^2) = 2 x_{12\mu} f'(x_{12}^2) \qand \p_{2\mu} f(x_{12}^2) = -2 x_{12\mu} f'(x_{12}^2),
+\ese 
+we have 
+\bse 
+    0 = \big(2x_1\cdot x_{12} - 2x_2\cdot x_{12}^2\big) f'(x_{12}^2) + \big(\Delta_1+\Delta_2)f(x_{12}^2) = 2x_{12}^2 f'(x_{12}^2) + (\Delta_1+\Delta_2)f(x_{12}^2).
+\ese 
+We can solve this using separation of variables: let $x_{12}^2=x$ for notational reasons, then we have 
+\bse 
+    \ln f = A + \frac{\Delta_1+\Delta_2}{2} \ln x \qquad \implies \qquad f = \frac{A^{\prime}}{x^{(\Delta_1+\Delta_2)/2}}
+\ese
+which we can write as 
+\bse 
+    \la \cO_1(x_1)\cO_2(x_2) \ra = \frac{C_{12}}{|x_1-x_2|^{\Delta_1+\Delta_2}}.
+\ese
+
+\subsubsection{Special Conformal}
+
+Finally we have special conformal transformations. These give us 
+\bse 
+    \big(-2x_{1\mu}\Delta_1 - 2x_{2\mu}\Delta_2 + K_{1\mu}+K_{2\mu}\big)f(x_{12}^2) = 0.
+\ese 
+
+\bcl 
+    The following equation holds 
+    \bse 
+        (K_{1\mu}+K_{2\mu}) |x_{12}| = -(x_{1\mu}+x_{2\mu}) |x_{12}|.
+    \ese 
+\ecl 
+
+\bq 
+    \bse 
+        \begin{split}
+            (K_{1\mu}+K_{2\mu}) x_{12}^2 & = \big( x_1^2\p_{1\mu} - 2x_{1\mu}x_1^{\nu}\p_{1\nu} + x_2^2\p_{2\mu} - 2x_{2\mu}x_2^{\nu}\p_{2\nu}\big) x_{12}^2 \\
+            & = \big(2x_1^2(x_1-x_2)_{\mu} - 4x_{1\mu}x_1^{\nu}(x_1-x_2)_{\nu} - 2x_2^2(x_1-x_2)_{\mu} + 4x_{2\mu}x_2^\nu(x_1-x_2)_{\nu} \\
+            & = -2x_1^2 x_{1\mu} - 2 x_1^2x_{2\mu} + 4x_{1\mu}x_1\cdot x_2 - 2x_2^2x_{2\mu} - 2x_2^2x_{1\mu} + 4x_{2\mu}x_1\cdot x_2 \\
+            & = -2(x_{1\mu}+x_{2\mu})(x_1^2 - 2x_1\cdot x_2 + x_2^2) \\
+            & = -2(x_{1\mu}+x_{2\mu})(x_1-x_2)^2.
+        \end{split}
+    \ese
+    Then using the fact that $K_{\mu}$ is a differential operator, if we act on the square root, we just pull down a factor of a $1/2$, which gives us 
+    \bse 
+        (K_{1\mu}+K_{2\mu}) (x_{12}^2)^{1/2} = \frac{1}{2(x_{12}^2)^{1/2}} (K_{1\mu}+K_{2\mu}) x_{12}^2
+    \ese 
+    which is the result we want. 
+\eq 
+
+\bbox 
+Using this result show that our special conformal transformations give 
+\bse 
+    \big(-2x_{1\mu}\Delta_1 - 2x_{2\mu}\Delta_2 + K_{1\mu}+K_{2\mu}\big)\frac{C_{12}}{|x_{12}|^{\Delta_1+\Delta_2}} = (\Delta_2-\Delta_1)(x_{1\mu} - x_{2\mu}) \frac{C_{12}}{|x_{12}|^{\Delta_1+\Delta_2}} = 0
+\ese 
+\ebox 
+
+The conclusion is that we either have $C_{12}=0$ or $\Delta_1=\Delta_2$.\footnote{We don't want to have $x_1=x_2$ here as this would correspond to putting two operators on top of each other, which is not a nice idea.} To conclude we have 
+\mybox{
+    \be 
+    \label{eqn:TwoPointCorrelator}
+        \la \cO_1(x_1) \cO_2(x_2)\ra = \begin{cases} 
+            \frac{C_{12}}{|x_1-x_2|^{2\Delta}} & \text{ if } \Delta_1=\Delta_2 \\
+            0 & \text{ otherwise}.
+        \end{cases}
+    \ee 
+}
+
+So we have seen that conformal symmetries fix the 2-point correlators up to a factor $C_{12}$. We can even fix this constant by renormalising our fields (and therefore operators) via 
+\bse 
+    \cO \to \frac{1}{\sqrt{C_{12}}} \cO,
+\ese 
+which puts a $1$ in the numerator of \Cref{eqn:TwoPointCorrelator}. This tells us that for a CFT, defining the space of operators and their dimensions is equivalent to the space of 2 point functions.
+
+% Note for Paul: You made some comment about getting anomalous dimension running with the coupling. I didn't understand this as I am not overly familiar with RG, so haven't made any remark here. 
+
+\subsection{3-Point Functions Of Scalar Operators}
+
+That's two-point functions done, next on the list is three-point functions
+\bse 
+    \la \cO_1(x_1) \cO_2(x_2) \cO_3(x_3) \ra = f(x_1,x_2,x_3).
+\ese 
+We proceed similarly to find
+\mybox{
+    \be 
+    \label{eqn:ThreePointCorrelator}
+        \la \cO_1(x_1)\cO_2(x_2)\cO_3(x_3)\ra = \frac{C_{123}}{|x_{12}|^{\Delta_1+\Delta_2-\Delta_3} |x_{23}|^{\Delta_2 + \Delta_3 - \Delta_1} |x_{13}|^{\Delta_3 + \Delta_1 - \Delta_2} }
+    \ee
+}
+
+\br 
+    Note that once we have fixed our $C_{12}$ for the two point functions we cannot change the $C_{123}$. That is the three-point functions can only be defined up to $C_{123}$.
+\er 
+
+\bbox 
+    Derive \Cref{eqn:ThreePointCorrelator}.
+\ebox 
+
+\subsection{4-Point Functions}
+
+Next, 4-point functions. Unfortunately, these are no longer fixed by conformal symmetry. This is not surprising as we expect there to be some point at which our conformal transformations stop helping us --- that is we have a limited number of constraints we can put on the system and so there has to be a point at which we cannot fully constrain the system anymore. 
+
+The result of imposing conformal symmetries is
+\bse
+    \la \cO_1(x_1) ... \cO_4(x_4) \ra = f(u,v) \prod_{i<j} |x_{ij}|^{\frac{\Delta_1 + ... + \Delta_4}{3} - \Delta_i - \Delta_j}
+\ese
+where $u,v$ are the so-called \textit{conformal cross-ratios}
+\be 
+\label{eqn:CrossRatios}
+    u := \frac{|x_{12}||x_{34}|}{|x_{13}||x_{24}|} \qand v := \frac{|x_{14}||x_{23}|}{|x_{13}||x_{24}|}.
+\ee 
+The big problem is that $f$ is an arbitrary function of $u,v$. The claim is that the product part
+\bse
+    \prod_{i<j} |x_{ij}|^{\frac{\Delta_1 + ... + \Delta_4}{3} - \Delta_i - \Delta_j}
+\ese 
+satisfies \Cref{eqn:CorrelationFunctionVariationOperators}, from which it follows from this that the cross-ratios are conformally invariant themselves. In particular they satisfy 
+\be 
+\label{eqn:CrossRatiosSpecialConformal}
+    (K_{1\mu}+K_{2\mu}+K_{3\mu}+K_{4\mu})u = 0 = (K_{1\mu}+K_{2\mu}+K_{3\mu}+K_{4\mu})v.
+\ee 
+\bbox 
+    Prove that the conformal cross-ratios are invariant under special conformal transformations. That is prove \Cref{eqn:CrossRatiosSpecialConformal}.
+\ebox 
+
+\br 
+    Note that even though we haven't fully solved this problem we have taken it from being a function of $4D$ variables (the $4$ $x^{\mu}$s) and reduced it to the dependence on $2$ variables. 
+\er 
+
+\subsection{Higher Point Functions}
+
+When we consider higher point functions we get more and more invariant cross-ratios, and so \textit{any} function solves the CFT. This is an obvious problem and we have to resort to other methods to fix these. In order to do this we need to derive the (several times mentioned) operator-state correspondence and so-called \textit{crossing symmetry}. 

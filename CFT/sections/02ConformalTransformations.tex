@@ -1,0 +1,312 @@
+\chapter{Conformal transformations}
+
+Now that we are (hopefully) motivated, we can begin a more technical study of conformal symmetry. We start by being a bit more precise as to what each of the symmetries we have mentioned mean. 
+
+\section{Symmetries \& Conformal Killing Equation}
+
+\bd
+    The \textit{Poincar\'{e} group} is the full set of symmetries of special relativity, i.e. it is the union of the Lorentz symmetries (spatial rotations and boosts) with translations. Poincar\'{e} transformations can therefore be defined as the set of transformations that map flat space to flat space. 
+\ed
+
+We should be familiar enough with Poincar\'{e} transformations to not need any examples.
+
+We can put a QFT on an arbitrary background, coupling the QFT to gravity, resulting in a theory which is diffeomorphism\footnote{A diffeomorphism is the structure preserving map between two manifolds. Diffeomorphisms play a \textit{huge} role in GR, where they (roughly speaking) correspond to coordinate changes. Diffeomorphisms are  gauge symmetry in GR and essentially give rise to the connection coefficients, $\Gamma$, in exactly the same way that the $SU(3)$ gauge symmetry of QCD gives gluons (although this comparison is not always made!).} invariant. Fixing the background to flat space we recover the original QFT and the  Poincar\'{e} transformations are simply the diffeomorphisms which leave the flat metric invariant.
+
+Some QFTs when coupled to gravity in this way possess an additional symmetry known as a Weyl transformation, simply a local rescaling of the metric.
+
+\bd
+    A \textit{Weyl transformation} is a local rescaling of the metric by a factor, i.e. it maps 
+    \bse 
+        g \mapsto \Omega^2(x) g,
+    \ese 
+    where the squared is purely convention. We call $\Omega^2(x)$ a \textit{Weyl factor}.
+\ed 
+
+A Weyl invariant theory when restricted to a fixed flat background metric is a called a CFT (at least classically).
+
+\bd 
+    A \textit{conformal transformation} is thus a spacetime transformation that leaves the \textit{flat} metric invariant up to a Weyl factor.
+\ed 
+
+\badr 
+    There is a subtle difference between a Weyl transformation and a conformal transformation. A Weyl transformation is a scaling of the metric itself and it does not effect the spacetime itself, while a conformal transformation leaves the metric alone but changes the underlying spacetime. We can see the difference between the two by transformation in terms of coordinates:\footnote{If we want to be a bit more fancy, we can define the difference using the notion of a pull-back. Let $f:\cM\to\cM$ be a smooth map with $\cM$ being our manifold. Then a conformal transformation is defined via $f^* g = \Omega^2(x) g$, where $\Omega^2(x) \in C^{\infty}(\cM)$. On the other hand a Weyl transformation has $f=\b1_{\cM}$ and we simply have $h = \Omega^2(x)g$.} 
+    \begin{itemize}
+        \item A Weyl transformation is defined via 
+        \bse 
+            h_{\mu\nu} = \Omega^2(x) g_{\mu\nu}.
+        \ese
+        \item A conformal transformation is defined via 
+        \bse
+            \frac{\p x^{\prime\a}}{\p x^{\mu}} \frac{\p x^{\prime\beta}}{\p x^{\nu}} \eta^{\prime}_{\a\beta} = \Omega^2(x) \eta_{\mu\nu}, 
+        \ese 
+        where the left-hand side of this expression is just the general formula for how the components of the metric change under a coordinate transformation.
+    \end{itemize}
+    These two things are \textit{almost} essentially the same, and it is likely that I will slip up here and there and use them interchangeably, but it's important to note they are indeed different things. 
+\eadr 
+
+Let's try break down conformal transformations a little bit further. Recall that the metric essentially tells us the lengths and angles between things. The length comes from taking $g(V,V)$, while the angle comes from considering $g(U,V)$ along with the lengths of $U$ and $V$. If we take a conformal transformation then the lengths are clearly going to change, as we have the $\Omega^2(x)$ factor. However when looking at angles really all we are interested in is the projections of lengths, and here the $\Omega^2(x)$ factors cancel. That is the lengths of \textit{both} $U$ and $V$ change by the same amount\footnote{This follows from the fact that we can only take the angle between them if they are defined at the same $x$, so the scaling is the same for both.} and so the ratio to the projection remains invariant. We can therefore intuitively think of conformal transformations as spacetime transformations that locally vary lengths but preserve angles. This is exactly the introductory definition we gave above. 
+
+The above result is actually very important, and so we write it again in a nice box. 
+\mybox{
+    \be 
+    \label{eqn:ConformalTransformation}
+        \frac{\p x^{\prime\a}}{\p x^{\mu}} \frac{\p x^{\prime\beta}}{\p x^{\nu}} \eta^{\prime}_{\a\beta} = \Omega^2(x) \eta_{\mu\nu}. 
+    \ee 
+}
+
+\bnn
+    From now on we will assume we are working in a flat spacetime, i.e. we replace $g_{\mu\nu}$ with $\eta_{\mu\nu}$. 
+\enn 
+
+The above result holds for a general \textit{finite} conformal transformation. We can use it to find out how an infinitesimal conformal transformation acts. Start by writing
+\bse
+    x^{\prime \mu} = x^{\mu} + \xi^{\mu} (x), \qand \Omega = 1 +\kappa(x),
+\ese
+where $\xi$ and $\kappa$ are infinitesimal (i.e. ignore $\cO(\xi^2),\cO(\kappa^2),\cO(\xi \kappa)$). Then inserting this into \Cref{eqn:ConformalTransformation} gives us 
+\mybox{
+    \be
+    \label{eqn:ConformalKilling}
+        2 \kappa(x) \eta_{\mu \nu}= \p_{\mu} \xi_{\nu} + \partial_{\nu} \xi_{\mu},
+    \ee
+}
+\noindent which is known as the \textit{conformal Killing equation}. It is the defining equation for infinitesimal conformal transformations.
+
+\br 
+    Note we call it the conformal \textit{Killing equation} as it is of the same form as the Killing equation from general relativty, which reads\footnote{In flat space, otherwise we replace $\p_{\mu}$ with $\nabla_{\mu}$.}
+    \be 
+    \label{eqn:KillingEquation}
+        \p_{\mu}\xi_{\nu} + \p_{\nu}\xi_{\mu} = 0.
+    \ee 
+    Note it is the $\kappa$ that distinguishes the two, and this is where the "conformal" part of the name comes from; $\kappa$ comes from the $\Omega^2(x)$ factor. 
+\er 
+
+\section{Conformal Killing Equation For $d>2$}
+
+The idea is to solve \Cref{eqn:ConformalTransformation} to get the infinitesimal symmetries and then we can get the full picture back using the exponential map. The general solution (for $d>2$, with $d$ being the spacetime dimension) is
+\be
+\label{eqn:ConformalKillingSolution}
+    \xi^{\mu}(x) = a^{\mu} + {\omega^{\mu}}_{\nu} x^{\nu} + \sigma x^{\mu} + b^{\mu} x^2- 2 b_{\nu} x^{\nu} x^{\mu}, 
+\ee 
+with (contracting \Cref{eqn:ConformalKilling} with $\eta^{\mu \nu}$)
+\bse 
+    \kappa(x)=\frac{1}{d} \p_{\mu} \xi^{\mu} = \sigma-2 b_{\nu} x^{\nu},
+\ese  
+where 
+\ben[label=(\roman*)]
+    \item $\omega$ is the Lorentz part, so it must obey $\omega_{\mu\nu}=-\omega_{\nu\mu}$,
+    \item $\sigma$ is the scaling part (known as a \textit{dilatation}), and
+    \item $b$ is something new we call the \textit{special conformal transformation}.
+\een 
+
+\bbox
+    \ben
+        \item Check that the above solves \Cref{eqn:ConformalKilling}.
+        \item Derive \Cref{eqn:ConformalKillingSolution}. \textit{Hint: Start by recalling (or deriving) the general solution to Killings equation, \Cref{eqn:KillingEquation}, and then include the contributions from $\kappa$. You want to show that $\kappa$ is linear in $x$, i.e. two derivatives on it are zero. Then go from there by picking suitable linear combinations to find the solution.}
+    \een
+\ebox 
+
+\br 
+    As we said above, \Cref{eqn:ConformalKillingSolution} only holds for dimensions $d \neq 2$. As we have mentioned a couple times, for the specific case of $d=2$ things change and we get a much larger expression. 
+\er 
+
+\subsection{The Conformal Algebra}
+
+\bcl 
+    The conformal group is a Lie group.\footnote{Note that the conformal group is \textit{not} a compact Lie group, though. This is easily seen from the fact that the Lorentz group is non-compact. See Remark 6.1.1 of my Group Theory notes for a little more detail.}
+\ecl 
+
+We can pick a basis of the Lie algebra so that our conformal Killing vector $\xi^{\mu}\p_{\mu}$ is a generator of the Lie group. We can do this by decomposing it in terms of the generators of the subgroups. We have 
+\ben[label=(\roman*)]
+    \item Momentum:
+    \be 
+    \label{eqn:MomentumGenerator}
+        P_{\mu} := \p_{\mu},
+    \ee
+    which generates spacetime translations, $a^{\mu}$.
+    \item Lorentz: 
+    \be 
+    \label{eqn:LorentzGenerator}
+        L_{\mu\nu} := x_{\mu}\p_{\nu} - x_{\nu}\p_{\mu},
+    \ee 
+    which generate our boosts and spatial rotations, $\omega^{\mu\nu}$.
+    \item Dilatations: 
+    \be 
+    \label{eqn:DilatationGenerator}
+        D := x^{\mu}\p_{\mu},
+    \ee 
+    which generates our scale transformations, $\sig$.
+    \item Special conformal generator:
+    \be 
+    \label{eqn:SpecialConformalGenerator}
+        K_{\mu} := x^2 \p_{\mu} - 2x_{\mu}x^{\nu} \p_{\nu},
+    \ee 
+    which generates our new $b^{\mu}$ parameter. 
+\een 
+From \Cref{eqn:ConformalKillingSolution} we then read off 
+\bse
+    \xi^{\mu} \p_{\mu} = a^{\mu} P_{\mu} + \frac{1}{2} {\omega^{\mu}}_{\nu} {L^{\nu}}_{\mu} + \sigma D + b^{\mu} K_{\mu},
+\ese 
+
+Now we have claimed that our conformal group is a Lie group and that \Crefrange{eqn:MomentumGenerator}{eqn:SpecialConformalGenerator} are our generators. If this is the case they must be elements of the associated Lie algebra, and so we really should check that they are closed under the commutator (which is the Lie bracket here). 
+
+\bp 
+    The generators \Crefrange{eqn:MomentumGenerator}{eqn:SpecialConformalGenerator} satisfy the following commutation relations. 
+    \mybox{
+        \be 
+        \label{eqn:GeneratorCommutators}
+            \begin{split}
+                [P_{\mu} , L_{\nu\rho}] & = \eta_{\mu\nu}P_{\rho} - \eta_{\mu\rho}P_{\nu}, \\
+                [P_\mu, K_\nu] & = -2 \eta_{\mu \nu} D+2 L_{\mu \nu}, \\
+                [K_\mu, L_{\nu \rho}] & = \eta_{\mu \nu} K_\rho - \eta_{\mu \rho} K_\nu, \\
+                [K_\mu, D] & = - K_\mu \\
+                [P_\mu, D] &= P_\mu, \\
+                [L_{\mu \nu}, L_{\rho \sigma}] & = \eta_{\nu \rho} L_{\mu \sigma} + \eta_{\mu \sigma}  L_{\nu \rho} -\eta_{\mu \rho} L_{\nu \sigma} - \eta_{\nu \sigma} L_{\mu \rho},
+            \end{split}
+        \ee 
+    }
+    \noindent with all others vanishing.
+\ep 
+
+
+\bbox 
+    Derive the commutation relations \Cref{eqn:GeneratorCommutators}. \textit{Hint: Recall that the commutator of differential operators only really make sense when acting on a function, $f$. Then remember (or show) that the $\p \p f$ terms always cancel.}
+\ebox 
+
+Now these commutation relations are not the prettiest things to remember, so it would be nice if we could repackage the information in a nicer way. We can do this by introducing two new `dimensions', which we call "$-1$" and "$d$". In other words we let $M, N \in \{ -1 , 0, ... , d-1 , d\}$, where we have used new indices to distinguish them from our Lorentz ones, $\mu,\nu$. We then make the following definition.
+\bd
+    Using our new index range, we define $J_{MN}$ via
+    \be
+    J_{\mu \nu} = L_{\mu \nu}, \quad J_{-1 \mu} = \frac{1}{2} (P_\mu + K_\mu) \quad J_{d \mu}  = \frac{1}{2} (P_\mu -K_\mu) \quad J_{d -1} = D, \quad J_{MN} = -J_{NM}.
+    \ee
+\ed 
+
+We can write this definition as a matrix\footnote{The convention here is that the first index, i.e. $M$, tells us the row, and the second index, $N$, tells us the column.}
+\bse
+    J_{MN} =
+    \begin{pmatrix}
+    0 & \dots & \frac{1}{2}\big(P_{\nu} + K_{\nu}\big) & \dots & -D \\
+    \vdots && \dots && \vdots  \\
+    -\frac{1}{2}\big(P_{\mu} + K_{\mu}\big) && L_{\mu\nu} && \frac{1}{2}\big(K_{\mu} - P_{\mu}\big) \\
+    \vdots && \dots && \vdots \\
+    D & \dots & \frac{1}{2}\big(P_{\nu} - K_{\nu}\big) & \dots & 0 
+    \end{pmatrix}.
+\ese 
+It follows from this that $J_{MN}$ satisfies 
+\bse
+    [J_{mn},J_{PQ}] = \eta_{n P} J_{m Q} + \eta_{m Q} J_{n P} - \eta_{m P} J_{n Q} - \eta_{n Q} J_{m P},
+\ese 
+where $\eta_{MN}= \text{diag}(-1,-1,+1,...,+1)$, but this is a representation of a Lorentz-type Lie algebra (compare it to the last line of  \Cref{eqn:GeneratorCommutators}). In other words this is a representation of $\so(2,\mathrm{d})$.
+
+\subsection{Finite Conformal Transformations}
+
+Now that we have the conformal Lie algebra, we can use the exponential map to recover a \textit{finite} conformal transformation:
+\be 
+\label{eqn:FiniteConformalTransformation}
+    x^{\prime \nu} = e^{\xi^{\mu} \p_{\mu}} x^{\nu} = x^{\nu} + \xi^{\mu} \p_{\mu} x^{\nu} + \frac{1}{2} \xi^{\mu}\p_{\mu} \big(\xi^{\rho}\p_{\rho} x^{\nu}\big) + \cO(\xi^3).
+\ee  
+
+Let's look at some examples. 
+
+\bex 
+    The easiest example is to consider just a translation, i.e. $\xi^{\mu} = a^{\mu}$. Plugging this into \Cref{eqn:FiniteConformalTransformation} we have 
+    \bse
+        \begin{split}
+            x^{\prime \nu} & = x^{\nu} + a^{\mu} \delta^{\nu}_{\mu} + \frac{1}{2}a^{\mu} \p_{\mu}\big( a^\rho \delta^{\nu}_{\rho} \big) \\
+            & = x^{\nu} + a^{\nu},
+        \end{split}
+    \ese
+    where the second line follows from the fact that $a^{\rho}$ is constant.
+\eex 
+
+\bex 
+    Next let's consider just a dilatation, i.e. $\xi^{\mu} = \sig x^{\mu}$. We then have 
+    \bse 
+        \begin{split}
+            x^{\prime \nu} & = x^{\nu} + \sigma x^{\mu} \delta^{\nu}_{\mu} + \frac{1}{2} \sigma x^{\mu} \p_{\mu} \big( \sigma x^{\rho} \delta^{\nu}_{\rho} \big) + \dots \\
+            & = x^{\nu} +\sigma x^{\nu} + \frac{1}{2} \sigma^2 x^{\nu} + \dots \\
+            & = e^{\sigma} x^\nu.
+        \end{split}
+    \ese 
+    Now, as $\sig$ is a constant, this just tells us to scale our coordinates about $x=0$: 
+    \begin{center}
+        \btik 
+            \draw[thick, dashed, <->] (-1,-1) -- (1,1);
+            \draw[thick, dashed, <->] (-1,1) -- (1,-1);
+            \draw[thick, ->] (1,1) -- (2,2);
+            \draw[thick, ->] (1,-1) -- (2,-2);
+            \draw[thick, ->] (-1,1) -- (-2,2);
+            \draw[thick, ->] (-1,-1) -- (-2,-2);
+            \draw[fill=black] (1,1) circle [radius=0.05cm];
+            \draw[fill=black] (1,-1) circle [radius=0.05cm];
+            \draw[fill=black] (-1,1) circle [radius=0.05cm];
+            \draw[fill=black] (-1,-1) circle [radius=0.05cm];
+            \node at (1,0.7) {$x$};
+            \node at (1,-0.7) {$x$};
+            \node at (-1,0.7) {$x$};
+            \node at (-1,-0.7) {$x$};
+            \node at (2,1.7) {$x^{\prime}$};
+            \node at (2,-1.6) {$x^{\prime}$};
+            \node at (-2,1.7) {$x^{\prime}$};
+            \node at (-2,-1.6) {$x^{\prime}$};
+        \etik 
+    \end{center}
+\eex 
+
+We have seen a translation and dilatation, but what about our special conformation transformations? That is what does
+\bse 
+    \xi^\mu = b^\mu x^2 - 2 b_\nu x^\nu x^\mu
+\ese 
+give us. 
+\bcl 
+    The special conformal transformations correspond to the finite transformation 
+    \be
+    \label{eqn:FiniteSpecialConformalTransformation}
+        x^{\prime \nu} = e^{\xi^{\mu} \p_{\mu} } x^{\nu} = \frac{x^{\nu} +x^2 b^{\nu}}{1+2 b_{\nu} x^{\nu} +b^2 x^2}
+    \ee 
+\ecl 
+
+\bbox
+    Show \Cref{eqn:FiniteSpecialConformalTransformation} holds up to $\cO(b^2)$, i.e. expand both sides. 
+\ebox 
+
+We can now check that these finite transformations agree with the original definition, i.e. check that \Cref{eqn:ConformalTransformation} holds for the above $x^{\prime \nu}$s with some $\Omega(x)$.
+\bbox
+    Given that 
+    \be 
+    \label{eqn:OmegaSpecialConformal}
+        \Omega^{-1}(x) = 1+2 b_\nu x^\nu +b^2 x^2
+    \ee
+    for special conformal transformations, check that \Cref{eqn:ConformalTransformation} is satisfied for special conformal transformations. That is use the given formula along with \Cref{eqn:FiniteSpecialConformalTransformation} to verify our definition holds.
+\ebox 
+
+\subsection{Inversions}
+
+Although \Cref{eqn:FiniteSpecialConformalTransformation} looks unapealing at first, it actually allows us to see a really nice result. Consider 
+\be
+\label{eqn:xPrimedSquared}
+    (x^\prime)^2 = \frac{(x+ x^2 b)^2}{(1+2b \cdot x+b^2 x^2)^2}=\frac{x^2+2 x^2 x\cdot b +x^4 b^2}{(1+2b\cdot x +x^2 b^2)^2}= \frac{x^{\prime} \cdot (x + x^2b) }{1+2 b\cdot x +x^2 b^2},
+\ee 
+from which we see that 
+\be
+\label{eqn:xByxSquared}
+    \frac{x^{\prime \mu}}{x^{\prime 2 }} = \frac{x^\mu + x^2 b^\mu}{x^2} = \frac{x^\mu}{x^2}+b^\mu. 
+\ee 
+In order to understand what this tells us, let's introduce another definition. 
+
+\bd[Inversion Map] 
+    We define the \textit{inversion map} via 
+    \be 
+    \label{eqn:InversionMap}
+        I: x^\mu \rightarrow \frac{x^\mu}{x^2}.
+    \ee 
+\ed 
+
+As the name suggests, the inversion map inverts our coordinates, e.g. it sends $0 \to \infty$. Now we see that \Cref{eqn:xByxSquared} tells us that if we invert our coordinates then a special conformal transformation corresponds simply to a translation. That is 
+\bse 
+    I x^{\prime\mu} = I x^{\mu} + b^{\mu},
+\ese
+which is our finite translation formula. Infinitesimally we can write this as
+\be
+\label{eqn:KEqualIPI}
+    K = I P I.
+\ee 

@@ -1,0 +1,402 @@
+\chapter{Conformal Transformation Of Classical Fields}
+
+The fundamental objects in a CFT are \textit{local}\footnote{The reason for emphasis on the word "local" will become clearer when we look at the state operator correspondance.} fields, which  become local operators on quantisation. We can then use these operators to work out the correlation functions of the theory. When we know all the operators\footnote{That is, knowing what representation of the conformal group they transform under.} and their correlation functions we say that we can \textit{solve} the theory. Said another way, if we know all the operators and all the different correlation functions between them we can work out anything we would want to know about the theory. 
+
+\bex 
+    In a theory that has a Lagrangian, the fields will be simply linear combinations of products of (derivatives of) the fundamental fields appearing in $\cL$. For example: 
+    \ben[label=(\roman*)]
+        \item If you have a scalar field theory the fundamental field is $\phi(x)$. Our Lagrangian is then built out of products, $\phi^n(x)$, and derivative terms $\p_{\mu}\phi(x)$. We also have products of both kinds, e.g. $\phi(x)\p_{\mu}\phi(x)$.
+        \item If you are considering a gauge theory, you must ensure that the fields are gauge invariant. So $A_{\mu}(x)$ is not considered by itself, as it is not gauge invariant. However terms such as $\tr[F_{\mu\nu}F_{\rho\sig}]$, with $F_{\mu\nu} = \p_{\mu}A_{\nu}-\p_{\nu}A_{\mu} + ig[A_{\mu},A_{\nu}]$, will appear.\footnote{If you are not familiar with such terms, see, for example, my QFT II notes.}
+    \een 
+\eex 
+
+\br 
+\label{rem:FieldsCanHaveLorentzIndices}
+    Note that our fields can transform outside the trivial representation of the Lorentz group, as the Lorentz group is a subgroup of the conformal group. However gauge transformations are non-physical and do not form a subgroup, so we have to ensure gauge invariance if we want to calculate physical things. By this we just mean that our operators, $\cO$, will be allowed to carry Lorentz indices $\mu,\nu$ etc., however they \textit{cannot} carry Lie algebra indices $a,b$ etc.
+\er 
+
+\section{Transformation Of Fields}
+
+So far we have seen how conformal transformations act on the spacetime coordinates $x^{\mu}$, however we are yet to see how the conformal transformations act on the fields themselves. This kind of question should sound familiar from a introductory field theory course where you discuss active vs. passive transformations of the Lorentz group. We shall recap the general idea here.\footnote{For a slightly more intuitive explanation, see Section 2.1.1 of my IFT notes.}
+
+\subsection{Recap Of Lorentz Transformations Of Fields}
+
+Under a Lorentz transformation the space transforms as (indices left implicit for notational convenience) 
+\bse 
+    x \to x^{\prime} = \Lambda x
+\ese 
+while the scalar field transforms as 
+\bse 
+    \phi \to \phi^{\prime}.
+\ese 
+Now if $\phi$ is a scalar it is, essentially by definition, invariant under the transformation. Mathematically that is
+\bse 
+    \phi^{\prime}(x^{\prime}) = \phi(x).
+\ese 
+If we put this all together, we can conclude
+\mybox{
+    \be 
+    \label{eqn:ScalarFieldTransformation}
+        \phi^{\prime}(x) = \phi(\Lambda^{-1}x).
+    \ee 
+}
+
+Ok great, we know how scalar fields transform, however we just said in \Cref{rem:FieldsCanHaveLorentzIndices} that our fields can have Lorentz indices, the next question is how do these transform? Well of course the argument still transforms as above, and we just need to take into account the transformation of the Lorentz index, e.g.
+\bse 
+    V^{\mu} \to V^{\prime\mu} 
+\ese 
+where 
+\be 
+\label{eqn:VmuTransform}
+    V^{\prime\mu}(x^{\prime}) = {\Lambda^{\mu}}_{\nu} V^{\nu}(x).
+\ee
+
+\badr 
+    Technically speaking we should write 
+    \bse 
+        V^{\prime \mu} (x^{\prime}) = {D[\Lambda]^{\mu}}_{\nu} V^{\nu}(x),
+    \ese
+    where $D$ is the representation of the Lorentz group that $V^{\mu}(x)$ transforms in. In the above we have just used the fundamental representation, as this is the representation for $4$-vectors. 
+\eadr 
+
+\subsection{Adding Dilatations}
+
+Ok so we know how the fields transform under the Lorentz subgroup of our conformal group. We now need to ask how our dilatations act. Recall that these are "scalings" and so anything that has dimension will be effected by these. That is, even the fundamental scalar fields will transform non-trivially. To be more clear, recall that 
+\bse 
+    S = \int d^dx  \, (\p_{\mu}\phi)^2 \qquad \implies \qquad [\phi] = \frac{d-2}{2}.
+\ese
+and so our scalar fields are effected by dilatations. The question we want to ask is "how are they effected?" Well recall that natural units ($c=1=\hbar$) are defined by mass dimensions, and it follows from Einstein's little equation $E=mc^2$, that in natural units $[E]=[m]$. Then from Heisenberg uncertainty that $[E] = -[t]$, and so spacetime lengths and mass will scale oppositely. That is things with positive mass dimensions "shrink" when we use a dilatation to "zoom in". We summarise this with the following definition. 
+
+\bd[Dilatation Weight]
+    The \textit{dilatation weight} (or just \textit{weight}), $\Delta$, is defined to equal to the mass dimension. 
+\ed 
+
+For clarity, the dilatation weight of our scalar field above is 
+\bse 
+    \Delta_{\phi} = \bigg(\frac{d-2}{2}\bigg).
+\ese 
+So if we use a dilatation of the form 
+\be 
+\label{eqn:xDilatation}
+    x^{\mu} \to x^{\prime\mu} = \l x^{\mu}, \qquad \l\in \R 
+\ee 
+we have 
+\be
+\label{eqn:phiDilatation}
+    \phi^{\prime}(x^{\prime}) = \l^{-\big(\frac{d-2}{2}\big)} \phi(x),
+\ee
+where the prefactor is coming from the fact that $\phi$ has mass dimensions and $[m] = [x^{-1}] = -[x]$ and so scales with the negative power.
+
+More generally, all local fields have a dilatation weight, and scale under the dilatation \Cref{eqn:xDilatation} as
+\mybox{
+    \be 
+    \label{eqn:ScalarFildDilatation}
+        \phi^{\prime}(x^{\prime}) = \l^{-\Delta} \phi(x).
+    \ee
+}
+
+\badr 
+    Note the above formula makes sense; it is just the dilatation equivalent of including a term for non-trivial Lorentz transformations, as in \Cref{eqn:VmuTransform}. The equivalent of the trivial representation (i.e. a Lorentz scalar) is simply $\Delta=0$, which gives us precisely $\phi^{\prime}(x^{\prime})=\phi(x)$. % Remember to ask Paul about the $f(x) = x^n$ example. Wiki gives it as an example, are they just wrong?
+\eadr 
+
+\section{Primary Fields}
+
+All we have left to add are the special conformal transformations, however here we just summarise how a scalar field transforms under a general conformal transformation. The first type of field we consider are so-called scalar primary fields.
+
+\bd[Primary Field]
+    A scalar \textit{primary field}, $\phi(x)$, with weight $\Delta$, transforms under a general conformal transformation as 
+    \be 
+    \label{eqn:PrimaryFieldTransformation}
+        \phi^{\prime}(x^{\prime}) = \Omega^{-\Delta}(x) \phi(x),
+    \ee 
+    where $\Omega(x)$ is a general conformal transformation. 
+\ed 
+
+Infinitesimally we can write \Cref{eqn:PrimaryFieldTransformation} as
+\bse 
+    \del\phi(x) =  -\kappa(x) \Delta \phi(x) - \xi^{\mu}\p_{\mu}\phi(x),
+\ese 
+where the second term comes from the fact that we have shifted the coordinates. 
+
+\bbox 
+    Use this definition to show that a scalar primary field transforms under special conformal transformations as 
+    \be 
+    \label{eqn:SpecialConformalTransformationOfPrimaryField}
+        \phi(x) = \frac{\phi(x^{\prime})}{(1+2b^{\mu}x_{\mu} +b^2x^2)^{\Delta}}. 
+    \ee 
+    % In response to Pual's question about if this was from him, no but it's in Simon Ross' notes, equation (4.4).
+\ebox 
+
+Ok that's scalar primaries, but what about non-scalar primaries? Well non-scalar primaries carry some form of Lorentz index (e.g. $\mu$ if it is in the vector representation or $\a$ if it is in the spinor representation). In order to account for all of these we shall denote a general index by $I$,\footnote{Not to be confused with the $I$ for inversions.} $J$ etc. All we have to do, then, is account for the transformation of the Lorentz indices, so our non-scalar primary field transforms (infinitesimally) as 
+\bse 
+    \del\phi_{\Delta,I}(x) = -\kappa(x) \Delta \phi_{\Delta,I}(x) - \xi^{\mu}(x)\p_{\mu}\phi_{\Delta,I}(x) + {\rho^{\mu}}_{\nu} {({S^{\nu}}_{\mu})_I}^J \phi_{\Delta, J}(x),
+\ese 
+where we have used
+\bse 
+    \begin{split}
+        \kappa(x) & = \sig - 2b\cdot x \\
+        {\rho^{\mu}}_{\nu} & = {\omega^{\mu}}_{\nu} + 2(b^{\mu}x_{\nu} - x^{\mu}b_{\nu}) \\
+        \xi^{\mu}(x) & = a^{\mu} + {\omega^{\mu}}_{\nu}x^{\nu} + \sig x^{\mu} + b^{\mu} x^2 - 2b\cdot x x^{\mu}
+    \end{split}
+\ese 
+and $S^{\mu\nu}$ is the appropriate matrix for the Lorentz representation in question\footnote{For example for spinors $S^{\mu\nu} = \frac{1}{4}[\g^{\mu},\g^{\nu}]$.}
+
+Now of course, by taking coefficients of $a_{\mu}, b_{\mu}, \sig, \omega^{\mu\nu}$, we get the action of $P_{\mu}, K_{\mu}, D, L_{\mu\nu}$ (respectively) on conformal primary fields, the results are set as an exercise now. 
+
+\bbox 
+    Use the above to show that 
+    \be 
+    \label{eqn:VariationGenerators}
+        \begin{split}
+            \del_{P_{\mu}} & = -\p_{\mu} \\
+            \del_{K_{\mu}} & = 2x_{\mu}\Delta - (x^2\p_{\mu} - 2x_{\mu}x^{\nu} \p_{\nu}) + 4(x_{\nu} {S^{\nu}}_{\mu}) \\
+            \del_D & = -(\Delta + x^{\mu}\p_{\mu}\big) \\
+            \del_{L_{\mu\nu}} & = x_{\nu}\p_{\mu} - x_{\mu}\p_{\nu} + S_{\nu\mu}
+        \end{split}
+    \ee 
+\ebox 
+
+
+\section{Descendants}
+
+So far we have only discussed what we called primary fields. Of course we do not expect these to be the only types of fields in a CFT, and indeed they are not. There is another important type of field known as \textit{descendants}, however in order to show where they come from we need to introduce some subtle points.\footnote{The arguments made here are based off the ones made in Simmons-Duffin, [1602.07982]. So see there for more details.}
+
+\subsection{Charges*}
+
+Recall from a canonical QFT course that for every conserved Noether current we can construct a conserved charge. For example, spacetime translations, $P_{\mu} = \p_{\mu}$, give rise to the stress\footnote{It is likely I will change between saying stress/energy-momentum/stress-energy/other-similar-combinations tensor, so keep on your toes!} tensor $T^{\mu\nu}$. We can extend this to a more general statement. 
+
+\bp 
+    For a QFT (need not be a CFT) with well-defined stress tesnor, any Killing vector field --- that is a $\xi = \xi^{\mu}(x)\p_{\mu}$ obeying \Cref{eqn:KillingEquation} --- has a conserved charge given by 
+    \be 
+    \label{eqn:Charges}
+        Q_{\xi}(\Sigma) = - \oint_{\Sigma} dS_{\mu} \, \xi_{\nu}(x) T^{\mu\nu}(x),
+    \ee 
+    where $\Sigma$ is the surface we integrate over with boundary $S$. 
+\ep 
+
+\bq 
+    Simply take the derivative:\footnote{We drop all the integral etc to reduce notation.} 
+    \bse 
+        \begin{split}
+            \p_{\mu} Q_{\xi} & \sim \p_{\mu} \big( \xi_{\nu}(x) T^{\mu\nu}(x) \big) \\
+            & = \big(\p_{\mu}\xi_{\nu}(x)\big) T^{\mu\nu}(x) + \xi_{\nu}(x) \p_{\mu}T^{\mu\nu}(x) \\
+            & = \frac{1}{2}\big(\p_{\mu}\xi_{\nu} + \p_{\nu}\xi_{\mu}\big) T^{\mu\nu} \\
+            & = 0
+        \end{split}
+    \ese 
+    where we have used $\p_{\mu}T^{\mu\nu}=0$ and the symmetry condition $T^{\mu\nu}=T^{\nu\mu}$. 
+\eq 
+
+As we said, this is true for QFTs outside CFTs. As we will show shortly, it turns out that in a CFT the stress tensor is traceless.\footnote{Foreshadowing to a remark that is to come, there are caveats to this.} It follows from this and the proof above that we can relax our condition to give the following Lemma. 
+
+\bl 
+    For a CFT a conformal Killing vector $\xi$ has an associated conserved charge given by \Cref{eqn:Charges}. 
+\el 
+
+\bbox 
+    Prove this Lemma. \textit{Hint: Just take the above proof and recall \Cref{eqn:ConformalKilling}.}
+\ebox 
+
+\br 
+    Note that \Cref{eqn:Charges} reduces to what we're familiar from in canonical QFT. There we take our slices to be equal time slices, so our boundary $dS_{\mu}$ points `in time' and our $\Sigma$ is a spatial slice. So our formula reduces to 
+    \bse 
+        Q_{\xi} = \int d^3 x \, \xi_{\nu}(x) T^{0\nu}(x) ,
+    \ese 
+    where the minus sign goes because we work in the signature $(-,+,+,+)$ in QFT.
+\er 
+
+Why are we talking about all this? Well it allows us to define conserved charges associated to our conformal Killing vectors $P_{\mu}, K_{\mu}, D$ and $L_{\mu\nu}$. We shall adopt the notation of using a tilde to indicate the corresponding conserved charge,\footnote{Note this is different to Simmons-Duffin's notation where a lower case letter indicates the vector field while a capital letter is used to denote the charge. We have already been using capital letters for the vector fields, so I've decided to adopt a tilde notation. Of course this is just notation and so does not mean anything itself, but this footnote is just for cross comparisons.} that is
+\bse 
+    \widetilde{P}_{\mu} := Q_{P_{\mu}}
+\ese 
+etc. However if we want to remain general (i.e. consider any of the conformal Killing vectors) we sill stick to the notation $Q_{\xi_i}$ where $i$ is meant to label whether we have $P_{\mu}$ or $K_{\mu}$ etc.
+
+Now there is a highly non-intuitive result that we can show 
+
+\bp 
+    The commutators between our conformal charges satisfy 
+    \be 
+    \label{eqn:CommutatorOfChargesRelation}
+        [Q_{\xi_i}, Q_{\xi_j}] = Q_{-[\xi_1,\xi_2]}.
+    \ee 
+\ep 
+
+\bq 
+    It is the minus sign that is highly non-trivial, so let's outline how you get it here. The first step is magically pull a relation out of the air 
+    \bse 
+        [Q_{\xi_i}, T^{\mu\nu}] = \xi_i^{\rho}\p_{\rho} T^{\mu\nu} + \p_{\rho}\xi_i^{\rho} T^{\mu\nu} - \p_{\rho}\xi_i^{\mu} T^{\rho\nu} + \p^{\nu} \xi_{i\rho} T^{\rho\mu}. 
+    \ese 
+    We do not prove this here but simply refer readers to Exercise 3.3. of Simmons-Duffin. Ok taking this formula as given let's try and prove \Cref{eqn:CommutatorOfChargesRelation}. The key point is to remember that the charges come as integrals and so the derivatives that will appear in the magic formula above will be with respect to different things. That is we have, for example,
+    \bse 
+        Q_{\xi_i} = -\oint dS_{\mu} \, \xi_{i\nu}(x) T^{\mu\nu}(x)
+    \ese 
+    and 
+    \bse 
+        Q_{\xi_j} = -\oint dS_{\mu} \, \xi_{j\nu}(y) T^{\mu\nu}(y). 
+    \ese 
+    Now we use the Jacobi identity (which our charges inherit from the Lie algebra) to write 
+    \bse 
+        \big[Q_{\xi_i}, [Q_{\xi_j}, T^{\mu\nu}]\big] - \big[Q_{\xi_j}, [Q_{\xi_i}, T^{\mu\nu}]\big] = \big[ [Q_{\xi_i},Q_{\xi_j}], T^{\mu\nu} \big]. 
+    \ese 
+    The idea is to expand the left-hand side out and then compare the result to our magic formula to deduce the commutation relation. Let's consider just the first term: we do the inner commutator first to give us 
+    \bse 
+        \begin{split}
+            \big[Q_{\xi_i}, [Q_{\xi_j}, T^{\mu\nu}]\big] & = \big[ Q_{\xi_i} , \xi_j^{\rho}\p_{\rho} T^{\mu\nu} + \p_{\rho}\xi_j^{\rho} T^{\mu\nu} - \p_{\rho}\xi_j^{\mu} T^{\rho\nu} + \p^{\nu} \xi_{j\rho} T^{\rho\mu} \big] \\
+            & = \xi_j^{\rho}\p_{\rho} [ Q_{\xi_i} , T^{\mu\nu}] + \p_{\rho}\xi_j^{\rho} [ Q_{\xi_i} , T^{\mu\nu} ] - \p_{\rho}\xi_j^{\mu} [ Q_{\xi_i} , T^{\rho\nu}] + \p^{\nu} \xi_{j\rho} [ Q_{\xi_i} , T^{\rho\mu}],
+        \end{split}
+    \ese 
+    where the second line follows from the linearity of the commutator bracket and the comment we made above about the derivatives being w.r.t. different variables. To avoid any confusion, what we mean is that the derivatives appearing in the above expression are w.r.t $y$ whereas $Q_{\xi_i}$ is a function of $x$ and so we can freely take the derivatives outside. 
+    
+    Hopefully it is clear from here\footnote{As otherwise it's a lot of writing for me...} how you continue the calculation and how it results in a left-hand side which implies \Cref{eqn:CommutatorOfChargesRelation}, so we finish the proof here.
+\eq 
+
+\br 
+    It turns out that the magic formula we quoted above is only true in $d\geq 3$, so again our $2$-dimensional CFT is special. However for what we're going to use these results for here this doesn't matter as we have another way to deal with it in $2$-dimensions.
+\er 
+
+We now introduce a new notation 
+\be
+\label{eqn:CommutatorOfChargesRelationNew}
+    [Q_{\xi_i}, Q_{\xi_j}] = - \widetilde{[\xi_i, \xi_j]}
+\ee 
+so that, for example, 
+\be 
+\label{eqn:CommutatorKDCharges}
+    [\widetilde{K}_{\mu}, \widetilde{D}] = - \widetilde{[K_{\mu}, D]} = \widetilde{K}_{\mu}. 
+\ee 
+Again this is a highly non-trivial result and essentially corresponds to saying that we have to swap the signs everywhere in our previous generator commutation relations, \Cref{eqn:GeneratorCommutators}. 
+
+\mybox{
+    \begin{center}
+        Taking the commutators of charges (tilded letters) differs from the commutators of vector fields (no tilde) by a minus sign, as in \Cref{eqn:CommutatorKDCharges}. We therefore have to put minus signs on the right-hand side of \Cref{eqn:GeneratorCommutators} when considering the charges.
+    \end{center}
+}
+
+\subsection{Descendant Fields*}
+\label{sec:DescendantFields}
+
+Ok why are we bothering to do all of this? Well it allows us to get a different definition of a primary field, which in turn will allow us to define descendant fields. The first thing we note is that if we take our local operator to be at $x=0$, then our dilatation operator acts as 
+\bse 
+    D \phi(0) = -\Delta \phi(0),
+\ese 
+which is easily seen from \Cref{eqn:VariationGenerators}. We are ultimately interested in the quantum theory where the local fields $\phi$ become local \textit{operators} $\cO_{\phi}$. The action of a charge on the local operator is given by the commutator, e.g.
+\bse 
+    [\widetilde{D}, \cO_{\phi}(0)] = \Delta \cO_{\phi}(0).
+\ese 
+We now adopt a new notation for the action of the charges on the fields by simply dropping the commutator brackets, i.e. we define
+\bse 
+    Q_{\xi_i}\cO(x) := [Q_{\xi_i}, \cO(x)].
+\ese 
+We extend this to nested commutators, 
+\bse 
+    Q_{\xi_j}Q_{\xi_i}\cO(x) := \big[Q_{\xi_j} , [Q_{\xi_i}, \cO(x)]\big].
+\ese 
+
+Now using this notation we can finally obtain the result we've been driving at. Consider the following (the subscript $\Delta$ is to label the weight of our operator)
+\bse 
+    \begin{split}
+        \widetilde{D}\widetilde{K}_{\mu}\cO_{\Delta}(0) & = \big( \widetilde{K}_{\mu}\widetilde{D} + [\widetilde{D},\widetilde{K}_{\mu}]\big) \cO_{\Delta}(0) \\
+        & = \big(\Delta - 1\big) \widetilde{K}_{\mu}\cO_{\Delta}(0),
+    \end{split}
+\ese 
+where we have made use of \Cref{eqn:CommutatorKDCharges}. This tells us that $\widetilde{K}_{\mu}\cO_{\Delta}$ has dilatation weight $(\Delta-1)$. In other words we can view $\widetilde{K}_{\mu}$ as a lowering operator for the weight. Now any physically reasonable theory will have a lower bound on the dilatation weight of a field/operator, and so it follows that there \textit{must} exist an operator such that 
+\bse 
+    \widetilde{D}\cO(0) = 0.
+\ese 
+This is what we can take as the definition of a primary operator, which we can relate to a definition of a primary field which we state now. 
+
+\bd[Primary Operator]
+    A primary operator of a given representation is an operator with the lowest dilatation weight in that representation of the conformal algebra. 
+\ed 
+
+Armed with this definition we can (finally!) explain descendant fields. Recall that the dilation weight is equal to the mass dimension. What we therefore want is something that raises the mass dimension of a field. Well the partial derivative has $[\p]=+1$ and so it follows that the dilatation weight of $\p\phi$ is $(\Delta+1)$. We generate derivatives using the momentum operator, and so we can define our descendant operators accordingly. 
+
+\bd[Descendant Operator]
+    Let $\cO_{\Delta}$ be a local primary operator of weight $\Delta$. Then the set 
+    \bse 
+        D_{\cO} := \{ \widetilde{P}_{\mu_1} \widetilde{P}_{\mu_2} ... \widetilde{P}_{\mu_n} \cO_{\Delta} \, | \, n \in \N \}
+    \ese 
+    are the \textit{descendant} local operators associated to $\cO$. A sum of such terms is also a descendant operator.
+\ed 
+
+We can of course translate this into a definition of descendant fields via the action of the un-tilded $P_{\mu}$s on $\phi(x)$. 
+
+\mybox{
+    \begin{center}
+        A descendant field is given by a linear combination of primary fields and their derivatives.
+    \end{center}
+}
+
+\subsection{Examples Of Fields}
+
+Let's give some examples of primary and descendant fields now. We shall use a free, complex, massless scalar field theory, 
+\bse 
+    S = \int d^d x \,  \p_{\mu}\phi \p^{\mu}\bar{\phi}
+\ese 
+as our starting point. Our discussions above tell us that:
+
+\begin{center}
+	\begin{tabular}{@{} C{5cm} C{5cm} C{4cm} @{}}
+		\toprule
+		Field & Primary Or Descendant & Weight \\
+		\midrule 
+		$\phi(x)$ & Primary & $\Delta$ \\ \\
+		$\phi^n(x)$ &  Primary & $n\Delta$ \\ \\
+		$\p_{\mu}\phi(x)$ & Descendant & $\Delta+1$ \\ \\
+		$\phi(x)\p_{\mu}\phi(x)$ & Descendant & $2\Delta+1$ \\ \\
+		$\phi(x)\p_{\mu}\bar{\phi}(x) + \bar{\phi}(x)\p_{\mu}\phi(x)$ & Descendant & $2\Delta+1$ \\ \\
+		$\phi(x)\p_{\mu}\bar{\phi}(x) - \bar{\phi}(x)\p_{\mu}\phi(x)$ & Descendant & $2\Delta+1$ \\ 
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+\br 
+    Note that the 4th and 5th examples are descendants as they are, respectively, 
+    \bse 
+        \p_{\mu}\phi^2(x) \qand \p_{\mu}\big(\bar{\phi}(x)\phi(x)\big)
+    \ese 
+\er 
+
+\bbox 
+    Prove the above primaries are indeed primary and check their weights. That is check that $\del_{K_{\nu}}$ and $\del_D$ are correct for primary. For the last one you will need (for this case) that.
+    \bse 
+        {({S^{\nu}}_{\mu})_{\rho}}^{\sig} = \frac{1}{2}\big( - \del^{\nu}_{\rho} \del^{\sig}_{\mu} + \del^{\nu}_{\mu}\del_{\rho}^{\sig}\big)
+    \ese
+    \textit{Hint: You start by assuming that $\phi(x)$ and $\overline{\phi}(x)$ is a primary. To be clear, we show $\del_D$ for $\phi^n(x)$ here:}
+    \bse 
+        \del_D\big(\phi^n(x)\big)  = n \phi^{n-1}\del_D \phi(x) = -n\phi^{n-1}\big(\Delta + x^{\mu}\p_{\mu}\big)\phi(x) = -\big(n\Delta + x^{\mu}\p_{\mu}\big)\phi^n(x),
+    \ese 
+    \textit{which is an operator of dimension $n\Delta$.}
+\ebox 
+
+\section{Stress-Energy Tensor}
+
+Now we have already made serious use of the stress-energy tensor above in deriving descendant operators, but we haven't actually talked about the existence of $T^{\mu\nu}$ in a CFT. It turns out that \textit{every} CFT has a well defined stress-energy tensor. Indeed we have seen that the stress-energy tensor actually generates the conformal transformations themselves via \Cref{eqn:Charges}.
+
+So how do we define the stress-energy tensor in a CFT? Well if we have a theory with a Lagrangian, we start by coupling the theory to gravity, which is accomplished via 
+\bse 
+    S = \int d^4x (\p\phi)^2 \to \int d^4x \sqrt{-g} \nabla_{\mu}\phi \nabla_{\nu}\phi g^{\mu\nu},
+\ese
+which should be familiar from a GR course. We then proceed exactly as in GR: we take the variation w.r.t. the metric $g_{\mu\nu}$ to obtain
+\bse 
+    \del S = -\frac{1}{2} \int d^Dx \, \sqrt{-g} T^{\mu\nu} \del g_{\mu\nu},  
+\ese 
+or 
+\mybox{
+    \be 
+    \label{eqn:StressEnergyTensor}
+        T^{\mu\nu} := -\frac{2}{\sqrt{-g}} \frac{\del S}{\del g_{\mu\nu}}
+    \ee 
+}
+
+What properties does the stress-energy tensor have? 
+\ben 
+    \item Because it is coupled to gravity, we have diffeomorphism invariance\footnote{Namely $\del S = 0$ under $\del g_{\mu\nu} = \p_{(\mu}\epsilon_{\nu)}$. We can see this is a translation by plugging $x^{\prime\mu} = x^{\mu} + \epsilon^{\mu}$ into \Cref{eqn:ConformalTransformation}.} which implies $\p_{\mu}T^{\mu\nu} = 0$, which is a conservation equation. Note this is a specialisation to flat space, as otherwise we need a covariant derivative. However it is true for any theory in flat space.
+    \item We also have Weyl invariance, which tells us that $\del S = 0$ under $\del g_{\mu\nu} = \kappa \eta_{\mu\nu}$ which implies $T^{\mu\nu}\eta_{\mu\nu} = {T^{\mu}}_{\mu} = 0$, so it is traceless. This is \textit{not} true for a non-CFT, so we can sort of see this as a defining property of a CFT.
+    \item We can use the stress energy tensor to construct \textit{all} the Noether currents associated with conformal symmetries. In this sense we can say that the stress-energy tensor generates our conformal field theories.
+\een 
+
+\badr
+\label{rem:WeylAnom}
+    Condition 2 is only true classically. It turns out that in even dimensional CFTs, upon quantisation the trace of the stress-energy tensor is some constant times terms that depend on the curvature, e.g. the Ricci scalar. These are known as \textit{Weyl anomalies}. We are working in flat space in this course, though, so these Weyl anomolies will not bother us. 
+\eadr 

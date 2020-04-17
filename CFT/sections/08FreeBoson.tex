@@ -1,0 +1,331 @@
+\chapter{Example Of 2D CFT: Free Boson}
+
+Let's now study an actual example of a $2D$ CFT. We will study the easiest case, that of a free scalar field. Even though it is the simplest model, it is a very important thing to study as string theory is essentially the study of $D$ free scalar fields in a 2D CFT. As a CFT is, in particular, a QFT essentially what we're doing is just the quantisation of a free scalar field. The only unusual feature compared to what we know from `normal' QFTs is that here we put our theory on a cylinder rather then some flat Minkowski spacetime. The idea of us putting the QFT on a cylinder corresponds to studying the closed string in string theory. 
+
+\section{Mode Expansion}
+
+Our action is simply the standard massless free action
+\bse 
+    S = -\frac{1}{4\pi \a^{\prime}} \int d^2 x \, \p_a X \p^a X,
+\ese
+where $x=(t,\sig)$ and $a=0,1$. Again to be clear, the $X$ here is just a scalar field from the CFT's perspective. That is we could replace it by the symbol $\phi$ an no confusion would arise. We stick to the $X$ notation as it is allows the relation to string theory to be made easier. 
+
+We know that the equations of motion for such an action is just a 1D wave equation
+\bse 
+    -\p_t^2 X + \p_{\sig}^2 X = 0.
+\ese 
+Now comes the fact that we are working on the cylinder, so we impose periodic boundary conditions
+\be 
+\label{eqn:XPeriodicBoundaryConditions}
+    X(t,\sig) = X(t,\sig + 2\pi).
+\ee 
+The general solution to such a problem is
+\be 
+\label{eqn:XGeneralSolution}
+    X = x_0 - \sqrt{2\a^{\prime}} \a_0 t - i \sqrt{\frac{\a^{\prime}}{2}} \sum_{n\neq 0} \bigg( \frac{\a_n}{n} e^{-in(t+\sig)} + \frac{\bar{\a}_n}{n} e^{-in(t-\sig)}\bigg),
+\ee 
+where $x_0\in \R$\footnote{As we consider a real scalar field.} is just some constant, and where the funny $\a^{\prime}$ factors are included to make the commutators that come later nicer. Now we have just pulled this solution out of nowhere so let's check it makes sense 
+\begin{itemize}
+    \item The $x_0$ constant term is obviously a solution as its derivatives vanish. 
+    \item A linear term in $t$ again vanishes because we have $\p_t^2$ in our equations of motion. 
+    \item Taking the two derivatives on the exponential terms will cancel as there is a relative minus sign in our equations of motion. These terms obviously obey the periodic boundary condition by $e^{in(x+2\pi)} = e^{inx}$.
+    \item The only other term we could imagine is something linear in $\sig$. However this is \textit{not} allowed as it wouldn't obey our periodic boundary condition, \Cref{eqn:XPeriodicBoundaryConditions}.
+\end{itemize}
+
+Now that we're happy this is the most general solution, let's make some comments/conclusions. As $X$ is a real field, we require $X^*=X$. It follows from this that 
+\be 
+\label{eqn:AlphaComplexConjugate}
+    \a^*_n = \a_{-n} \qand \bar{\a}^*_n = \bar{\a}_{-n}. 
+\ee 
+It is important to note that the bar here does \textit{not} indicate complex conjugation. In order to avoid confusion we could replace it was a tilde, $\bar{\a}_n \to \widetilde{\a}_n$, however hopefully now that this has been pointed out we can stick with a bar without any confusion. $\a_n$ and $\bar{\a}_n$ play a very important role in string theory and are called \textit{oscillator modes}, as they correspond to the exponential oscillating part of \Cref{eqn:XGeneralSolution}. Next we define  
+\be 
+\label{eqn:Palpha0}
+    p := \sqrt{\frac{2}{\a^{\prime}}} \a_0,
+\ee
+which at this point is just a label, however if we consider our light-cone coordinates we can see that it is actually related to the conjugate momenta $\pi$,\footnote{See Remark 2.1.1. of my notes on Prof. Minwalla's string theory course.} and so we conclude that $p$ is the centre of mass momentum of the string.
+
+This was done in terms of $(t,\sig)$, but we now want to proceed through as before to obtain the result in terms of $(z,\bar{z})$. There we,
+\ben[label=(\roman*)]
+    \item Wick rotate $\tau=it$, and
+    \item Define $r=e^{\tau}$ so that $e^{-i(t+\sig)}$ becomes $e^{-\tau}e^{-i\sig} = 1/(re^{i\sig}) = 1/z$. 
+\een 
+so that
+\bse 
+    X = x_0 + i\a^{\prime} p\ln|z| - i\sqrt{\frac{\a^{\prime}}{2}} \sum_{n\neq0} \bigg( \frac{\a_n}{n} z^{-n} + \frac{\bar{\a}_n}{n} \bar{z}^{-n}\bigg).
+\ese 
+This object is not a nice object from a CFT point of view mainly because of the $\ln|z|$ term, which is not meromorphic. However we now notice that if we take a derivative, $\p$ or $\bar{\p}$, we will get a much nicer expression
+\bse 
+    \p X = i \sqrt{\frac{\a^{\prime}}{2}} \sum_{n\neq 0} \frac{\a_n}{z^{n+1}} \qand \bar{\p} X = -i \sqrt{\frac{\a^{\prime}}{2}} \sum_{n\neq 0} \frac{\bar{\a}_n}{\bar{z}^{n+1}}.
+\ese 
+We can show\footnote{See, for example, section 4.3.3 of Prof Tong's String Theory notes.} that these are primary fields of weights $(1,0)$ and $(0,1)$, respectively. However the field $X$ itself is \textit{not} a primary field, and so we much prefer to work with $\p X$ and $\bar{\p}X$.
+
+\br 
+    We can get a rough feeling for the weights above being correct by considering the dimension of $X$. From our action we see $[X]=0$, and so from $[\p]=[\bar{\p}]=1$, we expect dilatation weights $\Delta=1$ for $\p X$ and $\bar{\p}X$. We then make arguments about $z/\bar{z}$ independence to get $(1,0)$ and $(0,1)$.
+\er 
+
+This has all been a classical discussion, let's not move on and quantise it.
+
+\section{Quantisation of the 2d Free Scalar}
+
+For the quantisation procedure we will go back to the $(t,\sig)$ coordinates, as we are more familiar with quantising things in this way. We know from our canonical QFT courses that the commutation relations for a free Bosonic field are given by the field and the conjugate momenta. We take these to be equal time commutation relations. So let's compute the conjugate momenta
+\bse 
+    \pi = \frac{\p \cL}{\p \dot{X}} = \frac{1}{2\pi \a^{\prime}} \dot{X}.
+\ese
+Putting this into our expected equal time commutation relations we get
+\bse 
+    [X(t,\sig), \dot{X}(t, \sig^{\prime})] = 2\pi \a^{\prime} i \del(\sig-\sig^{\prime}),
+\ese 
+where the $2\pi\a^{\prime}$ factor on the right comes from us putting $\dot{X}$ in the commutator not $\pi$. We can then plug our mode expansion for $X$ in to obtain commutation relations between the modes themselves. The results are
+\mybox{
+    \be 
+    \label{eqn:ModeCommutations}
+        [x_0,p] = i \qquad [\a_m,\a_n] = m\del_{m+n,0} \qand [\bar{\a}_m,\bar{\a}_n] = m\del_{m+n,0}
+    \ee 
+}
+\noindent We see that all the funny $\a^{\prime}$ factors have disappeared in our commutation relations. This is why we introduced them in the first place.
+
+\badr 
+    Note that the $[x_0,p]=i$ commutation relation further supports the idea that $p$ is the centre of mass momentum and that $x_0$ labels the centre of mass. That is it agrees with the usual $[q,p]=i$ relation. 
+\eadr 
+
+\bbox 
+    Prove \Cref{eqn:ModeCommutations}. \textit{Hint: Use}
+    \bse 
+        \sum_n e^{-2in(\sig-\sig^{\prime})} = n\del(\sig-\sig^{\prime}).
+    \ese 
+\ebox 
+
+Next we want to compute the Hamiltonian. The standard QFT derivation gives us 
+\be 
+\label{eqn:HamiltonianBosonicField}
+    H = \int d\sig \, \big( \pi \dot{X} - \cL\big) = \frac{\a^{\prime}p^2}{2} + \sum_{n>0} \big(\a_{-n}\a_n + \bar{\a}_{-n}\bar{\a}_n\big)  
+\ee 
+
+\bbox 
+    Fill in the missing steps to arrive at \Cref{eqn:HamiltonianBosonicField}.
+\ebox 
+
+From here we can compute the commutator
+\bse 
+    [H,\a_{-n}] = n \a_{-n} \qand [H,\bar{\a}_{-n}] = n \bar{\a}_{-n}
+\ese 
+which is easily verified. Now we note that these look just like creation/annihilation operator commutators with the energy spacing being given by $n$. That is $\a_n/\bar{\a}_n$ are raising operators when $n<0$ and lowering operators when to $n>0$. It is important to note that we have \textit{two}, independent, sets of creations/annihilation operators. Therefore our Hilbert space is built out of \textit{two} towers of states given by acting with the creation operators. It turns out that there is a relation, known as the \textit{level matching condition}, that tells us the number of $\a_n$ excitations must equal the number of $\bar{\a}_n$ excitations, and so we only need one label in our bra-ket vector. As we will see shortly our Hilbert space also has another sector given by the momentum. So in total we denote an element of the Hilbert space by $\ket{n;k}$, where $n$ indicates the number of harmonic oscillator states and $k$ the momentum. As usual, we construct our Hilbert space by defining the vacuum $\ket{0;k}$ such that 
+\bse 
+    \a_m \ket{0;k} = 0 = \bar{\a}_m \ket{0,k} \qquad \forall m >0.
+\ese 
+
+This seems a bit strange, because it appears we don't have a unique vacuum, i.e. we haven't constrained $k$. So what's going on? Well now is a point where the fact that our CFT is on a cylinder becomes important.  Normally we think of the fields as dying off at infinity, however on the cylinder the fields can go round and round. This corresponds exactly to the ground state not being unique, and the different ground states being labelled by the momentum. So how we do extract the momentum? Well in the above we only considered the $\a_n/\bar{\a}_n$s for $n\neq 0$, but what about $\a_0$? Well we have already seen/said that it is related to the centre of mass momentum. We can therefore use this to extract $k$:
+\bse 
+    p\ket{0;k} = k\ket{0;k}.
+\ese 
+
+Now that we have defined our vacuua, we can build up the Hilbert space by acting with the raising operators. That is any state in the Hilbert space is given in the form
+\bse 
+    (\a_{-1})^{n_1} (\a_{-2})^{n_2} ... (\bar{\a}_{-1})^{\bar{n}_1} (\bar{\a}_{-2})^{\bar{n}_2}\ket{0;k}.
+\ese 
+
+There is an obvious question to ask "what about when $k=0$?" This is indeed an important case, and we define $\ket{0}:= \ket{0;0}$ which is often called the \textit{absolute} vacuum. As we will see shortly, this is invariant under the whole global conformal subgroup, i.e. the M\"{o}bius subgroup. We can then construct $\ket{0;k}$ from $\ket{0}$ via the following claim (we are going back to $(z,\bar{z})$ coordinates\footnote{We only really used the $(t,\sig)$ coordinates to do the quantisation because we were familiar with how to quantise in equal time slices. That's all done now, so it makes sense to go back to the more useful complex coordinates.}).
+\bcl 
+    We can produce the vacuum state $\ket{0;k}$ from the absolute vacuum in the following way.
+    \bse 
+        \ket{0;k} = e^{ikX(z=0)}\ket{0}.
+    \ese
+\ecl 
+
+Before proving this, let's just make a couple comments. This is an important thing in string theory and it is called a \textit{vertex operator}. Note that we \textit{cannot} write this down in higher dimensions, as then $[X]\neq 0$ so its dilatation weight is non-vanishing. That is, if we Taylor expanded the exponential we wouldn't have a well-defined dilatation transformation property. 
+\bq 
+    Essentially what we need to do is prove it has momentum $k$, and that it is annihilated by the lowering operators $\a_n/\bar{\a}_n$ for $n >0$.  
+    \bse 
+        \begin{split}
+            p \ket{0;k} & = p e^{ikX(0)}\ket{0} \\
+            & = \Big[p,e^{ikX(0)}\Big]\ket{0} \\
+            & = e^{ikX(0)}[p,ikX(0)]\ket{0} \\
+            & = ik e^{ikX(0)} [p,x_0]\ket{0} \\
+            & = k e^{ikX(0)} \ket{0}\\
+            & = k\ket{0;k},
+        \end{split}
+    \ese 
+    where we have used the mode expansion for $X$ and then only kept the commutators that are non-vanishing. Similarly, we have, for $n>0$, 
+    \bse 
+        \begin{split}
+            \a_n\ket{0;k} & = \Big[\a_n, e^{ikX(0)}\Big] \ket{0} \\
+            & = e^{ikX(0)} [\a_n, ik X(0)] \ket{0} \\
+            & = e^{ikX(0)} ik \sum_{m} \bigg[\a_n, \frac{\a_{m}}{m} z^{-m}\bigg]\bigg|_{z=0} \ket{0} \\
+            & = e^{ikX(0)} \frac{ikn}{m}  \sum_m \del_{n+m,0} z^{-m}\big|_{z=0} \ket{0} \\
+            & =  e^{ikX(0)} ik z^n\big|_{z=0} \ket{0}\\
+            & = 0,
+        \end{split}
+    \ese 
+    where again we have used the mode expansion and only kept the non-vanishing commutators. A similar calculation works for the $\bar{\a}_n$ lowering operators.
+\eq 
+
+Now that we know how to construct our Hilbert space we can use our state-operator correspondance to see what operators these states are dual to. We just give a couple examples here.
+
+\begin{center}
+	\begin{tabular}{@{} C{5cm} C{5cm} @{}}
+		\toprule
+		State & Operator  \\
+		\midrule 
+		$\ket{0;0}$ & $\b1$ \\
+		$\a_{-m}\ket{0;0}$ & $\p^m X$ \\
+		$\a_{-m^{\prime}}\a_{-m}\ket{0;0}$ & $\cl \p^{m^{\prime}}X\p^m X \cl$ \\
+		$\ket{0;k}$ & $\cl e^{ikX} \cl $ \\
+		\bottomrule
+	\end{tabular}
+\end{center}
+where $\cl ... \cl$ means normal ordering.\footnote{It is actually something known as \textit{conformal normal ordering}. This is defined as $\cl A B \cl := \lim_{z\to w} [A(z)B(w)- \la A(z) B(w)\ra ]$. The idea is that a conformal normal ordering gives vanishing vev, $\la \cl A(z)B(w) \cl \ra$. In these notes we will ignore this small difference and just say normal ordering, but feel free to insert "conformal" in front when reading.}
+
+\badr 
+    It turns out that the vertex operator $\cl e^{ikX} \cl$ is a primary operator with weight 
+    \bse 
+        h = \frac{\a^{\prime} k^2}{4}.
+    \ese 
+    You can show this by considering the OPE with the stress-energy tensor (which we will obtain in a moment). Details of this calculation can be found in section 8.6 of my notes on Prof. Minwalla's string theory course. 
+\eadr 
+
+\subsection{Propagator}
+
+Recall that in QFT the propagator is one of the most important objects, and it is given by the two-point function
+\bse 
+    \la X(z) X(w)\ra = k(z,w).
+\ese 
+Also recall that we require the propagator to be a Green's function for the quadratic operator, i.e.
+\bse 
+    \p \bar{\p} k(z,w) = -\del^{(2)}(z-w).
+\ese 
+The solution to this is a log expression:
+\bse 
+    \la X(z) X(w)\ra = -\frac{1}{2\pi} \log |z-w|^2,
+\ese
+where 
+\bse 
+    |z-w|^2 = (z-w)(\bar{z}-\bar{w}).
+\ese 
+
+This tells us that $X$ is not a primary operator, as we know that two point functions of scalar primary operators go as $1/(z-w)^{2\Delta}$, but we have a log. However we note that if we take two derivatives we get 
+\bse 
+    \la \p X(z) \p X(w) \ra = -\frac{1}{2\pi} \frac{1}{(z-w)^2},
+\ese 
+where the variable of the derivative is understood by the argument of the field it acts on. Note also we don't have a modulus $|z-w|$ in the denominator. This is because we have only differentiated w.r.t. $z/w$ (i.e. not barred) and 
+\bse 
+    \log|z-w|^2 = \log\big[(z-w)(\bar{z}-\bar{w})\big] = \log(z-w) + \log(\bar{z}-\bar{w}).
+\ese 
+
+We therefore see that $\p X(z)$ \textit{is} a scalar primary operator with weight $h=1$. By our "everything follows by sticking a bar on it" mantra, we also have 
+\bse 
+    \la \bar{\p} X(\bar{z}) \bar{\p} X(\bar{w}) \ra = -\frac{1}{2\pi} \frac{1}{(\bar{z}-\bar{w})^2}.
+\ese 
+We summarise this result in a nice box. 
+\mybox{
+    \begin{center}
+        $\p X(z)$ is a scalar primary operator of weight $(1,0)$. \\
+        $\bar{\p}X(\bar{z})$ is a scalar primary of weight $(0,1)$.
+    \end{center}
+}
+
+\subsection{Stress-Energy Tensor}
+
+Ok so what exactly is the stress-energy tensor for our free boson theory? Well classically we can show\footnote{See Section 4.1.3 of Prof. Tong's notes.} that it just comes out to be
+\bse 
+    T = - \frac{1}{\a^{\prime}} \p X \p X, \qand \bar{T} = - \frac{1}{\a^{\prime}} \bar{\p} X \bar{\p} X.
+\ese
+When we quantise this result, we have to include our normal ordering\footnote{This is one of the big motivations for defining conformal normal ordering the way we do. Essentially we want the vev of $T$ to vanish, and so we construct it such that this is the case.}
+\mybox{
+    \be
+    \label{eqn:TBoson}
+        T = -\frac{1}{\a^{\prime}} \cl \p X \p X \cl.
+    \ee 
+}
+
+Now recall that we wrote the stress energy tensor as a Laurent expansion 
+\bse 
+    T = \sum_n \frac{L_n}{z^{n+2}},
+\ese 
+we can then insert our mode expansions for $X$ into \Cref{eqn:TBoson} and obtain 
+\bse 
+    T = \frac{1}{2} \cl \sum_m \frac{\a_m}{z^{m+1}} \sum_n \frac{\a_n}{z^{n+1}} \cl ,
+\ese 
+If we then pick off the $z^{-(m+2)}$ part of this to get the Virasoro modes 
+\bse 
+    L_m = \cl \frac{1}{2}\sum_n \a_{m+n}\a_{-n} \cl = \frac{1}{2}\sum_n \a_{m+n}\a_{-n} \qquad m \neq 0.
+\ese 
+where the second line follows from the fact that when $m\neq0$ we always get a vanishing commutator between $\a_{m+n}\a_{-n}$ so no problems arise from our normal ordering. 
+
+What about when $m=0$? Well there we have 
+\bse 
+    L_0 = \frac{1}{2} \cl \sum_n \a_n \a_{-n} \cl = \frac{1}{2}\a_0^2 + \sum_{n>0} \a_{-n}\a_n,
+\ese 
+where we have split the sum into $n>0$ and $n<0$ and then relabelled to get rid of the 1/2. We can then finally rewrite this as 
+\bse 
+    L_0 = \frac{\a^{\prime}}{4}p^2 + \sum_{n>0} \a_{-n}\a_n.
+\ese 
+
+Of course again we get a similar result by putting bars everywhere. 
+
+\br 
+    In string theory $L_0=0$ gives us a condition on the masses of our particles. This is known as the \textit{level matching} condition and is precisely the condition we used above to say that we always require the number of $\a$ and $\bar{\a}$ excitations match. 
+\er 
+
+\bbox 
+    Using the relations above prove that 
+    \be 
+    \label{eqn:LalphaCommutator}
+        [L_m, \a_n] = -n\a_{m+n}, \qand [\bar{L}_m, \bar{\a}_n] = -n\bar{\a}_{m+n}
+    \ee 
+\ebox 
+
+Comparing this with the transformation of the modes of a primary,
+\bse 
+    [L_m,\varphi_n] = \big((h-1)m-n\big) \varphi_{m+n},
+\ese 
+we see this is consistent with $\a_n$ being the modes of $\p X$, which is a primary of weight $(1,0)$. That is putting $h=1$ in the above expression will give exactly \Cref{eqn:LalphaCommutator}.
+
+Now we come to the interesting bit, the commutator of $L_m$ with $L_n$. Plugging through the calculations we obtain
+\bse 
+    [L_m,L_n] = (m-n)L_{m+n} + \frac{1}{12} m(m^2-1) \del_{m+n,0},
+\ese
+where we recognise the first term from the Witt algebra, but the second term is new. This extra term is called a \textit{central extension} of the algebra,\footnote{This name comes from the fact that the centre of an algebra is something that commutes with every element, which this last term does as it's just a number.} i.e. it breaks our closure of the algebra.
+
+\br 
+    Note that the extra term vanishes for our subalgebra, i.e. $\{L_0,L_1,L_{-1}\}$. From this we see that we never see an equivalent in higher dimensions. 
+\er 
+
+Let's derive this. We will cheat slightly and then explain why we cheated at the end. We will focus on the case when $m=-n$ so that we can get this extra piece as this is the harder case.\footnote{We can also obtain these results using contour type arguments, once we know the $T(z)T(w)$ OPE. For details of this calculation see, e.g., Section 4.5.2 of Prof. Tong's notes.}
+
+\bse 
+    \begin{split}
+        [L_m,L_{-m}] & = \frac{1}{4} \sum_n \sum_{n^{\prime}} [ \a_{m-n}\a_n, \a_{-m-n^{\prime}}\a_{n^{\prime}}] \\
+        & = \frac{1}{4}\sum_{n,n^{\prime}} \big( \a_{m-n}[\a_n,\a_{m-n^{\prime}}]\a_{n^{\prime}} + \a_{-m-n^{\prime}}[\a_{m-n},\a_{n^{\prime}}]\a_n \\
+        & \qquad \qquad  + \a_{m-n}[\a_n,\a_{n^{\prime}}]\a_{-m-n^{\prime}} + \a_{n^{\prime}} [\a_{m-n}, \a_{-m-n^{\prime}}] \a_n \big) \\
+        & = \frac{1}{4} \sum_n 2 \big( n\a_{m-n}\a_{n-m} + (m-n)\a_{-n}\a_n\big),
+    \end{split}
+\ese 
+where we have used the fact that the commutators give us bunch of delta functions. Now in order to relate it to the $L$s we need to normal order. In order to do that, notice that when $m>n$, we have 
+\bse 
+    \a_{m-n}\a_{n-m} = \a_{n-m}\a_{m-n} + (m-n).
+\ese
+Also notice that when $n<0$, we have
+\bse 
+    \a_{-n}\a_n = \a_n\a_{-n} + (-n).
+\ese 
+Now consider the case when both these inequalities are satisfied. Then the extra terms from normal ordering above cancel. That is our commutator will contain the terms
+\bse 
+    n(m-n) + (m-n)(-n) = 0.
+\ese 
+Therefore the only additional terms we pick up from normal ordering occur in the inequalities $0<n<m$. 
+\begin{center}
+    \btik 
+        \draw[->] (-4,0) -- (4,0);
+        \node at (3.8,-0.2) {$n$};
+        \draw[ultra thick, red] (-2,0) -- (2,0);
+        \draw[fill=black] (-2,0) circle [radius=0.05cm] node [below] {$0$} ; 
+        \draw[fill=black] (2,0) circle [radius=0.05cm] node [below] {$m$};
+    \etik 
+\end{center}
+We can then perform the sum over these extra terms and obtain 
+\bse 
+    \frac{2}{4}\sum_{n=0}^m n(m-n) = \frac{1}{12}m(m^2-1).
+\ese 
+
+So how did we cheat? Well we are really cancelling two infinite sums. Of course we showed they cancel term by term, but the `better' way to do is it introduce a normal ordering constant and show that this is the only thing that satisfies the Jacobi identity. 
+
